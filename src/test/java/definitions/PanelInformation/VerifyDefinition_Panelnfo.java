@@ -27,7 +27,7 @@ public class VerifyDefinition_Panelnfo {
 	public void printPanelInforA(String configuration)  {
   		//Pre-condition: Select the correct configuration
 		
-		System.out.println("111111111111111111111111");
+		System.out.println("1111111114441111111111");
 		Logger.info("Print Panel Information");	
 		Logger.info("<pre>" + "Data GET: " + "</pre>");
 
