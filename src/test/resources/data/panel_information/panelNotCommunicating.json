@@ -1,0 +1,554 @@
+{
+    "panelList": [
+        {
+            "rackId": "160013002174",
+            "totalPanels": 16,
+            "panels": [
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "3615994010E6",
+                            "type": "96LC Fiber",
+                            "hardwareVersion": "9",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2014-03-25",
+                            "updatable": "true",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "A",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 12,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "B",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 12,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "2612100001C0",
+                            "type": "M4200i",
+                            "hardwareVersion": "1",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2007-11-14",
+                            "updatable": "false",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 24,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "31161340000B",
+                            "type": "Quattro",
+                            "hardwareVersion": "1",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2013-06-19",
+                            "updatable": "true",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "1",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 4,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "2",
+                                    "type": "",
+                                    "lowestPortNumber": 5,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 4,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "3",
+                                    "type": "",
+                                    "lowestPortNumber": 9,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 4,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "4",
+                                    "type": "",
+                                    "lowestPortNumber": 13,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 4,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "5",
+                                    "type": "",
+                                    "lowestPortNumber": 17,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 4,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "6",
+                                    "type": "",
+                                    "lowestPortNumber": 21,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 4,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "251100000D3A",
+                            "type": "LC Fiber",
+                            "hardwareVersion": "0",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2003-11-19",
+                            "updatable": "false",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 2,
+                                    "sensorCount": 48,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "37151920101F",
+                            "type": "MPO Fiber",
+                            "hardwareVersion": "1",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2014-03-25",
+                            "updatable": "true",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "A",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 8,
+                                    "occupiedSensorMask": 3
+                                },
+                                {
+                                    "position": "B",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 8,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "3615994010EF",
+                            "type": "96LC Fiber",
+                            "hardwareVersion": "9",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2014-03-25",
+                            "updatable": "true",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "C",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 12,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "D",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 12,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "371519401024",
+                            "type": "MPO Fiber",
+                            "hardwareVersion": "1",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2014-03-25",
+                            "updatable": "true",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "C",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 8,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "D",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 8,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "220000001A77",
+                            "type": "Copper",
+                            "hardwareVersion": "0",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2000-04-20",
+                            "updatable": "false",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 24,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "551611000AD9",
+                            "type": "360LC Fiber",
+                            "hardwareVersion": "1",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2009-03-02",
+                            "updatable": "false",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "A",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 2,
+                                    "sensorCount": 12,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "B",
+                                    "type": "",
+                                    "lowestPortNumber": 7,
+                                    "sensorPerPortNumbers": 2,
+                                    "sensorCount": 12,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "C",
+                                    "type": "",
+                                    "lowestPortNumber": 13,
+                                    "sensorPerPortNumbers": 2,
+                                    "sensorCount": 12,
+                                    "occupiedSensorMask": 0
+                                },
+                                {
+                                    "position": "D",
+                                    "type": "",
+                                    "lowestPortNumber": 19,
+                                    "sensorPerPortNumbers": 2,
+                                    "sensorCount": 12,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "22000000011C",
+                            "type": "Copper",
+                            "hardwareVersion": "0",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2000-04-20",
+                            "updatable": "false",
+                            "portOffset": 24,
+                            "modules": [
+                                {
+                                    "position": "",
+                                    "type": "",
+                                    "lowestPortNumber": 25,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 24,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "2200000002E2",
+                            "type": "Copper",
+                            "hardwareVersion": "0",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2000-04-20",
+                            "updatable": "false",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 24,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "23121000016F",
+                            "type": "SC Fiber",
+                            "hardwareVersion": "1",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2002-08-22",
+                            "updatable": "false",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 2,
+                                    "sensorCount": 24,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "27990000003D",
+                            "type": "High Density Module",
+                            "hardwareVersion": "0",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2008-08-14",
+                            "updatable": "false",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "1",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 2,
+                                    "sensorCount": 48,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "27990000004C",
+                            "type": "High Density Module",
+                            "hardwareVersion": "0",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2008-08-14",
+                            "updatable": "false",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "2",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 2,
+                                    "sensorCount": 48,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": -1,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "2714110006F0",
+                            "type": "High Density Module",
+                            "hardwareVersion": "1",
+                            "rowNumber": 0,
+                            "status": "NotCommunicating",
+                            "firmwareTimestamp": "2008-11-11",
+                            "updatable": "false",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "3",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 2,
+                                    "sensorCount": 48,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "panelNumber": 0,
+                    "ruHeight": 0,
+                    "rowCount": 0,
+                    "totalKits": 1,
+                    "kits": [
+                        {
+                            "id": "2200000015E6",
+                            "type": "Copper",
+                            "hardwareVersion": "0",
+                            "rowNumber": 0,
+                            "status": "OK",
+                            "firmwareTimestamp": "2000-04-20",
+                            "updatable": "false",
+                            "portOffset": 0,
+                            "modules": [
+                                {
+                                    "position": "",
+                                    "type": "",
+                                    "lowestPortNumber": 1,
+                                    "sensorPerPortNumbers": 1,
+                                    "sensorCount": 24,
+                                    "occupiedSensorMask": 0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

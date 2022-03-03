@@ -1,0 +1,21 @@
+{
+    "zoneStatus": "ZoneDegraded",
+    "totalRacks": 2,
+    "rackList": [
+        {
+            "id": "176034002243",
+            "rackNumber": -1,
+            "name": "",
+            "status": "NotCommunicating",
+            "managedBy": ""
+        },
+        {
+            "id": "160010002243",
+            "rackNumber": 1,
+            "name": "",
+            "status": "OK",
+            "managedBy": "160010002243",
+            "powerUsagePercent": 2
+        }
+    ]
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" thread-count="5" parallel="classes">
+	<listeners>
+		<listener class-name="utils.config.TestListener" />
+	</listeners>
+
+ <!-- GET Controller Information -->
+<test name="A1. GET Controller Information - Run by API check racks in single rack mode">
+		<classes>
+			<class name="LinkingCucumber.GET_ControllerInfo.SingleRackMode.VerifyControllerInfoInSingleRackMode"></class>						
+		</classes>
+	</test>  
+
+<!-- GET Patching mode on Controller Information -->
+<test name="A2. GET Patching mode on Controller Information - Run by API check patching mode">
+		<classes>
+			<class name="LinkingCucumber.GET_ControllerInfo.PatchingMode.VerifyControllerInfoInPatchingMode"></class>						
+		</classes>
+	</test>
+
+
+<!-- GET Rack Information -->
+ <test name="B1. GET Rack Information - Run by API check racks in single rack mode">
+		<classes>
+			<class name="LinkingCucumber.GET_RackInfo.SingleRackMode.VerifyRackInfoInSingleRackMode"></class>			
+		</classes>
+	</test>  
+<test name="B2. GET Rack Information - Run by API check racks in multi rack mode">
+		<classes>
+			<class name="LinkingCucumber.GET_RackInfo.MultiRackMode.VerifyRackInfoInMultiRackMode"></class>
+		</classes>
+	</test>  
+
+<!-- POST Rack Information -->
+   <test name="B3. POST Rack Information - Change Rack Name">
+		<classes>
+			<class name="LinkingCucumber.POST_RackInfo.ChangeRackName.VerifyChangingRackName"></class>			
+		</classes>
+	</test>
+	<test name="B4. POST Rack Information - Change Rack Number">
+		<classes>
+			<class name="LinkingCucumber.POST_RackInfo.ChangeRackNumber.VerifyChangingRackNumber"></class>
+		</classes>
+	</test> 
+	<test name="B5. POST Rack Information - Change Other Fields">
+		<classes>
+			<class name="LinkingCucumber.POST_RackInfo.ChangeOtherFields.VerifyChangingOtherFields"></class>
+		</classes>
+	</test> 
+	<test name="B6. POST Rack Information - Check Status Codes">
+		<classes>
+			<class name="LinkingCucumber.POST_RackInfo.CheckStatusCodes.VerifyStatusCode"></class>
+		</classes>
+	</test>
+	
+	<!-- GET Pane; Information -->
+	<test name="C1. GET Panel Information - Check Total Panels">
+		<classes>
+			<class name="LinkingCucumber.GET_PanelInfo.CheckTotalPanels.VerifyTotalPanels"></class>
+		</classes>
+	</test> 
+
+
+
+
+
+
+
+
+
+</suite>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" thread-count="5" parallel="false">
+	<listeners>
+		<listener class-name="utils.config.CucumberTestListener" />
+	</listeners>
+
+<!--test Rack Information -->
+ 
+ <test name="B6. POST Rack Information - Check Status Codes">
+		<classes>
+			
+	<class name="LinkingCucumber.POST_RackInfo.ChangeRackName.VerifyChangingRackName"></class>
+			
+		</classes>
+	</test> 
+	<!-- <class name="LinkingCucumber.POST_RackInfo.ChangeRackName.VerifyChangingRackName"></class> -->
+ <!-- <class name="LinkingCucumber.POST_RackInfo.ChangeRackNumber.VerifyChangingRackNumber"></class> -->
+ <!-- <class name="LinkingCucumber.POST_RackInfo.ChangeOtherFields.VerifyChangingOtherFields"></class> -->
+ <!-- <class name="LinkingCucumber.POST_RackInfo.CheckStatusCodes.VerifyStatusCode"></class> -->
+<!--  <test name="1. Change Rack Name">
+		<classes>
+			<class name="RestFul_API.POST_RackInformation.Check_Status_Codes.POST_RackInfo_04_06.verify_status_code_405"></class>
+									
+		</classes>
+	</test> -->
+
+
+<!-- <class name="RestFul_API.POST_RackInformation.Change_Rack_Name.POST_RackInfo_01_03.verify_rack_name_after_entered_special_character"></class> -->
+
+
+<!-- GET Rack Information -->
+ <!-- <test name="B1. GET Rack Information - Run by API check racks in single rack mode">
+		<classes>
+			<class name="LinkingCucumber.GET_RackInfo.SingleRackMode.VerifyRackInfoInSingleRackMode"></class>			
+		</classes>
+	</test>  
+<test name="B2. GET Rack Information - Run by API check racks in multi rack mode">
+		<classes>
+			<class name="LinkingCucumber.GET_RackInfo.MultiRackMode.VerifyRackInfoInMultiRackMode"></class>
+		</classes>
+	</test>  
+ -->
+
+
+
+<!--POST Rack Information -->
+ <!--  <test name="B3. POST Rack Information - Change Rack Name">
+		<classes>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Name.POST_RackInfo_01_01.verify_rack_name_after_entered_1_valid_character"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Name.POST_RackInfo_01_02.verify_rack_name_after_entered_50_valid_character"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Name.POST_RackInfo_01_03.verify_rack_name_after_entered_special_character"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Name.POST_RackInfo_01_04.verify_after_entered_valid_rack_name_invalid_rack_number"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Name.POST_RackInfo_01_05.verify_after_remove_rack_name_key"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Name.POST_RackInfo_01_06.verify_rack_name_after_entered_51_valid_character"></class>			
+		</classes>
+	</test>
+ <test name="B4. POST Rack Information - Change Rack Number">
+		<classes>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Number.POST_RackInfo_02_01.verify_rack_number_is_5"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Number.POST_RackInfo_02_02.verify_rack_number_is_255"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Number.POST_RackInfo_02_03.verify_rack_number_is_negative_number"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Number.POST_RackInfo_02_04.verify_rack_number_is_256"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Number.POST_RackInfo_02_05.verify_rack_number_is_a_character"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Number.POST_RackInfo_02_06.verify_rack_number_is_blank"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Number.POST_RackInfo_02_07.verify_rack_number_and_rack_name_in_all_rack"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Number.POST_RackInfo_02_08.verify_after_add_duplicate_rack_number"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Rack_Number.POST_RackInfo_02_09.verify_after_remove_rack_number_key"></class>
+		</classes>
+	</test> 
+	<test name="B5. POST Rack Information - Change Other Fields">
+		<classes>
+			<class name="RestFul_API.POST_RackInformation.Change_Other_Fields.POST_RackInfo_03_01.verify_total_Rack_after_changed_value"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Other_Fields.POST_RackInfo_03_02.verify_id_after_changed_value"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Other_Fields.POST_RackInfo_03_03.verify_status_after_changed_value"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Other_Fields.POST_RackInfo_03_04.verify_managedBy_after_changed_value"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Other_Fields.POST_RackInfo_03_05.verify_iPatchRackUnitsAvailable_after_changed_value"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Other_Fields.POST_RackInfo_03_06.verify_after_remove_totalRacks_key"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Other_Fields.POST_RackInfo_03_07.verify_after_remove_id_key"></class>
+			<class name="RestFul_API.POST_RackInformation.Change_Other_Fields.POST_RackInfo_03_08.verify_after_remove_status_key"></class>
+			 <class name="RestFul_API.POST_RackInformation.Change_Other_Fields.POST_RackInfo_03_09.verify_after_remove_managedBy_key"></class>
+			 <class name="RestFul_API.POST_RackInformation.Change_Other_Fields.POST_RackInfo_03_10.verify_after_remove_iPatchRackUnitsAvailable_key"></class>
+		</classes>
+	</test> 
+	<test name="B6. POST Rack Information - Check Status Codes">
+		<classes>
+			<class name="RestFul_API.POST_RackInformation.Check_Status_Codes.POST_RackInfo_04_01.verify_status_code_500"></class>
+			<class name="RestFul_API.POST_RackInformation.Check_Status_Codes.POST_RackInfo_04_02.verify_status_code_200"></class>
+			<class name="RestFul_API.POST_RackInformation.Check_Status_Codes.POST_RackInfo_04_03.verify_status_code_400"></class>
+			<class name="RestFul_API.POST_RackInformation.Check_Status_Codes.POST_RackInfo_04_04.verify_status_code_401"></class>
+			<class name="RestFul_API.POST_RackInformation.Check_Status_Codes.POST_RackInfo_04_05.verify_status_code_404"></class>
+			<class name="RestFul_API.POST_RackInformation.Check_Status_Codes.POST_RackInfo_04_06.verify_status_code_405"></class>
+		</classes>
+	</test>  -->
+	
+
+
+
+</suite>

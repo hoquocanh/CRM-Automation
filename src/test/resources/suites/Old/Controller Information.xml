@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" thread-count="5" parallel="false">
+	<listeners>
+		<listener class-name="utils.config.CucumberTestListener" />
+	</listeners>
+
+ <!-- GET Controller Information -->
+<test name="A1. GET Controller Information - Run by API check racks in single rack mode">
+		<classes>
+			<class name="LinkingCucumber.GET_ControllerInfo.SingleRackMode.VerifyControllerInfoInSingleRackMode"></class>						
+		</classes>
+	</test>  
+
+<!-- GET Patching mode on Controller Information -->
+<!-- <test name="A2. GET Patching mode on Controller Information - Run by API check patching mode">
+		<classes>
+			<class name="LinkingCucumber.GET_ControllerInfo.PatchingMode.VerifyControllerInfoInPatchingMode"></class>						
+		</classes>
+	</test> -->
+</suite>

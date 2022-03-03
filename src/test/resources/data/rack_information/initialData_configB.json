@@ -1,0 +1,22 @@
+{
+    "zoneStatus": "OK",
+    "totalRacks": 2,
+    "rackList": [
+        {
+            "id": "160061002173",
+            "rackNumber": 1,
+            "name": "",
+            "status": "OK",
+            "managedBy": "160061002173",
+            "iPatchRackUnitsAvailable": 9
+        },
+        {
+            "id": "160060002173",
+            "rackNumber": 2,
+            "name": "",
+            "status": "OK",
+            "managedBy": "160061002173",
+            "iPatchRackUnitsAvailable": 9
+        }
+    ]
+}

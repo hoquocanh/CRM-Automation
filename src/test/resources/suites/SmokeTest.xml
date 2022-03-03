@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" thread-count="5" parallel="false">
+	<listeners>
+		<listener class-name="utils.config.CucumberTestListener" />
+	</listeners>
+
+	<test name="Run Daily Regression">
+		<parameter name="browser" value="chrome.local" />
+		<parameter name="autoLogBug" value="false" />
+		<parameter name="tags" value="@SmokeTest" />
+		<classes>
+			<class name="tests.cucumber.Cogito.all_features"/>
+		</classes>
+	</test>
+</suite>

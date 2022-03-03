@@ -1,0 +1,19 @@
+{
+    "totalControllers": 1,
+    "controllers": [
+        {
+            "id": "160010002243",
+            "vendor": "CommScope",
+            "type": "imVision Controller X",
+            "display": {
+                "id": "6B0101812042017",
+                "hardwareVersion": "DB01"
+            },
+            "hardwareVersion": "CF01",
+            "firmwareVersion": "X.2.0  Build 0083",
+            "firmwareTimestamp": "2019-05-17T04:29:02",
+            "language": "English",
+            "patchingMode": "Equipment"
+        }
+    ]
+}
