@@ -14,8 +14,16 @@ import utils.common.Common;
 import utils.common.Constants;
 import utils.helper.Logger;
 
-public class VerifyDefinition_Panelnfo {
 
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class VerifyDefinition_Panelnfo extends BaseDefinition{
+	WebDriver driver;
+	
+	
 	public String temporaryJsonPath;
 	public String getValueByAPI;
 	public String positionOfPanel;
@@ -24,13 +32,19 @@ public class VerifyDefinition_Panelnfo {
 	
 	// ============================ GIVEN - for most of scenarios============================//
 	@Given("^Print A of (.*)$")
-	public void printPanelInforA(String configuration)  {
+	public void printPanelInforA(String configuration)  throws Throwable {
   		//Pre-condition: Select the correct configuration
 		
 		System.out.println("1111111114441111111111");
 		Logger.info("Print Panel Information");	
 		Logger.info("<pre>" + "Data GET: " + "</pre>");
 
+		System.setProperty("webdriver.chrome.driver",
+				"D:\\II. Automation\\Workspace\\.metadata\\CRM-Automation\\driver\\chromedriver.exe");
+		driver = new ChromeDriver();
+
+		String url = "http://odoo-test-env.nakivo.com/web/login";
+		driver.get(url);	
 		
 		}
 	@Given("^Print Panel Information of (.*)$")

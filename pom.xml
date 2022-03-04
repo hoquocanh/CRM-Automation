@@ -251,6 +251,22 @@
 			<artifactId>google-oauth-client-jetty</artifactId>
 			<version>1.23.0</version>
 		</dependency>
+
+<!-- The below part is for testing WEB UI -->
+<dependency>
+	<groupId>org.seleniumhq.selenium</groupId>
+	<artifactId>selenium-server</artifactId>
+	<version>3.7.0</version>
+</dependency>
+<!-- Thanks for using https://jar-download.com -->
+<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-api</artifactId>
+    <version>4.1.2</version>
+</dependency>
+
+		
 	</dependencies>
 	<artifactId>imVisionXRESTAPI </artifactId>
 </project>
