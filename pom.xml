@@ -253,24 +253,29 @@
 		</dependency>
 
 <!-- The below part is for testing WEB UI -->
-<dependency>
-	<groupId>org.seleniumhq.selenium</groupId>
-	<artifactId>selenium-server</artifactId>
-	<version>3.7.0</version>
-</dependency>
-<!-- Thanks for using https://jar-download.com -->
-<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
-<dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>selenium-api</artifactId>
-    <version>4.1.2</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server-standalone -->
-<dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>selenium-server-standalone</artifactId>
-    <version>2.53.0</version>
-</dependency>
+
+ <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.0.3</version>
+        </dependency>
+  <!-- add belows for these dependencies version is not 4.0.0 when automatically generated -->
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-chrome-driver</artifactId>
+        <version>4.0.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-api</artifactId>
+        <version>4.0.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-remote-driver</artifactId>
+        <version>4.0.0</version>
+    </dependency>
+
 
 		
 	</dependencies>

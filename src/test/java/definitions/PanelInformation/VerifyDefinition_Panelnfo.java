@@ -40,7 +40,7 @@ public class VerifyDefinition_Panelnfo extends BaseDefinition{
 		Logger.info("<pre>" + "Data GET: " + "</pre>");
 
 		System.setProperty("webdriver.chrome.driver",
-				"D:\\II. Automation\\Workspace\\.metadata\\CRM-Automation\\driver\\chromedriver.exe");
+				"D:\\II. Automation\\Workspace\\chromedriver.exe");
 		driver = new ChromeDriver();
 
 		String url = "http://odoo-test-env.nakivo.com/web/login";
