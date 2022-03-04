@@ -1,4 +1,4 @@
-package definitions.PanelInformation;
+package definitions;
 
 import utils.common.Common;
 import utils.common.Constants;
