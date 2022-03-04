@@ -33,6 +33,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 public class Common {
+	public static void waitPageLoad() throws Throwable
+	{
+		
+		Thread.sleep(Constants.WAIT_PAGE_LOAD);
+	}
+	
 	public static String dateToString(Date date) {
 		return dateToString(date, "MM/dd/yy");
 	}

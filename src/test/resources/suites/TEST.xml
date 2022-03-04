@@ -14,10 +14,5 @@
 	</test>
 	
  
- <!-- <test name="C1. GET Panel Information - Check Total Panels">
-		<classes>
-			<class name="LinkingCucumber.GET_PanelInfo.CheckTotalPanels.VerifyTotalPanels"></class>
-		</classes>
-	</test>  -->
 
 </suite>

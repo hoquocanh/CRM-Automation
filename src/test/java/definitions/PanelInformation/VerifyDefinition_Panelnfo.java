@@ -39,13 +39,8 @@ public class VerifyDefinition_Panelnfo extends BaseDefinition{
 		Logger.info("Print Panel Information");	
 		Logger.info("<pre>" + "Data GET: " + "</pre>");
 
-		System.setProperty("webdriver.chrome.driver",
-				"D:\\II. Automation\\Workspace\\chromedriver.exe");
-		driver = new ChromeDriver();
-
-		String url = "http://odoo-test-env.nakivo.com/web/login";
-		driver.get(url);	
-		
+		launchPage();
+		closePage();
 		}
 	@Given("^Print Panel Information of (.*)$")
 	public void printPanelInfor(String configuration)  {

@@ -82,5 +82,6 @@ public class Constants {
 	public static final int	CALL_LENGTH_MIN_TO		= 10;
 	public static final int	CALL_LENGTH_MIN_TO_ALL	= 60;
 	
-	
+	// Wait
+	public static final int	WAIT_PAGE_LOAD	= 1000;
 }
