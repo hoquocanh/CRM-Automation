@@ -4,7 +4,7 @@ Feature: Verify totalPanels key value
   Scenario Outline: Verify totalPanels key value when connecting all panel types
   Given Print A of <configuration>
   When Login
-  Then Close
+  #Then Close
     
     Examples: 
    	|configuration|

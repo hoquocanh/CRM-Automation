@@ -3,32 +3,32 @@ package definitions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import FirmwareObject.PanelInformation;
-import FirmwareObject.RackInformation;
+
+import pages.LoginPage;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.restassured.response.Response;
+
 import utils.common.Common;
 import utils.common.Constants;
 import utils.helper.Logger;
 
 
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 
 public class LoginDefinition extends BaseDefinition{
-//	WebDriver driver;
+
+	WebDriver driver = null;
+	
+	// A new class will continue to use the "driver" in class BaseDefinition
 	
 	
-	public String temporaryJsonPath;
-	public String getValueByAPI;
-	public String positionOfPanel;
-	public Response response;
-	public String jsonString;
+	LoginPage loginpage = new LoginPage(driver); 
+	
 	
 	// ============================ GIVEN - for most of scenarios============================//
 	@Given("^Print A of (.*)$")
@@ -39,7 +39,7 @@ public class LoginDefinition extends BaseDefinition{
 		Logger.info("Print Panel Information");	
 		Logger.info("<pre>" + "Data GET: " + "</pre>");
 
-		launchPage();
+		loginpage.launchPage();
 
 		
 		}
@@ -48,14 +48,14 @@ public class LoginDefinition extends BaseDefinition{
 	  
 		@When("^Login$")
 			public void Login() throws Throwable {
-			login();
+			loginpage.loginValidUser("anh.ho@nakivo.com", "QATest@123");
 			} 
 	
 	
 	// ============================ THEN - close page ============================//
 		@Then("^Close$")   
 	    public void ClosePage() throws Throwable {
-			closePage();
+			loginpage.closePage();
 		}
 	// =========================Other actions ======================//
  
