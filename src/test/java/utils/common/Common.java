@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -80,7 +81,8 @@ public class Common {
 		Date curDate = new Date();
 		return curDate;
 	}
-
+	
+	
 	public static Date addDays(Date date, int days) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
@@ -121,7 +123,24 @@ public class Common {
 		cal.set(Calendar.DAY_OF_MONTH, rnd);
 		return cal.getTime();
 	}
-
+	/**
+	 * Generate a random email based on the current time
+	 * @author anh.ho	 
+	 * @return a random email
+	 */
+	public static String getRandomEmail() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd'T'HH_mm_ss");
+		Date date = new Date();
+		
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		System.out.println(timestamp.getTime());
+		
+		String randomEmail =  sdf.format(timestamp) + Constants.EMAIL_TEST_DOMAIN;
+		System.out.println(randomEmail);
+		return randomEmail;
+	}
+	
 	public static String randomHeight() {
 		return String.format("%.2f",
 				(float) new Random()

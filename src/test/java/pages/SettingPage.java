@@ -20,5 +20,12 @@ public class SettingPage extends GeneralHomePage {
 		super(Driver);
 	}
 	// ============================ Methods============================//
-	
+	public void activateDeveloperMode() throws Throwable 
+	{
+		
+		gotoModuleSettings();
+		driver.findElement(lnk_activate_developer_mode).click();
+		backToHome();
+		
+	}
 }

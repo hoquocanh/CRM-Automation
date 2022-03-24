@@ -83,5 +83,13 @@ public class Constants {
 	public static final int	CALL_LENGTH_MIN_TO_ALL	= 60;
 	
 	// Wait
-	public static final int	WAIT_PAGE_LOAD	= 1000;
+	public static final int	WAIT_PAGE_LOAD	= 10000;
+	public static final int	WAIT_ELEMENT_DISPLAY	= 500;
+	
+	
+	//CRM
+	public static final String UAT_LINK = PropertiesHelper.getPropValue("profile.uat_link");
+	public static final String UAT_USERNAME = PropertiesHelper.getPropValue("profile.uat_username");
+	public static final String UAT_PASSWORD = PropertiesHelper.getPropValue("profile.uat_password");	
+	public static final String EMAIL_TEST_DOMAIN = PropertiesHelper.getPropValue("profile.email_test_domain");
 }

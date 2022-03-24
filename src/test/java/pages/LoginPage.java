@@ -5,6 +5,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import utils.common.Common;
 import utils.common.Constants;
 
 public class LoginPage extends GeneralHomePage {
@@ -29,14 +30,18 @@ public class LoginPage extends GeneralHomePage {
 		driver.findElement(txt_password).sendKeys(password);
 	}
 	
-	public void clikLogin()
+	public void clickLogin() throws Throwable 
 	{
 		driver.findElement(btn_login).click();
+		waitForHomePageDisplay();
 	}
 	
-	public void loginValidUser(String username, String password) {
+	public void loginValidUser(String username, String password) throws Throwable {
 		enterUsername(username);
 		enterPassword(password);
-		clikLogin();
+		clickLogin();
+		//Common.waitPageLoad();
+		
+		waitForHomePageDisplay();
 	}
 }

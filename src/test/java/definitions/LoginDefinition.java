@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 
 import pages.LoginPage;
-
+import pages.SettingPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -22,39 +22,72 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginDefinition extends BaseDefinition{
 
-	WebDriver driver = null;
+	//WebDriver driver = null;
 	
 	// A new class will continue to use the "driver" in class BaseDefinition
 	
 	
 	LoginPage loginpage = new LoginPage(driver); 
-	
-	
-	// ============================ GIVEN - for most of scenarios============================//
-	@Given("^Print A of (.*)$")
-	public void LaunchPage(String configuration)  throws Throwable {
+	SettingPage settingpage = new SettingPage(driver);
+	@Given("^Test$")
+	public void Test()  throws Throwable {
   		//Pre-condition: Select the correct configuration
 		
-		System.out.println("1111111114441111111111");
-		Logger.info("Print Panel Information");	
-		Logger.info("<pre>" + "Data GET: " + "</pre>");
-
-		loginpage.launchPage();
+		System.out.println("Launch page");
+		Logger.info("Launch page");	
+		
+		Common.getRandomEmail();
 
 		
 		}
-	
-	// ============================ WHEN - Login ============================//
+	// ============================ GIVEN - for most of scenarios============================//
+	@Given("^Launch Odoo Page$")
+	public void LaunchPage()  throws Throwable {
+  		//Pre-condition: Select the correct configuration
+		
+		System.out.println("Launch page");
+		Logger.info("Launch page");	
+		
+
+		loginpage.launchWebPage();
+
+		
+		}
+	// ============================ GIVEN - Login ============================//
 	  
-		@When("^Login$")
-			public void Login() throws Throwable {
-			loginpage.loginValidUser("anh.ho@nakivo.com", "QATest@123");
-			} 
+			@Given("^Login successfully$")
+				public void Login() throws Throwable {
+				Logger.info("Login successfully");	
+				loginpage.loginValidUser(Constants.UAT_USERNAME, Constants.UAT_PASSWORD);
+				} 
+			
+	@Given("^Go to (.*)$")
+	public void goTo(String page)  throws Throwable {
+  		//Pre-condition: Select the correct configuration
+		System.out.println("Go to "+ page +" page");
+		Logger.info("Go to "+ page +" page");	
+		loginpage.gotoModuleCRM();
+		
+		}
+	
+	@Given("^Active developer mode$")
+	public void activeDeveloperMode()  throws Throwable {
+  			
+		settingpage.activateDeveloperMode();
+		
+		}
+	@Given("^Create a new Lead$")
+	public void createNewLead()  throws Throwable {
+  			
+		loginpage.gotoModuleCRM();
+		
+		}
 	
 	
 	// ============================ THEN - close page ============================//
 		@Then("^Close$")   
 	    public void ClosePage() throws Throwable {
+			Logger.info("Close page");	
 			loginpage.closePage();
 		}
 	// =========================Other actions ======================//

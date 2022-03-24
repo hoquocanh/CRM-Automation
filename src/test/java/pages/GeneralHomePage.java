@@ -3,25 +3,35 @@ package pages;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+
 import utils.common.Common;
+import utils.common.Constants;
 import utils.config.Driver;
 
+import utils.data.dataGenralHomePage;
 
-public  class GeneralHomePage {
+
+abstract  class GeneralHomePage {
 	
 	
 	WebDriver driver;
+	private dataGenralHomePage _homeInfo;
 	// ============================ Element declaration============================//
-		By module_crm 		=By.xpath("//a[div[contains (text(),'CRM')]]/div[1]");
+	
+		By module_crm 		=By.xpath("//div[contains (text(),'CRM')]");
+		By module_settings  =By.xpath("//div[contains (text(),'Settings')]");
+		By btn_application  =By.xpath("//a[contains (@title,'Applications')]");
+		
 		By btn_expand_menu  =By.xpath("//a[@role= 'button' and @data-toggle='dropdown']/i[@class='fa fa-plus']");
 		By sub_menu_leads 	=By.xpath("//a[contains(@data-menu-xmlid,'crm_leads')]/span");
-		By module_settings  =By.xpath("//a[div[contains (text(),'Settings')]]/div[1]");
+		
 		
 		
 	// ============================ Constructor declaration============================//
@@ -30,7 +40,7 @@ public  class GeneralHomePage {
 		this.driver = Driver;
 	}
 	// ============================ Methods============================//
-	public void launchPage() throws Throwable {
+	public void launchWebPage() throws Throwable {
 		
 		String projectPath = System.getProperty("user.dir");
 		System.out.println("Project path is: " + projectPath);
@@ -39,16 +49,17 @@ public  class GeneralHomePage {
 				projectPath+"/driver/chromedriver.exe");
 		
 		driver = new ChromeDriver();
+		//driver.manage().timeouts().pageLoadTimeout(TimeUnit.SECONDS);
 		
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		
 		driver.manage().window().maximize();
 		
-		String url = "http://odoo-test-env.nakivo.com/web/";
-//		driver.get(url);	
+		String url = Constants.UAT_LINK;
+
 		
-		driver.navigate().to(url);
-		Common.waitPageLoad();
+		driver.navigate().to(url);		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		//Common.waitPageLoad();
 	}
 	
 	public void closePage() throws Throwable {
@@ -56,6 +67,37 @@ public  class GeneralHomePage {
 		driver.quit();
 	}
 	
+	public void gotoModuleCRM() {
+		
+		driver.findElement(module_crm).click();
+		waitForPageDisplay();
+	}
+	public void gotoModuleSettings() {
+		
+		try {
+		driver.findElement(module_settings).click();
+		waitForPageDisplay();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
 	
+	public void backToHome() throws Throwable {
+		
+		driver.findElement(btn_application).click();
+		waitForHomePageDisplay();
+	}
+	public void waitForHomePageDisplay() throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.findElement(module_crm);
+		
+	}
 	
+	public void waitForPageDisplay()
+	{
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
+	}
 }
