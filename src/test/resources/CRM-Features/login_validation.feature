@@ -5,11 +5,11 @@ Feature: Verify totalPanels key value
   Given Launch Odoo Page
   Given Login successfully
   Given Active developer mode
-  Given Go to <page>
-  #Given Create a new Lead
+  Given Go to <page CRM>
+  Given Create a new Lead
   #Then Close
     
     Examples: 
-   	|page|
+   	|page CRM|
    	|CRM|
 

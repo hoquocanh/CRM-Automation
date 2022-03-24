@@ -17,22 +17,26 @@ public class LoginPage extends GeneralHomePage {
 	
 	// ============================ Constructor declaration============================//
 	//Login Page continues to use the Driver which created at GeneralHomePage
+	public LoginPage()
+	{
+		super();
+	}
 	public LoginPage(WebDriver Driver)
 	{
 		super(Driver);
 	}
 	// ============================ Methods============================//
 	public void enterUsername(String username) {
-		driver.findElement(txt_username).sendKeys(username);
+		getDriver().findElement(txt_username).sendKeys(username);
 	}
 	
 	public void enterPassword(String password) {
-		driver.findElement(txt_password).sendKeys(password);
+		getDriver().findElement(txt_password).sendKeys(password);
 	}
 	
 	public void clickLogin() throws Throwable 
 	{
-		driver.findElement(btn_login).click();
+		getDriver().findElement(btn_login).click();
 		waitForHomePageDisplay();
 	}
 	

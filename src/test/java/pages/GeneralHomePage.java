@@ -18,10 +18,10 @@ import utils.config.Driver;
 import utils.data.dataGenralHomePage;
 
 
-abstract  class GeneralHomePage {
+public class GeneralHomePage {
 	
-	
-	WebDriver driver;
+	//A variable "driver" is a static variable which is created at beginning and being used through the session
+	private static WebDriver driver;
 	private dataGenralHomePage _homeInfo;
 	// ============================ Element declaration============================//
 	
@@ -35,29 +35,38 @@ abstract  class GeneralHomePage {
 		
 		
 	// ============================ Constructor declaration============================//
-	public GeneralHomePage (WebDriver Driver)
+		public GeneralHomePage ()
+		{
+			
+			String projectPath = System.getProperty("user.dir");
+			System.out.println("Project path is: " + projectPath);
+			
+			System.setProperty("webdriver.chrome.driver",
+					projectPath+"/driver/chromedriver.exe");
+			
+			this.driver = new ChromeDriver();
+		}
+		public GeneralHomePage (WebDriver Driver)
 	{
 		this.driver = Driver;
+		
+		
 	}
+		// ============================ Generate Getter and Setter============================//	
+		public static WebDriver getDriver() {
+			return driver;
+		}
+		public static void setDriver(WebDriver driver) {
+			GeneralHomePage.driver = driver;
+		}
 	// ============================ Methods============================//
 	public void launchWebPage() throws Throwable {
-		
-		String projectPath = System.getProperty("user.dir");
-		System.out.println("Project path is: " + projectPath);
-		
-		System.setProperty("webdriver.chrome.driver",
-				projectPath+"/driver/chromedriver.exe");
-		
-		driver = new ChromeDriver();
-		//driver.manage().timeouts().pageLoadTimeout(TimeUnit.SECONDS);
-		
-		
-		driver.manage().window().maximize();
 		
 		String url = Constants.UAT_LINK;
 
 		
 		driver.navigate().to(url);		
+		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		//Common.waitPageLoad();
 	}
@@ -100,4 +109,5 @@ abstract  class GeneralHomePage {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		
 	}
+	
 }

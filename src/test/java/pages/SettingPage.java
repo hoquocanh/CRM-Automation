@@ -15,6 +15,10 @@ public class SettingPage extends GeneralHomePage {
 	
 	// ============================ Constructor declaration============================//
 	//Login Page continues to use the Driver which created at GeneralHomePage
+	public SettingPage()
+	{
+		super();
+	}
 	public SettingPage(WebDriver Driver)
 	{
 		super(Driver);
@@ -23,8 +27,8 @@ public class SettingPage extends GeneralHomePage {
 	public void activateDeveloperMode() throws Throwable 
 	{
 		
-		gotoModuleSettings();
-		driver.findElement(lnk_activate_developer_mode).click();
+		super.gotoModuleSettings();
+		getDriver().findElement(lnk_activate_developer_mode).click();
 		backToHome();
 		
 	}
