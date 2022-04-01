@@ -26,10 +26,17 @@ public class CRMPage extends GeneralHomePage {
 	
 	// ============================ Constructor declaration============================//
 	//Login Page continues to use the Driver which created at GeneralHomePage
+	public CRMPage()
+	{
+		super();
+	}
 	public CRMPage(WebDriver Driver)
 	{
 		super(Driver);
 	}
 	// ============================ Methods============================//
-	
+	public CRMPage createNewLead()
+	{
+		return this;
+	}
 }

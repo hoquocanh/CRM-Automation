@@ -1,0 +1,42 @@
+{
+	"leadsList":[	
+		{
+			"leadType":"target lead",
+			"leadName":"target lead",
+			"emailAddress":"",
+			"leadForm":"IB NC Leads",
+			"companyName":"test123",
+			"address":{
+			        "streetAddress":"123street",
+			        "district":"",
+			        "city":"",
+			        "state":"",
+			        "postalCode":""
+	       			 },		
+			"contactname":"",
+			"tags":"Renewal",
+			"salesTeam":"Channel  Management",
+			"createManual":false
+		},	
+		{
+			"leadType":"source lead",
+			"leadName":"source lead",
+			"emailAddress":"",
+			"leadForm":"Download Free Trial",
+			"companyName":"test12345",
+			"address":{
+			        "streetAddress":"456street",
+			        "district":"",
+			        "city":"",
+			        "state":"",
+			        "postalCode":""
+	       			 },		
+			"contactname":"test contact",
+			"tags":"Trial download",
+			"salesTeam":"Channel  Management",
+			"createManual":false,
+			"publicMessage":"target lead message",
+			"userLogNotes":"target lead log notes"
+		}
+	]
+}
