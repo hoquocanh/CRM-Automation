@@ -29,7 +29,7 @@ public class SettingPage extends GeneralHomePage {
 		
 		super.gotoModuleSettings();
 		getDriver().findElement(lnk_activate_developer_mode).click();
-		backToHome();
+		//backToHome();
 		
 	}
 }

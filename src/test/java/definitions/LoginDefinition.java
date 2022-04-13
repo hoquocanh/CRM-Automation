@@ -3,6 +3,7 @@ package definitions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import pages.CRMPage;
 import pages.GeneralHomePage;
 import pages.LoginPage;
 import pages.SettingPage;
@@ -26,6 +27,9 @@ public class LoginDefinition {
 	LoginPage loginpage = new LoginPage(homePage.getDriver()); 
 	//A SettingPage will continue to use the Driver from LoginPage  
 	SettingPage settingpage = new SettingPage(loginpage.getDriver());
+	//A CRMPage will continue to use the Driver from LoginPage
+	CRMPage crmpage = new CRMPage(loginpage.getDriver());
+	
 	@Given("^Test$")
 	public void Test()  throws Throwable {
   		//Pre-condition: Select the correct configuration
@@ -73,11 +77,19 @@ public class LoginDefinition {
 		settingpage.activateDeveloperMode();
 		
 		}
-	@Given("^Create a new Lead$")
-	public void createNewLead()  throws Throwable {
+	@Given("^Create a new Target Lead from (.*)$")
+	public void createNewLead(String Leadsfile)  throws Throwable {
   			
-		homePage.gotoModuleCRM();
+		String returnRandomEmail = "";
+		crmpage.createLead();
 		
+		crmpage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
+		returnRandomEmail = crmpage.enterEmail(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.enterCompanyName(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectTag(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.setOffCreateManual(Leadsfile, Constants.TARGET_LEAD);
 		}
 	
 	

@@ -1,137 +1,193 @@
 package utils.object;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+
+import utils.common.Constants;
 import utils.data.dataJsonLead;
 
-public class objLead {
+public class objLead<T, S extends String> {
 	
-	private String leadName = null;
-	private String emailAddress = null;	
-	private String leadForm = null;
-	private String companyName = null;
-	private String street = null;
-	private String tags = null;	
-	private String salesTeam = null;
-	private Boolean createManual = false;
-	
-	
-	
-	public objLead() {
-		
-	}
-	
-	
-	public objLead(Iterator interator) {
+	public T getJsonValue(S testFileName, S leadType, S inputKey)
+	{
+		T returnValue=null;
+		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
+		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
+		System.out.println("jsonPath: "+ jsonPath);
 		
 		
-		try {
-		Iterator itr1 = interator;
-		while (interator.hasNext()) {
-
-        	Iterator<Map.Entry> itr2 = ((Map) itr1.next()).entrySet().iterator();
-            while (itr2.hasNext()) {
-                Map.Entry pair = itr2.next();
-                if(pair.getKey().equals(dataJsonLead.ADDRESS.getValue()) == false )
-                {
-                	
-                	System.out.println(pair.getKey() + " : " + pair.getValue());
-                	
-                }
+		Object obj;
+        try {
+        	
+            obj = new JSONParser().parse(new FileReader(jsonPath));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONObject leadXObject;
+            //List of Leads
+			//1. Iterator itr1 = leadList.iterator();
+            JSONArray leadListArry = (JSONArray) jsonObject.get(dataJsonLead.LEADLIST.getValue());
+            
+            //2. Position of Target lead is 0; position of Source lead is 1
+            if(leadType.equalsIgnoreCase(Constants.TARGET_LEAD))
+            {
+            	leadXObject = (JSONObject) leadListArry.get(0);
             }
-        }
-    } 
-    catch (Exception e) 
-    {
-        e.printStackTrace();
-    } 
+            else
+            {
+            	leadXObject = (JSONObject) leadListArry.get(1);
+            }
+             //3. "address" is another JSONObject
+            JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.ADDRESS.getValue());
+            System.out.println("Address:" + JSONValue.toJSONString(addressObject));
+            
+            if(isAddressKey(inputKey))
+            {
+            	returnValue = (T) addressObject.get(inputKey);
+            	
+            }//If not in group of key "address"
+            else
+            {
+            	returnValue = (T) leadXObject.get(inputKey);
+            	
+            }
+         } 
+	    catch (Exception e) 
+	    {
+	        e.printStackTrace();
+	    } 
+		
+		return returnValue;
 		
 	}
-
-//	public Object getJsonValue(Iterator interator, String key)
+	
+//	public static String getJsonValue(String testFileName, String leadType, String inputKey)
 //	{
-//		Object obj = new Object();
+//		String returnValue ="";
+//		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
+//		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
+//		System.out.println("jsonPath: "+ jsonPath);
 //		
-//		try {
-//			Iterator itr1 = interator;
-//			while (interator.hasNext()) {
-//
-//	        	Iterator<Map.Entry> itr2 = ((Map) itr1.next()).entrySet().iterator();
-//	            while (itr2.hasNext()) {
-//	                Map.Entry pair = itr2.next();
-//	                if(pair.getKey().equals(dataLead.ADDRESS.getValue()) == false )
-//	                {
-//	                	
-//	                	for (dataLead d : dataLead.values())
-//	                	{
-//	                		if(pair.getKey().equals(d.getValue()) == true )
-//	                			obj = pair.getValue();
-//	                			System.out.println(pair.getKey() + " : " + pair.getValue());
-//	                			System.out.println("Gotten key: "+ d.getValue()+ " Gotten value: "+ (String)obj);
-//	                			return obj;
-//	                	}
-//	                }
-//	            }
-//	        }
-//	    } 
+//		
+//		Object obj;
+//        try {
+//        	
+//            obj = new JSONParser().parse(new FileReader(jsonPath));
+//            JSONObject jsonObject = (JSONObject) obj;
+//            JSONObject leadXObject;
+//            //List of Leads
+//			//1. Iterator itr1 = leadList.iterator();
+//            JSONArray leadListArry = (JSONArray) jsonObject.get(dataJsonLead.LEADLIST.getValue());
+//            
+//            //2. Position of Target lead is 0; position of Source lead is 1
+//            if(leadType.equalsIgnoreCase(Constants.TARGET_LEAD))
+//            {
+//            	leadXObject = (JSONObject) leadListArry.get(0);
+//            }
+//            else
+//            {
+//            	leadXObject = (JSONObject) leadListArry.get(1);
+//            }
+//             //3. "address" is another JSONObject
+//            JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.ADDRESS.getValue());
+//            System.out.println("Address:" + JSONValue.toJSONString(addressObject));
+//            
+//            if(isAddressKey(inputKey))
+//            {
+//            	returnValue = (String) addressObject.get(inputKey);
+//            	
+//            }//If not in group of key "address"
+//            else
+//            {
+//            	returnValue = (String) leadXObject.get(inputKey);
+//            	
+//            }
+//         } 
 //	    catch (Exception e) 
 //	    {
 //	        e.printStackTrace();
 //	    } 
 //		
-//		return null;
+//		return returnValue;
+//		
 //	}
-	
-	public String getLeadName() {
-		return leadName;
+	public static void setJsonValue(String testFileName, String leadType, String inputKey, String inputValue)
+	{
+		String returnValue ="";
+		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
+		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
+		System.out.println("jsonPath: "+ jsonPath);
+		
+		
+		Object obj = null;
+        //I. Find out the inputKey we want to replace the value
+		try {
+        	
+            obj = new JSONParser().parse(new FileReader(jsonPath));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONObject leadXObject;
+            //List of Leads
+			//1. Iterator itr1 = leadList.iterator();
+            JSONArray leadListArry = (JSONArray) jsonObject.get(dataJsonLead.LEADLIST.getValue());
+            
+            //2. Position of Target lead is 0; position of Source lead is 1
+            if(leadType.equalsIgnoreCase(Constants.TARGET_LEAD))
+            {
+            	leadXObject = (JSONObject) leadListArry.get(0);
+            }
+            else
+            {
+            	leadXObject = (JSONObject) leadListArry.get(1);
+            }
+             //3. "address" is another JSONObject
+            JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.ADDRESS.getValue());
+            //System.out.println("Address:" + JSONValue.toJSONString(addressObject));
+            
+            if(isAddressKey(inputKey))
+            {            	
+            	addressObject.remove(inputKey);
+            	addressObject.put(inputKey, inputValue);
+            	
+            }//If not in group of key "address"
+            else
+            {            	
+            	leadXObject.remove(inputKey);
+            	leadXObject.put(inputKey, inputValue);
+            }
+         } 
+	    catch (Exception e) 
+	    {
+	        e.printStackTrace();
+	    } 
+		        
+        
+        //II. Write JSON file after replace the value for the inputKey
+		try (FileWriter file = new FileWriter(jsonPath) )
+		{
+			file.write(obj.toString());
+			file.flush();			
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 	}
-	public void setLeadName(String leadName) {
-		this.leadName = leadName;
+	public static boolean isAddressKey(String inputKey)
+	{
+		
+		if (inputKey.equalsIgnoreCase(dataJsonLead.STREETADDRESS.getValue()) 
+				|| inputKey.equalsIgnoreCase(dataJsonLead.DISTRICT.getValue()) 
+				|| inputKey.equalsIgnoreCase(dataJsonLead.CITY.getValue())
+				|| inputKey.equalsIgnoreCase(dataJsonLead.POSTALCODE.getValue())) 
+		{
+			return true;
+		}
+		else return false;
 	}
-	public void setLeadName(Iterator interator) {
-		this.leadName = leadName;
-	}
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-	public String getLeadForm() {
-		return leadForm;
-	}
-	public void setLeadForm(String leadForm) {
-		this.leadForm = leadForm;
-	}
-	public String getCompanyName() {
-		return companyName;
-	}
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-	public String getStreet() {
-		return street;
-	}
-	public void setStreet(String street) {
-		this.street = street;
-	}
-	public String getTags() {
-		return tags;
-	}
-	public void setTags(String tags) {
-		this.tags = tags;
-	}
-	public String getSalesTeam() {
-		return salesTeam;
-	}
-	public void setSalesTeam(String salesTeam) {
-		this.salesTeam = salesTeam;
-	}
-	public Boolean getCreateManual() {
-		return createManual;
-	}
-	public void setCreateManual(Boolean createManual) {
-		this.createManual = createManual;
-	}
+
 }

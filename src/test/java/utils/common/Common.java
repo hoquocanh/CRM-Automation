@@ -39,7 +39,11 @@ public class Common {
 		
 		Thread.sleep(Constants.WAIT_PAGE_LOAD);
 	}
-	
+	public static void waitPageLoad(int seconds) throws Throwable
+	{
+		
+		Thread.sleep(seconds*1000);
+	}
 	public static String dateToString(Date date) {
 		return dateToString(date, "MM/dd/yy");
 	}

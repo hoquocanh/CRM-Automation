@@ -6,10 +6,10 @@ Feature: Verify totalPanels key value
   Given Login successfully
   Given Active developer mode
   Given Go to <page CRM>
-  Given Create a new Lead
+  Given Create a new Target Lead from <Leads file>
   #Then Close
     
     Examples: 
-   	|page CRM|
-   	|CRM|
+   	|page CRM|Leads file|
+   	|CRM|defaultLead|
 

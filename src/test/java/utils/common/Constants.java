@@ -91,7 +91,7 @@ public class Constants {
 	public static final String UAT_LINK = PropertiesHelper.getPropValue("profile.uat_link");
 	public static final String UAT_USERNAME = PropertiesHelper.getPropValue("profile.uat_username");
 	public static final String UAT_PASSWORD = PropertiesHelper.getPropValue("profile.uat_password");	
-	public static final String EMAIL_TEST_DOMAIN = PropertiesHelper.getPropValue("profile.email_test_domain");
+	public static final String EMAIL_TEST_DOMAIN = "@test.com";
 	public static final String TARGET_LEAD = "target lead";
 	public static final String SOURCE_LEAD = "source lead";
 }

@@ -9,7 +9,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import java.util.concurrent.TimeUnit;
 
 import utils.common.Common;
 import utils.common.Constants;
@@ -18,22 +21,21 @@ import utils.config.Driver;
 import utils.data.dataGenralHomePage;
 
 
-public class GeneralHomePage {
+public class GeneralHomePage implements WebDriverEventListener{
 	
 	//A variable "driver" is a static variable which is created at beginning and being used through the session
 	private static WebDriver driver;
 	private dataGenralHomePage _homeInfo;
 	// ============================ Element declaration============================//
-	
+		//Module
 		By module_crm 		=By.xpath("//div[contains (text(),'CRM')]");
 		By module_settings  =By.xpath("//div[contains (text(),'Settings')]");
 		By btn_application  =By.xpath("//a[contains (@title,'Applications')]");
 		
+		
+		
+		
 		By btn_expand_menu  =By.xpath("//a[@role= 'button' and @data-toggle='dropdown']/i[@class='fa fa-plus']");
-		By sub_menu_leads 	=By.xpath("//a[contains(@data-menu-xmlid,'crm_leads')]/span");
-		
-		
-		
 	// ============================ Constructor declaration============================//
 		public GeneralHomePage ()
 		{
@@ -99,15 +101,95 @@ public class GeneralHomePage {
 		waitForHomePageDisplay();
 	}
 	public void waitForHomePageDisplay() throws InterruptedException {
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(17));
+		
 		driver.findElement(module_crm);
 		
 	}
 	
 	public void waitForPageDisplay()
 	{
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(17));
 		
 	}
-	
+	public void waitForElementResponse()
+	{
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+	@Override
+	public void beforeNavigateTo(String url, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void afterNavigateTo(String url, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void beforeNavigateBack(WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void afterNavigateBack(WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void beforeNavigateForward(WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void afterNavigateForward(WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void beforeFindBy(By by, WebElement element, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void afterFindBy(By by, WebElement element, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void beforeClickOn(WebElement element, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void afterClickOn(WebElement element, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void beforeChangeValueOf(WebElement element, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void afterChangeValueOf(WebElement element, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void beforeScript(String script, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void afterScript(String script, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onException(Throwable throwable, WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
 }
