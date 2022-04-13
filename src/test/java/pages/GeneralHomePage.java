@@ -95,7 +95,7 @@ public class GeneralHomePage implements WebDriverEventListener{
 		}
 	}
 	
-	public void backToHome() throws Throwable {
+	public void goToHome() throws Throwable {
 		
 		driver.findElement(btn_application).click();
 		waitForHomePageDisplay();

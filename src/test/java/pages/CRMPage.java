@@ -27,6 +27,12 @@ import utils.object.objLead;
  * @author anh.ho
  *
  */
+/**
+ * @author anh.ho
+ *
+ * @param <T>
+ * @param <S>
+ */
 public class CRMPage<T, S extends String> extends GeneralHomePage {
 	/**
 	 * Flow to create Source lead
@@ -38,16 +44,28 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	 */
 	
 	// ============================ Element declaration============================//
-	//Menu "Leads"
+	//I. Pipeline page
+	//1.Menu "Leads"
 	By menu_leads		=By.xpath("//a[@role= 'button' and contains(@ data-menu-xmlid,'menu_leads')]");
-	By sub_menu_leads 	=By.xpath("//a[contains(@data-menu-xmlid,'crm_leads')]/span");
+	By sub_menu_leads_leads 	=By.xpath("//a[contains(@data-menu-xmlid,'crm_leads')]/span");
 	
-	//Title
+	By menu_archive		=By.xpath("//a[@role= 'button' and contains(@ data-menu-xmlid,'menu_archive_leads')]");
+	By sub_menu_archive_all =By.xpath("//a[contains(@data-menu-xmlid,'archive_leads')]/span[contains(text(),'All')]");
+	
+	//2. Textbox
+	By txt_search 		=By.xpath("//input[contains(@role,'searchbox')]");
+	
+	//3. Title
 	By lbl_leads = By.xpath("//li[contains(text(),'Leads')]");
 	
-	//In CRM page
+	//II. All leads page
+	By lnk_dynamic_source_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'source lead')]");
+	By lnk_dynamic_targe_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'target lead')]");
+	
+	//III. In CRM page
+	//1. Detail CRM page
 	By btn_create =By.xpath("//button[contains(text(),'Create')]");
-	By btn_save =By.xpath("//button[contains(text(),'Discard')]");
+	By btn_save =By.xpath("//button[contains(text(),'Save')]");
 	By btn_discard 	=By.xpath("//button[contains(text(),'Discard')]");
 	By btn_paper_plane =By.xpath("//button[contains(@class,'paper-plane')]");
 		//tab_send_message		
@@ -112,7 +130,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	}
 	public void clickLeadsSubMenu() throws Throwable 
 	{
-		getDriver().findElement(sub_menu_leads).click();
+		getDriver().findElement(sub_menu_leads_leads).click();
 		waitForPageDisplay();
 		//Find label "Leads" to make sure the "Leads" page displays completely
 		getDriver().findElement(lbl_leads);
@@ -128,14 +146,26 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		getDriver().findElement(txt_name);
 		
 	}
-	
+	/**This method is used to create a Lead
+	 * <pre>
+	 * Pre-condition: The screen is being Home page
+	 * </pre>
+	 * This method including below steps
+	 * 1. Go to Module CRM
+	 * 2. Click on "Leads" menu
+	 * 3. Click on "Leads" sub-menu
+	 * 4. Press "CREATE" button
+	 * @throws Throwable
+	 */
 	public void createLead() throws Throwable
 	{
-		//1. Click on "Leads" menu
+		//1. Go to Module CRM
+		this.gotoModuleCRM();
+		//2. Click on "Leads" menu
 		this.clickLeadsMenu();
-		//2. Click on "Leads" sub-menu
+		//3. Click on "Leads" sub-menu
 		this.clickLeadsSubMenu();
-		//3. Press "CREATE" button
+		//4. Press "CREATE" button
 		this.clickCreateButton();
 		
 		
@@ -149,7 +179,10 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		
 	}
 	
-	/**This method is used to generate a random email
+	/**This method is used to generate a random email and create a lead with that email
+	 * <pre>
+	 * This method is used to create the Target lead
+	 * </pre>
 	 * @param testFileName
 	 * @param leadType
 	 * @throws Throwable
@@ -160,12 +193,30 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		
 		String randomEmail = Common.getRandomEmail();
 		System.out.println("Random email:"+ randomEmail);
+		Logger.info("Random email:"+ randomEmail);
 		//Set random email to the Email address on the Json file
 		objLead.setJsonValue(testFileName,leadType,dataJsonLead.EMAILADDRESS.getValue(), randomEmail);
+		objLead.setJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.EMAILADDRESS.getValue(), randomEmail);
 		
 		getDriver().findElement(txt_email).sendKeys(randomEmail);
 		
 		return randomEmail;
+	}
+	/**This method is used to enter an existing email
+	 * <pre>
+	 * This method is used to create the Source lead
+	 * </pre>
+	 * @param testFileName
+	 * @param leadType
+	 * @param inputEmail
+	 * @throws Throwable
+	 */
+	public void enterEmail(String testFileName, String leadType, String inputEmail) throws Throwable	
+	
+	{
+		objLead.setJsonValue(testFileName,leadType,dataJsonLead.EMAILADDRESS.getValue(), inputEmail);
+		getDriver().findElement(txt_email).sendKeys(inputEmail);
+		
 	}
 	public void enterLeadForm(String testFileName, String leadType) throws Throwable
 	{
@@ -185,6 +236,13 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		String inputText = temp.getJsonValue(testFileName,leadType,dataJsonLead.SALESTEAM.getValue());	
 		getDriver().findElement(cbb_sales_team).sendKeys(inputText);
 	}
+	public void pressSaveButton() throws Throwable
+	{
+		
+		getDriver().findElement(btn_save).click();
+		waitForPageDisplay();
+	}
+	
 	public void selectTag(String testFileName, String leadType) throws Throwable
 	{
 		objLead<String, String> temp = new objLead<String, String>();
@@ -216,20 +274,19 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		WebDriver dr = super.getDriver();
 		JavascriptExecutor Js1 = (JavascriptExecutor) dr;
 		
-		
-		
-		//Get value of //input[@id]
+		//1. Get value of //input[@id]
 		String attributeValue = getDriver().findElement(chb_is_create_manual).getAttribute("id");
-		Logger.info("Attribute of ID is "+ attributeValue);	
+		//Logger.info("Attribute of ID is "+ attributeValue);	
 		
+		//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
 		String checkTheCheckBox = 
 				  "return document.querySelector(\'#" + attributeValue + "\')" +
 				  ".checked";
 		
-		Logger.info("Checkbox element is "+ checkTheCheckBox);	
+		//Logger.info("Checkbox element is "+ checkTheCheckBox);	
 		Boolean isChecked = (Boolean) Js1.executeScript(checkTheCheckBox);
 		
-		//If the CreateManual checkbox is check -> click on it
+		//3. If the CreateManual checkbox is check -> click on it
 		if(isChecked)
 			getDriver().findElement(div_chb_is_create_manual).click();
 	}

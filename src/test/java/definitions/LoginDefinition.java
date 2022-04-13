@@ -22,6 +22,7 @@ import org.openqa.selenium.WebDriver;
 
 
 public class LoginDefinition {
+	String returnRandomEmail = "";
 	GeneralHomePage homePage = new GeneralHomePage();
 	//A LoginPage will be extended from GenralHomePage and use the Driver from there  
 	LoginPage loginpage = new LoginPage(homePage.getDriver()); 
@@ -78,21 +79,41 @@ public class LoginDefinition {
 		
 		}
 	@Given("^Create a new Target Lead from (.*)$")
-	public void createNewLead(String Leadsfile)  throws Throwable {
+	public void createNewTargetLead(String Leadsfile)  throws Throwable {
   			
-		String returnRandomEmail = "";
+		
 		crmpage.createLead();
 		
 		crmpage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
 		returnRandomEmail = crmpage.enterEmail(Leadsfile, Constants.TARGET_LEAD);
+		
 		crmpage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.enterCompanyName(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectTag(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.setOffCreateManual(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.pressSaveButton();
+		crmpage.goToHome();
 		}
 	
-	
+	@Given("^Create a new Source Lead from (.*)$")
+	public void createNewSourceLead(String Leadsfile)  throws Throwable {
+  			
+		
+		crmpage.createLead();
+		
+		crmpage.enterLeadName(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.enterEmail(Leadsfile, Constants.SOURCE_LEAD,returnRandomEmail);
+		
+		crmpage.enterLeadForm(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.enterCompanyName(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.selectTag(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.selectSalesTeam(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.setOffCreateManual(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.pressSaveButton();
+		crmpage.goToHome();
+		
+		}
 	// ============================ THEN - close page ============================//
 		@Then("^Close$")   
 	    public void ClosePage() throws Throwable {
