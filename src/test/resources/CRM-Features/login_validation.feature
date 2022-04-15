@@ -8,6 +8,7 @@ Feature: Verify totalPanels key value
   Given Go to <page CRM>
   #Given Create a new Target Lead from <Leads file>
   #Given Create a new Source Lead from <Leads file>
+  Given Check Source Lead is merged to Target Lead from <Leads file>
   #Then Close
     
     Examples: 

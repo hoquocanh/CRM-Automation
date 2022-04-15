@@ -27,6 +27,7 @@ import javax.xml.bind.DatatypeConverter;
 import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.openqa.selenium.By;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -140,11 +141,30 @@ public class Common {
 		
 		System.out.println(timestamp.getTime());
 		
-		String randomEmail =  sdf.format(timestamp) + Constants.EMAIL_TEST_DOMAIN;
+		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.EMAIL_TEST_DOMAIN;
 		System.out.println(randomEmail);
 		return randomEmail;
 	}
-	
+	/**
+	 * Replace a dynamic controll
+	 * @author anh.ho	
+	 * @param inputElement
+	 * @param replaceString
+	 * @param replaceBy
+	 * @return a selenium.by
+	 */
+	public static By replaceDynamicControl (By inputElement, String replaceString, String replaceBy)
+	{
+		By dynamicElement=null;
+		
+		String x = inputElement.toString().replaceAll("By.xpath: ", "");
+        String y = x.replaceAll(replaceString, replaceBy);
+		
+        dynamicElement= By.xpath(y);
+        
+		return dynamicElement;
+		
+	}
 	public static String randomHeight() {
 		return String.format("%.2f",
 				(float) new Random()

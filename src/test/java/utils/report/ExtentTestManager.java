@@ -25,7 +25,8 @@ public class ExtentTestManager {
 	private static String resultFileName = "ReportResults.html";
 	private static String folderResultName = "ReportResults";
 	private static String screenshotsFolderName = "screenshots";
-
+	static Map<String, ExtentTest> extentTestMap = new HashMap<String, ExtentTest>();
+	static Map<String, ExtentTest> extentTestNodeMap = new HashMap<String, ExtentTest>();
 	static Map<String, ExtentTest> featureMap = new HashMap<String, ExtentTest>();
 	static Map<String, ExtentTest> scenarioMap = new HashMap<String, ExtentTest>();
 	static Map<PickleStepTestStep, ExtentTest> stepMap = new HashMap<PickleStepTestStep, ExtentTest>();
@@ -33,11 +34,12 @@ public class ExtentTestManager {
 	static String outputFolder;
 	static ExtentReports extent;
 	static ThreadLocal<ExtentTest> stepTestThreadLocal = new InheritableThreadLocal<>();
-
+	static ExtentTest newestNode;
+	static ExtentTest newestTest;
 	public static synchronized boolean isFeatureExisted(FeatureModel currentFeature) {
 		return featureMap.containsKey(currentFeature.getUri());
 	}
-
+	
 	public static synchronized void initialReport() {
 		try {
 			if (ExtentManager.isReportCreated())
@@ -52,7 +54,11 @@ public class ExtentTestManager {
 			e.printStackTrace();
 		}
 	}
-
+	public static synchronized ExtentTest getTest() {
+		if (newestTest != null)
+			return newestTest;
+		return (ExtentTest) extentTestMap.get(String.valueOf(Thread.currentThread().getId()));
+	}
 	public static synchronized void createFeatureNode(FeatureModel currentFeature) {
 		try {
 			ExtentTest feature = extent.createTest(Feature.class, currentFeature.getName());
@@ -152,6 +158,12 @@ public class ExtentTestManager {
 		if (!output.exists())
 			output.mkdir();
 		return path;
+	}
+	public static synchronized ExtentTest getNode() {
+		return newestNode;
+	}
+	public static synchronized ExtentTest getNode(String key) {
+		return (ExtentTest) extentTestNodeMap.get(key);
 	}
 
 	public static synchronized String getOutputFolder() {

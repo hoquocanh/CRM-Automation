@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 
@@ -57,10 +58,11 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	
 	//3. Title
 	By lbl_leads = By.xpath("//li[contains(text(),'Leads')]");
+	By lbl_all_leads = By.xpath("//li[contains(text(),'All Leads')]");
 	
 	//II. All leads page
-	By lnk_dynamic_source_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'source lead')]");
-	By lnk_dynamic_targe_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'target lead')]");
+	By lnk_dynamic_source_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'REPLACE#1')]");
+	By lnk_dynamic_targe_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'REPLACE#1')]");
 	
 	//III. In CRM page
 	//1. Detail CRM page
@@ -96,10 +98,11 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	By div_chb_is_create_manual =By.xpath("//div[contains(@name,'is_create_manual')]");
 	By chb_active =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name,'active')][2]/input[@type='checkbox']");
 	
-	//document.querySelector('#o_field_input_1691').checked;
+	
 	
 	//label
 	By lbl_is_won =By.xpath("//span[contains(@name,'won_status')]");
+	By lbl_dynamic_merge_source_lead = By.xpath("//p[contains(text(),'This lead has been merged into')]/a[contains(text(),'REPLACE#1')]");
 	
 	//Footer tabs
 	
@@ -136,7 +139,19 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		getDriver().findElement(lbl_leads);
 		
 	}
-	
+	public void clickArchiveMenu() throws Throwable 
+	{
+		getDriver().findElement(menu_archive).click();
+		waitForElementResponse();
+	}
+	public void clickArchive_AllSubMenu() throws Throwable 
+	{
+		getDriver().findElement(sub_menu_archive_all).click();
+		waitForPageDisplay();
+		//Find label "Leads" to make sure the "Leads" page displays completely
+		getDriver().findElement(lbl_all_leads);
+		
+	}
 	public void clickCreateButton() throws Throwable 
 	{
 		getDriver().findElement(btn_create).click();
@@ -171,10 +186,21 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		
 	}
 	
+	public void goToSub_ArchiveMenu(String subMenu) throws Throwable
+	{
+		
+		//1. Click on "Archive" menu
+		this.clickArchiveMenu();
+		//2. Click on "All Leads" sub-menu
+		this.clickArchive_AllSubMenu();
+		
+	}
+	
+//---------------------------------------CRM page------------------------------------------------
 	public void enterLeadName(String testFileName, String leadType) throws Throwable
 	{
 		objLead<String, String> temp = new objLead<String, String>();
-		String inputText = temp.getJsonValue(testFileName,leadType,dataJsonLead.LEADNAME.getValue());;
+		String inputText = temp.getJsonValue(testFileName,leadType,dataJsonLead.LEADNAME.getValue());
 		getDriver().findElement(txt_name).sendKeys(inputText);
 		
 	}
@@ -242,6 +268,12 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		getDriver().findElement(btn_save).click();
 		waitForPageDisplay();
 	}
+	public void clickCRMDeveloper() throws Throwable
+	{
+		
+		getDriver().findElement(tab_crm_developer).click();
+		waitForElementResponse();
+	}
 	
 	public void selectTag(String testFileName, String leadType) throws Throwable
 	{
@@ -260,14 +292,30 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		//waitForElementResponse();
 		getDriver().findElement(cbb_tags).click();;	
 		getDriver().findElement(cbb_tags).sendKeys(inputText);	
+		//Press "Enter" on keyboard
 		getDriver().findElement(cbb_tags).sendKeys(Keys.RETURN);
 
 	}
 	public void setOnCreateManual(String testFileName, String leadType) throws Throwable
 	{				
-		//If the CreateManual checkbox is UNcheck -> click on it
-		if(!getDriver().findElement(chb_is_create_manual).isSelected())
-			getDriver().findElement(chb_is_create_manual).click();
+		WebDriver dr = super.getDriver();
+		JavascriptExecutor Js1 = (JavascriptExecutor) dr;
+		
+		//1. Get value of //input[@id]
+		String attributeValue = getDriver().findElement(chb_is_create_manual).getAttribute("id");
+		//Logger.info("Attribute of ID is "+ attributeValue);	
+		
+		//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
+		String checkTheCheckBox = 
+				  "return document.querySelector(\'#" + attributeValue + "\')" +
+				  ".checked";
+		
+		//Logger.info("Checkbox element is "+ checkTheCheckBox);	
+		Boolean isChecked = (Boolean) Js1.executeScript(checkTheCheckBox);
+		
+		//3. If the CreateManual checkbox is UNcheck -> click on it
+		if(!isChecked)
+			getDriver().findElement(div_chb_is_create_manual).click();
 	}
 	public void setOffCreateManual(String testFileName, String leadType) throws Throwable
 	{				
@@ -292,9 +340,100 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	}
 	
 	
+	public void checkIsWon(String valueCheck)
+	{
+		String outputvalue = (String) getDriver().findElement(lbl_is_won).getText();
+		Logger.verify("Verity the isWon is " + valueCheck);
+		Assert.assertTrue(outputvalue.equals(valueCheck),
+				"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");
+		
+	}
+	public void checkActive(Boolean valueCheck)
+	{
+		WebDriver dr = super.getDriver();
+		JavascriptExecutor Js1 = (JavascriptExecutor) dr;
+		
+		//1. Get value of //input[@id]
+		String attributeValue = getDriver().findElement(chb_active).getAttribute("id");
+		//Logger.info("Attribute of ID is "+ attributeValue);	
+		
+		//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the beginning of command to return the value of checking
+		String checkTheCheckBox = 
+				  "return document.querySelector(\'#" + attributeValue + "\')" +
+				  ".checked";
+		
+		//Logger.info("Checkbox element is "+ checkTheCheckBox);	
+		Boolean isChecked = (Boolean) Js1.executeScript(checkTheCheckBox);
+		
+		
+		//3. Now start to check
+		Boolean outputvalue = isChecked;
+		Logger.verify("Verify the checkbox Active is " + valueCheck);
+		Assert.assertTrue(outputvalue.equals(valueCheck),
+				"output value : " + outputvalue + " ; expected value : "+ valueCheck+ "|");
+		
+	}
+	public void checkLostReason(String valueCheck)
+	{
+		String outputvalue = (String) getDriver().findElement(cbb_lost_reason).getText();
+		Logger.verify("Verify the LostReason is " + valueCheck);
+		Assert.assertTrue(outputvalue.equals(valueCheck),
+				"output value : " + outputvalue + " ; expected value : "+ valueCheck+ "|");
+		
+	}
+	public void checkMergeMessageOnSourceLead(String testFileName,String leadType)
+	{
+		By replace_dynamic_controll = null;
+		
+		objLead<String, String> temp = new objLead<String, String>();
+		//Get the Lead name of Target Lead
+		String inputText = temp.getJsonValue(testFileName,Constants.TARGET_LEAD,dataJsonLead.LEADNAME.getValue());
+		
+		if (leadType.equalsIgnoreCase(Constants.TARGET_LEAD))
+			replace_dynamic_controll = Common.replaceDynamicControl(lbl_dynamic_merge_source_lead,"REPLACE#1",inputText);
+		else if (leadType.equalsIgnoreCase(Constants.SOURCE_LEAD))
+			replace_dynamic_controll = Common.replaceDynamicControl(lnk_dynamic_source_lead,"REPLACE#1",inputText);
+		
+		getDriver().findElement(replace_dynamic_controll).click();
+		waitForPageDisplay();
+		
+		lbl_dynamic_merge_source_lead
+	}
+	//---------------------------------------Archive page------------------------------------------------
 	
-
 	
+	public void searchOnArchive(String textSearch) throws Throwable
+	{
+		
+		getDriver().findElement(txt_search).sendKeys(textSearch);
+		waitForElementResponse();
+		//Press "Enter" on keyboard
+		getDriver().findElement(txt_search).sendKeys(Keys.RETURN);
+		
+	}
+	/**This method is used to click on Target Lead or Source Lead (after creating these 2 leads completely)
+	 * <pre>
+	 * 
+	 * </pre>
+	 * @param testFileName
+	 * @param leadType
+	 * @throws Throwable
+	 */
+	public void clickOnItemLead(String testFileName,String leadType) throws Throwable
+	{
+		By replace_dynamic_controll = null;
+		
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputText = temp.getJsonValue(testFileName,leadType,dataJsonLead.LEADNAME.getValue());
+		
+		if (leadType.equalsIgnoreCase(Constants.TARGET_LEAD))
+			replace_dynamic_controll = Common.replaceDynamicControl(lnk_dynamic_targe_lead,"REPLACE#1",inputText);
+		else if (leadType.equalsIgnoreCase(Constants.SOURCE_LEAD))
+			replace_dynamic_controll = Common.replaceDynamicControl(lnk_dynamic_source_lead,"REPLACE#1",inputText);
+		
+		getDriver().findElement(replace_dynamic_controll).click();
+		waitForPageDisplay();
+	}
 	
 	
 	

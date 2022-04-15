@@ -114,6 +114,27 @@ public class LoginDefinition {
 		crmpage.goToHome();
 		
 		}
+	
+	@Given("^Check Source Lead is merged to Target Lead from (.*)$")
+	public void checkSourceLeadMergeToTargetLead(String Leadsfile)  throws Throwable {
+  			
+		
+		crmpage.goToSub_ArchiveMenu("All");
+		crmpage.searchOnArchive("2022_04_13T17_10_28@test.com");
+		
+		//Check Source lead first
+		crmpage.clickOnItemLead(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.clickCRMDeveloper();
+		
+		crmpage.checkIsWon("Lost");
+		crmpage.checkActive(false);
+		crmpage.checkLostReason("Duplicate");
+		
+		
+		//crmpage.goToHome();
+		
+		}
+	
 	// ============================ THEN - close page ============================//
 		@Then("^Close$")   
 	    public void ClosePage() throws Throwable {
