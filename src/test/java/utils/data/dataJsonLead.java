@@ -1,18 +1,19 @@
 package utils.data;
 
 public enum dataJsonLead {
-	//Root list
+	//1. Root list
 	LEADLIST("leadsList"),	
-	//A typical lead
+	//2. A typical lead
 	LEADTYPE("leadType"),
 	LEADNAME("leadName"),		
 	EMAILADDRESS("emailAddress"),
 	LEADFORM("leadForm"),
 	COMPANYNAME("companyName"),
-	//Address
-	ADDRESS("address"),
-	STREETADDRESS("streetAddress"),
-	DISTRICT("district"),
+	//3.Address
+	ADDRESS("address"),	
+	//3.1.content of Address
+	COUNTRY("country"),
+	STREETADDRESS("streetAddress"),	
 	CITY("city"),
 	STATE("state"),
 	POSTALCODE("postalCode"),
@@ -21,6 +22,7 @@ public enum dataJsonLead {
 	CONTACTNAME("contactname"),	
 	TAGS("tags"),	
 	SALESTEAM("salesTeam"),
+	STAGEOPP("stageOpp"),
 	CREATEMANUAL("createManual");
 	
 		

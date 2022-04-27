@@ -17,9 +17,9 @@ public class objLead<T, S extends String> {
 	public T getJsonValue(S testFileName, S leadType, S inputKey)
 	{
 		T returnValue=null;
-		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
+		String inputjsonPath = "\\src\\test\\java\\utils\\data\\MergedLead\\SameCompanyEmail\\"+testFileName+".json";
 		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
-		System.out.println("jsonPath: "+ jsonPath);
+		//System.out.println("jsonPath: "+ jsonPath);
 		
 		
 		Object obj;
@@ -43,7 +43,7 @@ public class objLead<T, S extends String> {
             }
              //3. "address" is another JSONObject
             JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.ADDRESS.getValue());
-            System.out.println("Address:" + JSONValue.toJSONString(addressObject));
+            //System.out.println("Address:" + JSONValue.toJSONString(addressObject));
             
             if(isAddressKey(inputKey))
             {
@@ -68,7 +68,7 @@ public class objLead<T, S extends String> {
 //	public static String getJsonValue(String testFileName, String leadType, String inputKey)
 //	{
 //		String returnValue ="";
-//		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
+//		String inputjsonPath = "\\src\\test\\java\\utils\\data\\MergedLead\\SameCompanyEmail\\"+testFileName+".json";
 //		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
 //		System.out.println("jsonPath: "+ jsonPath);
 //		
@@ -118,9 +118,9 @@ public class objLead<T, S extends String> {
 	public static void setJsonValue(String testFileName, String leadType, String inputKey, String inputValue)
 	{
 		String returnValue ="";
-		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
+		String inputjsonPath = "\\src\\test\\java\\utils\\data\\MergedLead\\SameCompanyEmail\\"+testFileName+".json";
 		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
-		System.out.println("jsonPath: "+ jsonPath);
+		//System.out.println("jsonPath: "+ jsonPath);
 		
 		
 		Object obj = null;
@@ -144,7 +144,7 @@ public class objLead<T, S extends String> {
             	leadXObject = (JSONObject) leadListArry.get(1);
             }
              //3. "address" is another JSONObject
-            JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.ADDRESS.getValue());
+            JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.STREETADDRESS.getValue());
             //System.out.println("Address:" + JSONValue.toJSONString(addressObject));
             
             if(isAddressKey(inputKey))
@@ -181,7 +181,8 @@ public class objLead<T, S extends String> {
 	{
 		
 		if (inputKey.equalsIgnoreCase(dataJsonLead.STREETADDRESS.getValue()) 
-				|| inputKey.equalsIgnoreCase(dataJsonLead.DISTRICT.getValue()) 
+				|| inputKey.equalsIgnoreCase(dataJsonLead.COUNTRY.getValue()) 
+				|| inputKey.equalsIgnoreCase(dataJsonLead.STATE.getValue()) 
 				|| inputKey.equalsIgnoreCase(dataJsonLead.CITY.getValue())
 				|| inputKey.equalsIgnoreCase(dataJsonLead.POSTALCODE.getValue())) 
 		{

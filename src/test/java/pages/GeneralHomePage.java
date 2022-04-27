@@ -102,20 +102,37 @@ public class GeneralHomePage implements WebDriverEventListener{
 	}
 	public void waitForHomePageDisplay() throws InterruptedException {
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(17));
-		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.findElement(module_crm);
 		
 	}
 	
 	public void waitForPageDisplay()
 	{
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(17));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		
 	}
 	public void waitForElementResponse()
 	{
-		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		try {
+			Thread.sleep(500);
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+	}
+	public void waitForLeadMerging()
+	{
+		try {
+			Thread.sleep(4000);
+			driver.navigate().refresh();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 	}
 	@Override
 	public void beforeNavigateTo(String url, WebDriver driver) {

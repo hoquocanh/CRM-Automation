@@ -134,7 +134,7 @@ public class Common {
 	 * @return a random email
 	 */
 	public static String getRandomEmail() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd'T'HH_mm_ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
 		Date date = new Date();
 		
 		Timestamp timestamp = new Timestamp(date.getTime());

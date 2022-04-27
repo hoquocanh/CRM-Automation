@@ -37,7 +37,7 @@ import utils.object.objLead;
  * @param <T>
  * @param <S>
  */
-public class CRMPage<T, S extends String> extends GeneralHomePage {
+public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	/**
 	 * Flow to create Source lead
 	 * 1. Fill all fields except Email
@@ -67,9 +67,20 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	By lnk_dynamic_source_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'REPLACE#1')]");
 	By lnk_dynamic_targe_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'REPLACE#1')]");
 	
+	//III. In Pipeline page
+	
+	By btn_view_list =By.xpath("//button[contains(@aria-label,'View list')]");
+		///1. Stage on Opp page 
+	By tab_stage_new =By.xpath("(//button[contains(text(),'New')])[2]");			
+	By tab_stage_in_process =By.xpath("//button[contains(text(),'In Process')]");
+	By tab_stage_qualified =By.xpath("//button[contains(text(),'Qualified')]");
+	By tab_stage_active_interest =By.xpath("//button[contains(text(),'Active interest')]");
+	By tab_stage_hot_deal =By.xpath("//button[contains(text(),'Hot Deal')]");
+	By tab_stage_purchase_approval =By.xpath("//button[contains(text(),'Purchase Approval')]");
+	By tab_stage_won =By.xpath("//button[contains(text(),'Won')]");
 	
 	
-	//IV. In CRM page		
+		
 	//1. Detail Lead page
 	
 	By btn_save =By.xpath("//button[contains(text(),'Save')]");
@@ -79,20 +90,22 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	
 	//Textbox
 	By txt_name 	=By.xpath("//input[@name='name']");
-	By txt_email 	=By.xpath("(//input[contains(@name,'email_from')])[2]");
-	By txt_contact_name =By.xpath("(//input[contains(@name,'contact_name')])[1]");
-	By txt_company_name =By.xpath("(//input[contains(@name,'partner_name')])[1]");
-	By txt_street =By.xpath("(//input[contains(@name,'street2')])[1]");
+	By txt_email 	=By.xpath("(//input[contains(@name,'email_from')])[1]");
+	By txt_contact_name =By.xpath("(//input[contains(@name,'contact_name')])[2]");
+	By txt_company_name =By.xpath("(//input[contains(@name,'partner_name')])[3]");
+	By txt_street =By.xpath("(//input[contains(@name,'street2')])[2]");
 	
-	By txt_zip  =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'state_id')][1]/following-sibling::input[contains(@name,'zip')]");
-	By txt_lead_form =By.xpath("//input[contains(@name,'x_studio_lead_sorce')]");
+	By txt_zip  =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'state_id')][2]/following-sibling::input[contains(@name,'zip')]");
+	By txt_lead_form =By.xpath("(//input[contains(@name,'x_studio_lead_sorce')])[2]");
+	
+	//NOT DOUBLE CHECK YET
 	By txt_send_message =By.xpath("//textarea[contains(@class,'composer_text_field')]");
 	
 	//Combobox
 	By cbb_sales_team =By.xpath("//select[contains(@name,'team_id')]");
-	By cbb_country =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'country_id')][1]/descendant::input");	
-	By cbb_state  =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'state_id')][1]/descendant::input");
-	By cbb_tags =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'tag_ids')][3]/descendant::input[contains(@type,'text')]");
+	By cbb_country =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'country_id')][2]/descendant::input");	
+	By cbb_state  =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'state_id')][2]/descendant::input");
+	By cbb_tags =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'tag_ids')][1]/descendant::input[contains(@type,'text')]");
 	By cbb_lost_reason =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::a[contains(@name,'lost_reason')][2]");
 	
 	//Checkbox
@@ -109,12 +122,12 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		//The system log note on Target Lead will be ["target lead's name",has been merged into this lead]
 	By lbl_dynamic_merge_target_lead = By.xpath("//a[contains(text(),'REPLACE#1')]/ancestor::span[contains(text(),'has been merged into this lead')]");
 	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'email_from')]");
-	By lbl_address = By.xpath("(//span[contains(@name,'street2')])[1]");
-	By lbl_contact_name = By.xpath("(//span[contains(@name,'contact_name')])[4]");
-	By lbl_state = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::span[contains(@name, 'state_id')][1]");
-	By lbl_country = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::span[contains(@name, 'country_id')][1]");
+	By lbl_address = By.xpath("(//span[contains(@name,'street2')])[2]");
+	By lbl_contact_name = By.xpath("(//span[contains(@name,'contact_name')])[3]");
+	By lbl_state = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::span[contains(@name, 'state_id')][2]");
+	By lbl_country = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::span[contains(@name, 'country_id')][2]");
 		//lbl_tag is a special lbl, it will give us the number of tags selected
-	By lbl_tag = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'tag_ids')][2]");
+	By lbl_tag = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'tag_ids')][1]");
 	//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'tag_ids')][2]/descendant::span[contains(@role,'img')]
 	
 	//Footer tabs
@@ -129,16 +142,16 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		//CHECK log note content with text = "Send log note" /div[contains(@class,'mail_thread_content')]/descendant::div[contains(@class,'mail_not_discussion')]/descendant::p[contains(text(),'Send log note')]
 	// ============================ Constructor declaration============================//
 	//Login Page continues to use the Driver which created at GeneralHomePage
-	public CRMPage()
+	public OpportunityPage()
 	{
 		super();
 	}
-	public CRMPage(WebDriver Driver)
+	public OpportunityPage(WebDriver Driver)
 	{
 		super(Driver);
 	}
 	// ============================ Methods============================//
-	public CRMPage createNewLead()
+	public OpportunityPage createNewLead()
 	{
 		return this;
 	}
@@ -204,7 +217,17 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		
 		
 	}
-	
+	public void createOpp() throws Throwable
+	{
+		//1. Go to Module CRM
+		this.gotoModuleCRM();
+		//2. Click on View List button to be able to create new Opp
+		this.clickViewList();
+		//3. Press "CREATE" button	
+		this.clickCreateButton();
+		
+		
+	}
 	public void goToSub_ArchiveMenu(String subMenu) throws Throwable
 	{
 		
@@ -214,7 +237,15 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		this.clickArchive_AllSubMenu();
 		
 	}
-
+//---------------------------------------Pipeline page------------------------------------------------	
+	public void clickViewList() throws Throwable 
+	{
+		getDriver().findElement(btn_view_list).click();
+		
+		Common.waitPageLoad(3);
+		
+		
+	}
 //---------------------------------------CRM page------------------------------------------------
 	public void enterLeadName(String testFileName, String leadType) throws Throwable
 	{
@@ -270,11 +301,19 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		getDriver().findElement(txt_street).sendKeys(inputText);
 		
 	}
-	
+	public void selectCRMDeveloperTab() throws Throwable		
+	{		
+		getDriver().findElement(tab_crm_developer).click();
+		waitForElementResponse();
+		
+	}
 	public void enterLeadForm(String testFileName, String leadType) throws Throwable
 	{
 		objLead<String, String> temp = new objLead<String, String>();
 		String inputText = temp.getJsonValue(testFileName,leadType,dataJsonLead.LEADFORM.getValue());
+		//1. Select CRM Developer tab first
+		selectCRMDeveloperTab();
+		//2. Enter Lead Form
 		getDriver().findElement(txt_lead_form).sendKeys(inputText);	
 	}
 	public void enterCompanyName(String testFileName, String leadType) throws Throwable
@@ -416,7 +455,38 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			getDriver().findElement(div_chb_is_create_manual).click();
 	}
 	
-	
+	public void setStageOpp(String testFileName, String leadType) throws Throwable
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputText =  temp.getJsonValue(testFileName,leadType,dataJsonLead.STAGEOPP.getValue());	
+		
+		switch (inputText)
+		{
+		case "new":
+			
+			getDriver().findElement(tab_stage_new).click();	
+			break;
+		case "in process":
+			getDriver().findElement(tab_stage_in_process).click();
+			break;
+		case "qualified":
+			getDriver().findElement(tab_stage_qualified).click();	
+			break;
+		case "active interest":
+			getDriver().findElement(tab_stage_active_interest).click();	
+			break;
+		case "hot deal":
+			getDriver().findElement(tab_stage_hot_deal).click();	
+			break;
+		case "purchase approval":
+			getDriver().findElement(tab_stage_purchase_approval).click();	
+			break;
+		case "won":
+			getDriver().findElement(tab_stage_won).click();	
+			break;		
+		}
+			
+	}
 	
 	
 	//----------------------Validation area--------------------------------------------------

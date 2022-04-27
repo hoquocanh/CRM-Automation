@@ -23,7 +23,7 @@ public class TEST {
 	{
 		
 		if (inputKey.equalsIgnoreCase(dataJsonLead.STREETADDRESS.getValue()) 
-				|| inputKey.equalsIgnoreCase(dataJsonLead.DISTRICT.getValue()) 
+				|| inputKey.equalsIgnoreCase(dataJsonLead.COUNTRY.getValue()) 
 				|| inputKey.equalsIgnoreCase(dataJsonLead.CITY.getValue())
 				|| inputKey.equalsIgnoreCase(dataJsonLead.POSTALCODE.getValue())) 
 		{
@@ -60,7 +60,7 @@ public class TEST {
             	leadXObject = (JSONObject) leadListArry.get(1);
             }
              //3. "address" is another JSONObject
-            JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.ADDRESS.getValue());
+            JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.STREETADDRESS.getValue());
             System.out.println("Address:" + JSONValue.toJSONString(addressObject));
             
             if(isAddressKey(inputKey))
@@ -112,7 +112,7 @@ public class TEST {
             	leadXObject = (JSONObject) leadListArry.get(1);
             }
              //3. "address" is another JSONObject
-            JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.ADDRESS.getValue());
+            JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.STREETADDRESS.getValue());
             //System.out.println("Address:" + JSONValue.toJSONString(addressObject));
             
             if(isAddressKey(inputKey))

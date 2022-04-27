@@ -8,8 +8,11 @@
 <!--test Panel Information -->
  
   <test name="TEST">
+  		<parameter name="browser" value="chrome.local" />
+		<parameter name="autoLogBug" value="false" />
 		<classes>
-			<class name="LinkingCucumber.login_validation"></class>					
+			<class name="LinkingCucumber.MergedLead.Merged_leads_from_the_same_company_email"></class>		
+						
 		</classes>
 	</test>
 	

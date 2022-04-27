@@ -25,8 +25,10 @@ public class Logger {
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Logger.class);
 
 	public static void info(String message) {
+		//info(message,null);
+		
 		try {
-			info(message, null);
+			info(message,null);
 		}
 		catch (NullPointerException ex) 
 		{
