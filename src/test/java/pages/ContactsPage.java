@@ -3,16 +3,30 @@ package pages;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import utils.common.Common;
 import utils.common.Constants;
 import utils.data.dataJsonContact;
 import utils.data.dataJsonLead;
+import utils.data.dataJsonContact;
 import utils.helper.Logger;
 import utils.object.objContact;
-import utils.object.objLead;
+import utils.object.objContact;
 
+/**
+ * @author anh.ho
+ *
+ */
+/**
+ * @author anh.ho
+ *
+ */
+/**
+ * @author anh.ho
+ *
+ */
 public class ContactsPage extends GeneralHomePage {
 	
 	// ============================ Element declaration============================//
@@ -21,7 +35,8 @@ public class ContactsPage extends GeneralHomePage {
 		
 		
 	//II. "CREATE" button...
-	By btn_create =By.xpath("//button[contains(text(),'Create')]");
+	By btn_create =By.xpath("(//button[contains(text(),'Create')])[1]");
+	By btn_edit =By.xpath("(//button[contains(text(),'Edit')])[1]");
 	By btn_view_list =By.xpath("//button[contains(@aria-label,'View list')]");
 	
 	//IV. In Contacts page		
@@ -33,7 +48,7 @@ public class ContactsPage extends GeneralHomePage {
 		By rdb_company =By.xpath("//input[contains(@data-value,'company')]");
 		
 		//Textbox
-		By txt_name 	=By.xpath("//input[@name='name']");
+		By txt_name 	=By.xpath("(//input[@name='name'])[1]");
 		By txt_email 	=By.xpath("(//input[contains(@name,'email')])[3]");
 		
 		By txt_street =By.xpath("(//input[contains(@name,'street2')])[1]");
@@ -52,6 +67,14 @@ public class ContactsPage extends GeneralHomePage {
 		By tab_contact_addresses  =By.xpath("//a[contains(text(),'Contacts & Addresses')]");
 		By lnk_add  =By.xpath("//div[contains(@name,'child_ids')]/descendant::button[contains(text(),'Add')]");
 		
+		//3. Sub Create Contacts page after press "ADD" button
+		By txt_child_contact_name  =By.xpath("(//input[@name='name'])[2]");
+		By txt_child_contact_email  =By.xpath("(//input[contains(@name,'email')])[4]");
+		By btn_child_contact_save_close  =By.xpath("//button/span[contains(text(),'Save & Close')]");
+		By btn_child_contact_save  =By.xpath("//button/span[contains(text(),'Save')]");
+		By btn_child_cactact_discard  =By.xpath("//button/span[contains(text(),'Discard')]");
+		By btn_child_contact_remove  =By.xpath("//button/span[contains(text(),'Remove')]");
+						
 	// ============================ Constructor declaration============================//
 	//Login Page continues to use the Driver which created at GeneralHomePage
 	public ContactsPage()
@@ -89,19 +112,29 @@ public class ContactsPage extends GeneralHomePage {
 		this.clickCreateButton();
 		
 	}
-	//---------------------------------------CRM page------------------------------------------------
-		public void enterContactName(String testFileName, String inputKey) throws Throwable
+	//---------------------------------------Contacts page------------------------------------------------
+		/**enterContactName is used to enter the Contact Name when creating a Contact
+		 * @param testFileName
+		 * @throws Throwable
+		 */
+		public void enterContactName(String testFileName) throws Throwable
 		{
 			objContact<String, String> temp = new objContact<String, String>();
-			String inputText = temp.getJsonValue(testFileName,inputKey,dataJsonLead.LEADNAME.getValue());
+			String inputText = temp.getJsonValue(testFileName,dataJsonContact.CONTACTNAME.getValue());
 			getDriver().findElement(txt_name).sendKeys(inputText);
 			
 		}
+		
+		/**enterContactChildName is used to enter the contact name of a Child of an existing Contact 
+		 * @param testFileName
+		 * @param inputChildName
+		 * @throws Throwable
+		 */
 		public void enterContactChildName(String testFileName, String inputChildName) throws Throwable
 		{
 			objContact<String, String> temp = new objContact<String, String>();
 			String inputText = temp.getJsonValue(testFileName,dataJsonContact.CHILDCONTACTNAME.getValue(), inputChildName);
-			getDriver().findElement(txt_name).sendKeys(inputText);
+			getDriver().findElement(txt_child_contact_name).sendKeys(inputText);
 			
 		}
 		/**This method is used to generate a random email and create a lead with that email
@@ -112,27 +145,84 @@ public class ContactsPage extends GeneralHomePage {
 		 * @param leadType
 		 * @throws Throwable
 		 */
-		public String enterEmail(String testFileName, String leadType) throws Throwable	
+		public String enterEmail(String testFileName) throws Throwable	
 		
 		{
 			String randomEmail = "";
-			objLead<String, String> temp = new objLead<String, String>();
-			String inputTestCaseType = temp.getJsonValue(testFileName,leadType,dataJsonLead.TESTCASETYPE.getValue());
 			
-			//Explanation: If the value of key "testcaseType" in JSON file is "public domain" or "company domain"
-			if(inputTestCaseType.contains("public domain"))
-				randomEmail = Common.getRandomPublicEmail();
-			else if(inputTestCaseType.contains("company domain"))
-				randomEmail = Common.getRandomCompanyEmail();
+			//Get randomEmail
+			randomEmail = Common.getRandomCompanyEmail();
 			
 			System.out.println("Random email:"+ randomEmail);
 			Logger.info("Random email:"+ randomEmail);
 			//Set random email to the Email address on the Json file
-				//objLead.setJsonValue(testFileName,leadType,dataJsonLead.EMAILADDRESS.getValue(), randomEmail);
-				//objLead.setJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.EMAILADDRESS.getValue(), randomEmail);
+				//objContact.setJsonValue(testFileName,leadType,dataJsonContact.EMAILADDRESS.getValue(), randomEmail);
+				//objContact.setJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonContact.EMAILADDRESS.getValue(), randomEmail);
 			
-			getDriver().findElement(txt_email).sendKeys(randomEmail);
+			getDriver().findElement(txt_child_contact_email).sendKeys(randomEmail);
 			
 			return randomEmail;
+		}
+		
+		//For the kind of Country combobox, that contains the long list of items, we need to enter the name of item -> enter for selecting that item
+		public void selectCountry(String testFileName) throws Throwable
+		{
+			objContact<String, String> temp = new objContact<String, String>();
+			String inputText = temp.getJsonValue(testFileName,dataJsonContact.COUNTRY.getValue());		
+			
+			if(!inputText.isEmpty())
+			{
+				getDriver().findElement(cbb_country).click();
+				waitForElementResponse();
+				getDriver().findElement(cbb_country).sendKeys(inputText);	
+				waitForElementResponse();
+				//Press "Enter" on keyboard
+				getDriver().findElement(cbb_country).sendKeys(Keys.RETURN);		
+				waitForElementResponse();
+			}
+			
+		}
+		public void selectState(String testFileName) throws Throwable
+		{
+			objContact<String, String> temp = new objContact<String, String>();
+			String inputText = this.refineStateString(temp.getJsonValue(testFileName,dataJsonContact.STATE.getValue()));		
+			
+			if(!inputText.isEmpty())
+			{
+				waitForElementResponse();
+
+				getDriver().findElement(cbb_state).click();
+				waitForElementResponse();
+				getDriver().findElement(cbb_state).sendKeys(inputText);	
+				waitForElementResponse();
+				//Press "Enter" on keyboard
+				getDriver().findElement(cbb_state).sendKeys(Keys.RETURN);	
+				waitForElementResponse();
+			}
+			
+		}
+		public void enterStreetName(String testFileName) throws Throwable
+		{
+			objContact<String, String> temp = new objContact<String, String>();
+			String inputText = temp.getJsonValue(testFileName,dataJsonContact.STREETADDRESS.getValue());
+			getDriver().findElement(txt_street).sendKeys(inputText);
+			
+		}
+		public void pressSaveButton() throws Throwable
+		{
+			
+			getDriver().findElement(btn_save).click();
+			waitForPageDisplay();
+		}
+		
+		public String refineStateString (String inputState) 
+		{
+			String outputString = null;
+			
+			int positionOfIndex = inputState.indexOf("(");
+			outputString = inputState.substring(0, positionOfIndex-1);
+			System.out.println(outputString);
+			return outputString;
+			
 		}
 }

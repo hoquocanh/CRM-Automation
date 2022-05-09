@@ -287,7 +287,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 	if(inputTestCaseType.contains("public domain"))
 		randomEmail = Common.getRandomPublicEmail();
 	else 
-		randomEmail = Common.getRandomCompanyEmail();
+		randomEmail = Common.getRandomTestEmail();
 	System.out.println("Random email:"+ randomEmail);
 	Logger.info("Random email:"+ randomEmail);
 	//Set random email to the Email address on the Json file

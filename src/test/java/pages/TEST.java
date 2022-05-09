@@ -152,7 +152,7 @@ public class TEST {
 
 		//System.out.println("Company name: "+ getJsonValue(inputjsonPath,Constants.SOURCE_LEAD,dataJsonLead.STREETADDRESS.getValue()));
 		//System.out.println("Is Address:" + isAddressKey(dataJsonLead.STREETADDRESS.getValue()));
-		setJsonValue(inputjsonPath,Constants.TARGET_LEAD,dataJsonLead.EMAILADDRESS.getValue(),Common.getRandomCompanyEmail());
+		setJsonValue(inputjsonPath,Constants.TARGET_LEAD,dataJsonLead.EMAILADDRESS.getValue(),Common.getRandomTestEmail());
 		
 		
 		
