@@ -1,0 +1,44 @@
+{
+   "leadsList":[
+      {
+         "leadType":"target lead-IB NC Leads",
+         "contactname":"",
+         "emailAddress":"",
+         "address":{
+            "country":"United States",
+            "streetAddress":"123street",
+            "city":"",
+            "postalCode":"",
+            "state":"Texas (US)"
+         },         
+         "leadName":"target lead",
+         "companyName":"test123",
+         "leadForm":"IB NC Leads",
+         "createManual":false,
+         "tags":"Renewal",
+         "testcaseType":"company domain",
+         "salesTeam":"CM_Channel_Management"
+      },
+      {
+         "leadType":"source lead",
+         "contactname":"test contact",
+         "emailAddress":"",
+         "address":{
+            "country":"United States",
+            "streetAddress":"123street",
+            "city":"",
+            "postalCode":"",
+            "state":"Texas (US)"
+         },         
+         "leadName":"source lead-Download Free Trial",
+         "companyName":"test12345",
+         "userLogNotes":"target lead log notes",
+         "publicMessage":"target lead message",
+         "leadForm":"Download Free Trial",
+         "createManual":false,
+         "tags":"Trial download",
+         "testcaseType":"company domain",
+         "salesTeam":"CM_Channel_Management"
+      }
+   ]
+}

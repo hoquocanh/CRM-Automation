@@ -27,9 +27,10 @@ public class GeneralHomePage implements WebDriverEventListener{
 	private static WebDriver driver;
 	private dataGenralHomePage _homeInfo;
 	// ============================ Element declaration============================//
-		//Module
+		//Modules
 		By module_crm 		=By.xpath("//div[contains (text(),'CRM')]");
 		By module_settings  =By.xpath("//div[contains (text(),'Settings')]");
+		By module_contacts  =By.xpath("//div[contains (text(),'Contacts')]");
 		By btn_application  =By.xpath("//a[contains (@title,'Applications')]");
 		
 		
@@ -94,7 +95,17 @@ public class GeneralHomePage implements WebDriverEventListener{
 			ex.printStackTrace();
 		}
 	}
-	
+	public void gotoModuleContacts() {
+		
+		try {
+		driver.findElement(module_contacts).click();
+		waitForPageDisplay();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
 	public void goToHome() throws Throwable {
 		
 		driver.findElement(btn_application).click();

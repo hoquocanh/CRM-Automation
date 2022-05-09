@@ -1,0 +1,28 @@
+{
+   "contactList":[{
+         "contactType":"company",
+         "contactName":"automation test contact",
+         "emailAddress":"",
+         "address":{
+            "country":"United States",
+            "streetAddress":"123street",
+            "city":"",
+            "postalCode":"",
+            "state":"Texas (US)"
+         },                  
+         "tags":"",         
+         "salesTeam":"CM_Channel_Management",
+         "contactChild":[
+          {
+            "childNo":1,
+            "childContactName":"Alice",
+            "childEmailAddress":""            
+          },  
+          {
+          	"childNo":2,
+            "childContactName":"Bob",
+            "childEmailAddress":""            
+         }]               
+      }
+      ]
+}

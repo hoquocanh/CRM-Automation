@@ -113,14 +113,25 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	By div_chb_is_create_manual =By.xpath("//div[contains(@name,'is_create_manual')]");
 	By chb_active =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name,'active')][2]/input[@type='checkbox']");
 	
-	
+	//Star
+	By star_1 =By.xpath("(//div[@name='priority']/a[@title='Medium'])[2]");
+	By star_2 =By.xpath("(//div[@name='priority']/a[@title='Medium High'])[2]");
+	By star_3 =By.xpath("(//div[@name='priority']/a[@title='High'])[2]");
+	By star_4 =By.xpath("(//div[@name='priority']/a[@title='Very High'])[2]");
 	
 	//label
 	By lbl_is_won =By.xpath("//span[contains(@name,'won_status')]");
 		//The system log note on Source Lead will be [This lead has been merged into "target lead's name"]
-	By lbl_dynamic_merge_source_lead = By.xpath("//p[contains(text(),'This lead has been merged into')]/a[contains(text(),'REPLACE#1')]");
-		//The system log note on Target Lead will be ["target lead's name",has been merged into this lead]
-	By lbl_dynamic_merge_target_lead = By.xpath("//a[contains(text(),'REPLACE#1')]/ancestor::span[contains(text(),'has been merged into this lead')]");
+		By lbl_dynamic_merge_source_lead_1 = By.xpath("//p[contains(text(),'This lead has been merged into')]/a[contains(text(),'TARGET_NAME#1')]");
+		//The system log note on Source Lead will be [Your lead  "source lead's name"has been automatically merged into "target lead's name" and closed.]
+		By lbl_dynamic_merge_source_lead_2 = By.xpath("//p[contains(text(),'Your lead')]/a[contains(text(),'SOURCE_NAME#1')] | //p[contains(text(),'has been automatically merged into ')]/a[contains(text(),'TARGET_NAME#1')] | //p[contains(text(),' and closed.')]");
+		//The system log note on Target Lead will be ["source lead's name",has been merged into this lead]
+		By lbl_dynamic_merge_target_lead_1 = By.xpath("//a[contains(text(),'SOURCE_NAME#1')]/ancestor::span[contains(text(),'has been merged into this lead')]");
+		//The system log note on Target Lead will be ["Another lead from SOURCE_EMAIL#1 has been automatically merged into your lead target lead's name"]
+		By lbl_dynamic_merge_target_lead_2 = By.xpath("//a[contains(text(),'TARGET_NAME#1')]/ancestor::p[contains(text(),'Another lead from SOURCE_EMAIL#1 has been automatically merged into your lead ')]");
+	
+	
+	
 	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'email_from')]");
 	By lbl_address = By.xpath("(//span[contains(@name,'street2')])[2]");
 	By lbl_contact_name = By.xpath("(//span[contains(@name,'contact_name')])[3]");
@@ -129,7 +140,10 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 		//lbl_tag is a special lbl, it will give us the number of tags selected
 	By lbl_tag = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'tag_ids')][1]");
 	//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'tag_ids')][2]/descendant::span[contains(@role,'img')]
-	
+	By lbl_star_1 =By.xpath("(//div[@name='priority']/a[@title='Medium'])[1]");
+	By lbl_star_2 =By.xpath("(//div[@name='priority']/a[@title='Medium High'])[1]");
+	By lbl_star_3 =By.xpath("(//div[@name='priority']/a[@title='High'])[1]");
+	By lbl_star_4 =By.xpath("(//div[@name='priority']/a[@title='Very High'])[1]");
 	//Footer tabs
 	//tab_send_message		
 		By btn_send_messsage =By.xpath("//button[contains(text(),'Send message')]");
@@ -263,20 +277,26 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	 * @param leadType
 	 * @throws Throwable
 	 */
-	public String enterEmail(String testFileName, String leadType) throws Throwable	
+public String enterEmail(String testFileName, String leadType) throws Throwable	
 	
 	{
-		
-		String randomEmail = Common.getRandomEmail();
-		System.out.println("Random email:"+ randomEmail);
-		Logger.info("Random email:"+ randomEmail);
-		//Set random email to the Email address on the Json file
-		objLead.setJsonValue(testFileName,leadType,dataJsonLead.EMAILADDRESS.getValue(), randomEmail);
-		objLead.setJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.EMAILADDRESS.getValue(), randomEmail);
-		
-		getDriver().findElement(txt_email).sendKeys(randomEmail);
-		
-		return randomEmail;
+	String randomEmail = "";
+	objLead<String, String> temp = new objLead<String, String>();
+	String inputTestCaseType = temp.getJsonValue(testFileName,leadType,dataJsonLead.TESTCASETYPE.getValue());
+	
+	if(inputTestCaseType.contains("public domain"))
+		randomEmail = Common.getRandomPublicEmail();
+	else 
+		randomEmail = Common.getRandomCompanyEmail();
+	System.out.println("Random email:"+ randomEmail);
+	Logger.info("Random email:"+ randomEmail);
+	//Set random email to the Email address on the Json file
+		//objLead.setJsonValue(testFileName,leadType,dataJsonLead.EMAILADDRESS.getValue(), randomEmail);
+		//objLead.setJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.EMAILADDRESS.getValue(), randomEmail);
+	
+	getDriver().findElement(txt_email).sendKeys(randomEmail);
+	
+	return randomEmail;
 	}
 	/**This method is used to enter an existing email
 	 * <pre>
@@ -290,7 +310,7 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	public void enterEmail(String testFileName, String leadType, String inputEmail) throws Throwable	
 	
 	{
-		objLead.setJsonValue(testFileName,leadType,dataJsonLead.EMAILADDRESS.getValue(), inputEmail);
+		//objLead.setJsonValue(testFileName,leadType,dataJsonLead.EMAILADDRESS.getValue(), inputEmail);
 		getDriver().findElement(txt_email).sendKeys(inputEmail);
 		
 	}
@@ -363,6 +383,7 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 				waitForElementResponse();
 				//Press "Enter" on keyboard
 				getDriver().findElement(cbb_country).sendKeys(Keys.RETURN);		
+				waitForElementResponse();
 			}
 			
 		}
@@ -381,7 +402,8 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 				getDriver().findElement(cbb_state).sendKeys(inputText);	
 				waitForElementResponse();
 				//Press "Enter" on keyboard
-				getDriver().findElement(cbb_state).sendKeys(Keys.RETURN);		
+				getDriver().findElement(cbb_state).sendKeys(Keys.RETURN);	
+				waitForElementResponse();
 			}
 			
 		}
@@ -454,40 +476,110 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 		if(isChecked)
 			getDriver().findElement(div_chb_is_create_manual).click();
 	}
-	
+	public void setStageOrPriority(String testFileName, String leadType) throws Throwable
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputTextOfStageOpp =  temp.getJsonValue(testFileName,leadType,dataJsonLead.STAGEOPP.getValue());	
+		String inputTextOfPriority =  temp.getJsonValue(testFileName,leadType,dataJsonLead.PRIORITY.getValue());
+		
+		if(inputTextOfStageOpp!=null)
+		{
+			setStageOpp(testFileName, leadType);
+		}
+		
+		if(inputTextOfPriority!=null)
+		{
+			setPriorityOpp(testFileName, leadType);
+		}
+		
+	}
 	public void setStageOpp(String testFileName, String leadType) throws Throwable
 	{
 		objLead<String, String> temp = new objLead<String, String>();
 		String inputText =  temp.getJsonValue(testFileName,leadType,dataJsonLead.STAGEOPP.getValue());	
 		
+		waitForElementResponse();
 		switch (inputText)
 		{
 		case "new":
-			
-			getDriver().findElement(tab_stage_new).click();	
+			//Only if the attribute "aria-checked" of the target Tab is "false", I can click on that tab, otherwise I could not
+			if (getDriver().findElement(tab_stage_new).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
+			{getDriver().findElement(tab_stage_new).click();	}	
 			break;
 		case "in process":
-			getDriver().findElement(tab_stage_in_process).click();
+			if (getDriver().findElement(tab_stage_in_process).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
+			{getDriver().findElement(tab_stage_in_process).click();}			
 			break;
 		case "qualified":
-			getDriver().findElement(tab_stage_qualified).click();	
+			if (getDriver().findElement(tab_stage_qualified).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
+			{getDriver().findElement(tab_stage_qualified).click();	}			
 			break;
 		case "active interest":
-			getDriver().findElement(tab_stage_active_interest).click();	
+			if (getDriver().findElement(tab_stage_active_interest).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
+			{getDriver().findElement(tab_stage_active_interest).click();	}		
 			break;
 		case "hot deal":
-			getDriver().findElement(tab_stage_hot_deal).click();	
+			if (getDriver().findElement(tab_stage_hot_deal).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
+			{getDriver().findElement(tab_stage_hot_deal).click();	}	
 			break;
 		case "purchase approval":
-			getDriver().findElement(tab_stage_purchase_approval).click();	
+			if (getDriver().findElement(tab_stage_purchase_approval).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
+			{getDriver().findElement(tab_stage_purchase_approval).click();}				
 			break;
 		case "won":
-			getDriver().findElement(tab_stage_won).click();	
+			if (getDriver().findElement(tab_stage_won).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
+			{getDriver().findElement(tab_stage_won).click();	}		
 			break;		
 		}
 			
 	}
 	
+	
+	
+	/**This method is used to select the Priority of Lead if having that Key in JSON file
+	 * @param testFileName
+	 * @param leadType 
+	 * @throws Throwable
+	 */
+	public void setPriorityIfRequired(String testFileName, String leadType) throws Throwable
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+			
+		String inputTextOfPriority =  temp.getJsonValue(testFileName,leadType,dataJsonLead.PRIORITY.getValue());
+		
+		if(inputTextOfPriority!=null)
+		{
+			setPriorityOpp(testFileName, leadType);
+		}
+		
+	}
+	public void setPriorityOpp(String testFileName, String leadType) throws Throwable
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputText =  temp.getJsonValue(testFileName,leadType,dataJsonLead.PRIORITY.getValue());	
+		
+		switch (inputText)
+		{
+		case "1-star":
+			//Only if the attribute "aria-checked" of the target Star is "false", I can click on that Star, otherwise all Star will disappear if clicking on the active level
+			if (getDriver().findElement(star_1).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
+				getDriver().findElement(star_1).click();		
+			break;
+		case "2-star":
+			if (getDriver().findElement(star_2).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
+				getDriver().findElement(star_2).click();		
+			break;
+		case "3-star":
+			if (getDriver().findElement(star_3).getAttribute("aria-checked").equalsIgnoreCase("false") == true)	
+				getDriver().findElement(star_3).click();		
+			break;
+		case "4-star":
+			if (getDriver().findElement(star_4).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
+				getDriver().findElement(star_4).click();	
+			break;		
+		}
+			
+	}
 	
 	//----------------------Validation area--------------------------------------------------
 	public void checkEmail(String valueCheck)
@@ -587,7 +679,7 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	 * <pre>List of tags</pre>
 	 * @param testFileName
 	 */
-	public void checkValueOfFieldOnTargetLead(String testFileName)
+	public void checkValueOfFieldOnTargetLead(String testFileName, String returnRandomEmail)
 	{
 		objLead<String, String> temp = new objLead<String, String>();
 		String inputEmail = null;	
@@ -599,10 +691,8 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 		
 		//1. Check Email
 			//1.1. If the value of Email field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
-			if(!temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.EMAILADDRESS.getValue()).isEmpty())
-				inputEmail = temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.EMAILADDRESS.getValue());
-			else //Else, if there is no value at that field on Target Lead, the value from Source Lead will be added to the field on Target lead
-				inputEmail = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.EMAILADDRESS.getValue());
+			if(!returnRandomEmail.isEmpty())
+				inputEmail = returnRandomEmail;
 			//1.2. Check the value on UI
 			checkEmail(inputEmail);
 		
@@ -668,7 +758,7 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	 * <pre>List of tags</pre>
 	 * @param testFileName
 	 */
-	public void checkValueOfFieldOnSourceLead(String testFileName)
+	public void checkValueOfFieldOnSourceLead(String testFileName, String returnRandomEmail)
 	{
 		objLead<String, String> temp = new objLead<String, String>();
 		String inputEmail = null;	
@@ -680,7 +770,8 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 		
 		//1. Check Email
 			//1.1 Get value from input JSON file 
-			inputEmail = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.EMAILADDRESS.getValue());
+			if(!returnRandomEmail.isEmpty())
+			inputEmail = returnRandomEmail;
 			//1.2. Check the value on UI
 			checkEmail(inputEmail);
 		
@@ -762,8 +853,13 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	}
 	public void checkLostReason(String valueCheck)
 	{
+		
 		String outputvalue = (String) getDriver().findElement(cbb_lost_reason).getText();
-		Logger.verify("Verify the LostReason is " + valueCheck);
+		
+		if(!valueCheck.isEmpty())
+			Logger.verify("Verify the LostReason is " + valueCheck);
+		else
+			Logger.verify("Verify the LostReason is " + "EMPTY");
 		try {
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck+ "|");
@@ -798,24 +894,39 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	 * @param inputEmail
 	 * @throws Throwable
 	 */
-	public void checkMergeMessageOnTargetLead(String testFileName)
+	public void checkMergeMessageOnTargetLead(String testFileName, String returnRandomEmail)
 	{
-		By replace_dynamic_controll = null;
+		By replace_dynamic_control_1 = null;
+		By replace_dynamic_control_2_1 = null;
+		By replace_dynamic_control_2_2 = null;
 		
 		objLead<String, String> temp = new objLead<String, String>();
 		//Get the Lead name of Source Lead
-		String inputText = temp.getJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.LEADNAME.getValue());
-				
-		replace_dynamic_controll = Common.replaceDynamicControl(lbl_dynamic_merge_target_lead,"REPLACE#1",inputText);
-				
+		String sourceName = temp.getJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.LEADNAME.getValue());
+		String targetName = temp.getJsonValue(testFileName,Constants.TARGET_LEAD,dataJsonLead.LEADNAME.getValue());
+		
+		//1. The system log note on Target Lead will be ["source lead's name",has been merged into this lead]
+		replace_dynamic_control_1 = Common.replaceDynamicControl(lbl_dynamic_merge_target_lead_1,"SOURCE_NAME#1",sourceName);
+		
+		
 		Logger.verify("Verify the System log note is [\"target lead's name\",has been merged into this lead]");		
 		try {
-			Assert.assertTrue(getDriver().findElement(replace_dynamic_controll).isDisplayed());				
+			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_1).isDisplayed());				
 		}catch(AssertionError e)
 		{
 			System.out.println("Assertion error. ");
 		}
 		
+		//2. The system log note on Target Lead will be ["Another lead from SOURCE_EMAIL#1 has been automatically merged into your lead target lead's name"]
+		replace_dynamic_control_2_1 = Common.replaceDynamicControl(lbl_dynamic_merge_target_lead_2,"SOURCE_EMAIL#1",returnRandomEmail);
+		replace_dynamic_control_2_2 = Common.replaceDynamicControl(replace_dynamic_control_2_1,"TARGET_NAME#1",targetName);
+		Logger.verify("Verify the System log note is [\"Another lead from SOURCE_EMAIL#1 has been automatically merged into your lead target lead's name\"]");		
+		try {
+			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_2_2).isDisplayed());				
+		}catch(AssertionError e)
+		{
+			System.out.println("Assertion error. ");
+		}
 	}
 	
 	/**This method is used to check the message on Source Lead like [This lead has been merged into target lead]
@@ -827,24 +938,37 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	 * @param inputEmail
 	 * @throws Throwable
 	 */
-	public void checkMergeMessageOnSourceLead(String testFileName)
+	public void checkMergeMessageOnSourceLead(String testFileName, String returnRandomEmail)
 	{
-		By replace_dynamic_controll = null;
-		
+		By replace_dynamic_control_1 = null;
+		By replace_dynamic_control_2_1 = null;
+		By replace_dynamic_control_2_2 = null;
 		objLead<String, String> temp = new objLead<String, String>();
 		//Get the Lead name of Target Lead
-		String inputText = temp.getJsonValue(testFileName,Constants.TARGET_LEAD,dataJsonLead.LEADNAME.getValue());
-				
-		replace_dynamic_controll = Common.replaceDynamicControl(lbl_dynamic_merge_source_lead,"REPLACE#1",inputText);
+		String targetLeadName = temp.getJsonValue(testFileName,Constants.TARGET_LEAD,dataJsonLead.LEADNAME.getValue());
+		String sourceLeadName = temp.getJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.LEADNAME.getValue());
+		
+		//1. The system log note on Source Lead will be [This lead has been merged into "target lead's name"]
+		replace_dynamic_control_1 = Common.replaceDynamicControl(lbl_dynamic_merge_source_lead_1,"TARGET_NAME#1",targetLeadName);
 				
 		Logger.verify("Verify the System log note is [This lead has been merged into \"target lead's name\"]");		
 		try {
-			Assert.assertTrue(getDriver().findElement(replace_dynamic_controll).isDisplayed());	
+			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_1).isDisplayed());	
 		}catch(AssertionError e)
 		{
 			System.out.println("Assertion error. ");
 		}
-					
+		
+		//2. The system log note on Source Lead will be [Your lead  "source lead's name"has been automatically merged into "target lead's name" and closed.]
+		replace_dynamic_control_2_1 = Common.replaceDynamicControl(lbl_dynamic_merge_source_lead_2,"SOURCE_NAME#1",sourceLeadName);
+		replace_dynamic_control_2_2 = Common.replaceDynamicControl(replace_dynamic_control_2_1,"TARGET_NAME#1",targetLeadName);
+		Logger.verify("Verify the System log note is [Your lead  \"source lead's name\"has been automatically merged into \"target lead's name\" and closed.]");		
+		try {
+			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_2_2).isDisplayed());				
+		}catch(AssertionError e)
+		{
+			System.out.println("Assertion error. ");
+		}
 	}
 	//---------------------------------------Archive page------------------------------------------------
 	

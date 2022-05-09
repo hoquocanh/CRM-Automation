@@ -23,6 +23,8 @@ public enum dataJsonLead {
 	TAGS("tags"),	
 	SALESTEAM("salesTeam"),
 	STAGEOPP("stageOpp"),
+	PRIORITY("priority"),
+	TESTCASETYPE("testcaseType"),
 	CREATEMANUAL("createManual");
 	
 		

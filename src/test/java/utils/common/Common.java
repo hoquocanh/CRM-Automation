@@ -129,11 +129,11 @@ public class Common {
 		return cal.getTime();
 	}
 	/**
-	 * Generate a random email based on the current time
+	 * Generate a random company email based on the current time
 	 * @author anh.ho	 
 	 * @return a random email
 	 */
-	public static String getRandomEmail() {
+	public static String getRandomCompanyEmail() {
 		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
 		Date date = new Date();
 		
@@ -141,7 +141,24 @@ public class Common {
 		
 		System.out.println(timestamp.getTime());
 		
-		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.EMAIL_TEST_DOMAIN;
+		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.COMPANY_DOMAIN_EMAIL;
+		System.out.println(randomEmail);
+		return randomEmail;
+	}
+	/**
+	 * Generate a random public email based on the current time
+	 * @author anh.ho	 
+	 * @return a random email
+	 */
+	public static String getRandomPublicEmail() {
+		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
+		Date date = new Date();
+		
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		System.out.println(timestamp.getTime());
+		
+		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.PUBLIC_DOMAIN_EMAIL;
 		System.out.println(randomEmail);
 		return randomEmail;
 	}
