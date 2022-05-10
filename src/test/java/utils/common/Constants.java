@@ -91,9 +91,8 @@ public class Constants {
 	public static final String UAT_LINK = PropertiesHelper.getPropValue("profile.uat_link");
 	public static final String UAT_USERNAME = PropertiesHelper.getPropValue("profile.uat_username");
 	public static final String UAT_PASSWORD = PropertiesHelper.getPropValue("profile.uat_password");	
-	public static final String TEST_DOMAIN_EMAIL = "@test.com";
-	public static final String GMAIL_DOMAIN_EMAIL = "@gmail.com";
-	public static final String COMPANY_DOMAIN_EMAIL = "@company.com";
+	public static final String COMPANY_DOMAIN_EMAIL = "@test.com";
+	public static final String PUBLIC_DOMAIN_EMAIL = "@gmail.com";
 	public static final String TARGET_LEAD = "target lead";
 	public static final String SOURCE_LEAD = "source lead";
 }

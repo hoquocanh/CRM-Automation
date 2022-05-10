@@ -15,56 +15,6 @@ import utils.data.dataJsonLead;
 
 public class objContact<T, S extends String> {
 	
-	/**getJsonValue method provides the way to retrieve the value of Contact JSON via inputKey
-	 * @param testFileName
-	 * @param inputKey
-	 * @return value of inputKey
-	 */
-	public T getJsonValue(S testFileName, S inputKey)
-	{
-		T returnValue=null;
-		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
-		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
-		
-		Object obj;
-        try {
-        	
-            obj = new JSONParser().parse(new FileReader(jsonPath));
-            JSONObject jsonObject = (JSONObject) obj;
-            JSONObject contactXObject;
-            //List of Contacts
-			//1. Position of first Contact is 0
-            JSONArray contactListArray = (JSONArray) jsonObject.get(dataJsonContact.CONTACTLIST.getValue());
-            contactXObject = (JSONObject) contactListArray.get(0);
-            
-             //2. "address" is another JSONObject
-            JSONObject addressObject = (JSONObject) contactXObject.get(dataJsonContact.ADDRESS.getValue());
-            //System.out.println("Address:" + JSONValue.toJSONString(addressObject));
-            
-            if(isAddressKey(inputKey))
-            {
-            	returnValue = (T) addressObject.get(inputKey);
-            	
-            }
-            
-            else //3. If not able to find in key "address"
-            {
-            	returnValue = (T) contactXObject.get(inputKey);         	
-            }
-         } 
-	    catch (Exception e) 
-	    {
-	        e.printStackTrace();
-	    } 
-		return returnValue;	
-	}
-	
-	/**getJsonValue method provides the way to retrieve the value of Contact JSON via inputKey, we can navigate to the desired Contact Child based on inputChildName
-	 * @param testFileName
-	 * @param inputKey
-	 * @param inputChildName
-	 * @return value of inputKey
-	 */
 	public T getJsonValue(S testFileName, S inputKey, S inputChildName)
 	{
 		T returnValue=null;
@@ -118,7 +68,6 @@ public class objContact<T, S extends String> {
 	    } 
 		return returnValue;	
 	}
-	
 	
 	
 //	public static String getJsonValue(String testFileName, String leadType, String inputKey)

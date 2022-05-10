@@ -25,7 +25,6 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginDefinition {
 	String returnRandomEmail = "";
-	String returnRandomContactEmail ="";
 	GeneralHomePage homePage = new GeneralHomePage();
 	//A LoginPage will be extended from GenralHomePage and use the Driver from there  
 	LoginPage loginpage = new LoginPage(homePage.getDriver()); 
@@ -93,30 +92,6 @@ public class LoginDefinition {
 		settingpage.activateDeveloperMode();
 		//NOTICE: needn't to back Home
 		
-		}
-	
-	 
-	@Given ("^Create a Contact as Company and its child contacts from (.*)$")
-	public void createNewContactAndItsChildContacts(String Contactsfile)  throws Throwable {
-  			
-		Logger.info("Create a Contact");
-		homePage.gotoModuleContacts();
-		contactspage.createContact();
-		
-		contactspage.enterContactName(Contactsfile);
-		returnRandomContactEmail = contactspage.enterEmail(Contactsfile);
-		
-		
-		contactspage.selectCountry(Contactsfile);
-		contactspage.selectState(Contactsfile);
-		contactspage.enterStreetName(Contactsfile);
-		
-		contactspage.pressSaveButton();
-		//2. Create its child contacts
-		
-		
-		
-		contactspage.goToHome();
 		}
 	// ============================ WHEN -  ============================//
 	@When ("^Create a new Target Lead from (.*)$")

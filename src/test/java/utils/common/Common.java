@@ -128,50 +128,8 @@ public class Common {
 		cal.set(Calendar.DAY_OF_MONTH, rnd);
 		return cal.getTime();
 	}
-	
-	
 	/**
-	 * Generate a random company email based on the current time. 
-	 * The email is using Constants.COMPANY_DOMAIN_EMAIL = "test" and the return email will be in template as "TEST_AUTOMATION_2022_05_04T13_56_19@test.com"
-	 * @author anh.ho	 
-	 * @return a random email
-	 */
-	public static String getRandomTestEmail() {
-		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
-		Date date = new Date();
-		
-		Timestamp timestamp = new Timestamp(date.getTime());
-		
-		System.out.println(timestamp.getTime());
-		
-		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.TEST_DOMAIN_EMAIL;
-		System.out.println(randomEmail);
-		return randomEmail;
-	}
-	
-	
-	/**
-	 * Generate a random public email based on the current time.
-	 * The email is using Constants.PUBLIC_DOMAIN_EMAIL = "gmail" and the return email will be in template as "TEST_AUTOMATION_2022_05_04T13_56_19@gmail.com"
-	 * @author anh.ho	 
-	 * @return a random email
-	 */
-	public static String getRandomPublicEmail() {
-		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
-		Date date = new Date();
-		
-		Timestamp timestamp = new Timestamp(date.getTime());
-		
-		System.out.println(timestamp.getTime());
-		
-		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.GMAIL_DOMAIN_EMAIL;
-		System.out.println(randomEmail);
-		return randomEmail;
-	}
-	
-	/**
-	 * Generate a random company email based on the current time. 
-	 * The email is using Constants.COMPANY_DOMAIN_EMAIL = "test" and the return email will be in template as "TEST_AUTOMATION_2022_05_04T13_56_19@2022_05_04T13_56_19.com"
+	 * Generate a random company email based on the current time
 	 * @author anh.ho	 
 	 * @return a random email
 	 */
@@ -183,9 +141,24 @@ public class Common {
 		
 		System.out.println(timestamp.getTime());
 		
-		String newCompanyDomain = Constants.COMPANY_DOMAIN_EMAIL.replace("company", sdf.format(timestamp));
+		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.COMPANY_DOMAIN_EMAIL;
+		System.out.println(randomEmail);
+		return randomEmail;
+	}
+	/**
+	 * Generate a random public email based on the current time
+	 * @author anh.ho	 
+	 * @return a random email
+	 */
+	public static String getRandomPublicEmail() {
+		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
+		Date date = new Date();
 		
-		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + newCompanyDomain;
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		System.out.println(timestamp.getTime());
+		
+		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.PUBLIC_DOMAIN_EMAIL;
 		System.out.println(randomEmail);
 		return randomEmail;
 	}

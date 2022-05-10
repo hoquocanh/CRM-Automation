@@ -255,7 +255,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		if(inputTestCaseType.contains("public domain"))
 			randomEmail = Common.getRandomPublicEmail();
 		else if(inputTestCaseType.contains("company domain"))
-			randomEmail = Common.getRandomTestEmail();
+			randomEmail = Common.getRandomCompanyEmail();
 		
 		System.out.println("Random email:"+ randomEmail);
 		Logger.info("Random email:"+ randomEmail);
