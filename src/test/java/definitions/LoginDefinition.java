@@ -51,7 +51,7 @@ public class LoginDefinition {
 	@Given("^Test (.*) and (.*)$")
 	public void Test(String Leadsfile, String Contactsfile)  throws Throwable {
   		//Pre-condition: Select the correct configuration
-		
+		//Test
 		System.out.println("Launch page");
 		Logger.info("Launch page");	
 		
