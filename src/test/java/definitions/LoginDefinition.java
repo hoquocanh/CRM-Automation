@@ -101,9 +101,13 @@ public class LoginDefinition {
 		homePage.gotoModuleContacts();
 		contactspage.createContact();
 		
+		contactspage.selectContactType(Contactsfile);
 		contactspage.enterContactName(Contactsfile);
 		returnRandomContactEmail = contactspage.enterEmail(Contactsfile);
+				
+		contactspage.enterStreetName(Contactsfile);
 		
+		crmpage.pressSaveButton();
 		
 		}
 	// ============================ WHEN -  ============================//
