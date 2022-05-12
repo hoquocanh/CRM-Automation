@@ -15,6 +15,55 @@ import utils.data.dataJsonLead;
 
 public class objContact<T, S extends String> {
 	
+	/**This method get the value of 'father' contact based on the entered "inputKey"
+	 * @param testFileName
+	 * @param inputKey
+	 * @return value of "inputKey"
+	 */
+	public T getJsonValue(S testFileName, S inputKey)
+	{
+		T returnValue=null;
+		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
+		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
+		
+		Object obj;
+        try {
+        	
+            obj = new JSONParser().parse(new FileReader(jsonPath));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONObject contactXObject;
+            //List of Contacts
+			//1. Position of first Contact is 0
+            JSONArray contactListArray = (JSONArray) jsonObject.get(dataJsonContact.CONTACTLIST.getValue());
+            contactXObject = (JSONObject) contactListArray.get(0);
+            
+             //2. "address" is another JSONObject
+            JSONObject addressObject = (JSONObject) contactXObject.get(dataJsonContact.ADDRESS.getValue());
+            //System.out.println("Address:" + JSONValue.toJSONString(addressObject));
+            
+            if(isAddressKey(inputKey))
+            {
+            	returnValue = (T) addressObject.get(inputKey);
+            	
+            }//If not in group of key "address", return the value of "inputKey", return NULL if there is no "inputKey" in JSON
+            else //3. If not able to find in key "address"
+            {
+            	returnValue = (T) contactXObject.get(inputKey);         	
+            }
+         } 
+	    catch (Exception e) 
+	    {
+	        e.printStackTrace();
+	    } 
+		return returnValue;	
+	}
+	
+	/**This method get the value of 'child' contact based on the entered "inputKey" and then "inputChildName" from child contact
+	 * @param testFileName
+	 * @param inputKey
+	 * @param inputChildName
+	 * @return value of "inputKey"
+	 */
 	public T getJsonValue(S testFileName, S inputKey, S inputChildName)
 	{
 		T returnValue=null;

@@ -254,8 +254,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		//Explanation: If the value of key "testcaseType" in JSON file is "public domain" or "company domain"
 		if(inputTestCaseType.contains("public domain"))
 			randomEmail = Common.getRandomPublicEmail();
-		else if(inputTestCaseType.contains("company domain"))
-			randomEmail = Common.getRandomCompanyEmail();
+		else if(inputTestCaseType.contains("test domain"))
+			randomEmail = Common.getRandomTestEmail();
 		
 		System.out.println("Random email:"+ randomEmail);
 		Logger.info("Random email:"+ randomEmail);

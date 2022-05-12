@@ -25,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginDefinition {
 	String returnRandomEmail = "";
+	String returnRandomContactEmail ="";
 	GeneralHomePage homePage = new GeneralHomePage();
 	//A LoginPage will be extended from GenralHomePage and use the Driver from there  
 	LoginPage loginpage = new LoginPage(homePage.getDriver()); 
@@ -44,8 +45,7 @@ public class LoginDefinition {
 		Logger.info("Launch page");	
 		
 		Common.getRandomPublicEmail();
-
-		
+	
 		}
 	
 	@Given("^Test (.*) and (.*)$")
@@ -63,7 +63,7 @@ public class LoginDefinition {
 	@Given("^Launch Odoo Page$")
 	public void LaunchPage()  throws Throwable {
   		//Pre-condition: Select the correct configuration
-		
+		homePage.launchWebPage();
 		System.out.println("Launch page");
 		Logger.info("Launch page");	
 
@@ -91,6 +91,19 @@ public class LoginDefinition {
 		Logger.info("Active developer mode");
 		settingpage.activateDeveloperMode();
 		//NOTICE: needn't to back Home
+		
+		}
+	
+	@Given ("^Create a Contact and its child contacts from (.*)$")
+	public void createNewContactandChildContacts(String Contactsfile)  throws Throwable {
+  			
+		Logger.info("Create Contact");
+		homePage.gotoModuleContacts();
+		contactspage.createContact();
+		
+		contactspage.enterContactName(Contactsfile);
+		returnRandomContactEmail = contactspage.enterEmail(Contactsfile);
+		
 		
 		}
 	// ============================ WHEN -  ============================//

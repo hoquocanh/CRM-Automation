@@ -129,11 +129,12 @@ public class Common {
 		return cal.getTime();
 	}
 	/**
-	 * Generate a random company email based on the current time
+	 * Generate a random company email based on the current time. 
+	 * The output email will be as "TEST_AUTOMATION_2022_05_12T11_10_23@test.com"
 	 * @author anh.ho	 
 	 * @return a random email
 	 */
-	public static String getRandomCompanyEmail() {
+	public static String getRandomTestEmail() {
 		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
 		Date date = new Date();
 		
@@ -141,12 +142,13 @@ public class Common {
 		
 		System.out.println(timestamp.getTime());
 		
-		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.COMPANY_DOMAIN_EMAIL;
+		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.TEST_DOMAIN_EMAIL;
 		System.out.println(randomEmail);
 		return randomEmail;
 	}
 	/**
 	 * Generate a random public email based on the current time
+	 * The output email will be as "TEST_AUTOMATION_2022_05_05T10_46_37@gmail.com" 
 	 * @author anh.ho	 
 	 * @return a random email
 	 */
@@ -158,7 +160,26 @@ public class Common {
 		
 		System.out.println(timestamp.getTime());
 		
-		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.PUBLIC_DOMAIN_EMAIL;
+		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + Constants.GMAIL_DOMAIN_EMAIL;
+		System.out.println(randomEmail);
+		return randomEmail;
+	}
+	/**
+	 * Generate a random public email based on the current time
+	 * The output email will be as "TEST_AUTOMATION_2022_05_05T10_46_37@company_2022_05_05T10_46_37.com" 
+	 * @author anh.ho	 
+	 * @return a random email
+	 */
+	public static String getRandomCompanyEmail() {
+		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
+		Date date = new Date();
+		
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		//Change the domain of Company to be as "@company_2022_05_05T10_46_37.com
+		String refineCompanyDomain = Constants.COMPANY_DOMAIN_EMAIL.replace("REPLACE",(String) sdf.format(timestamp));		
+		
+		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + refineCompanyDomain;
 		System.out.println(randomEmail);
 		return randomEmail;
 	}
