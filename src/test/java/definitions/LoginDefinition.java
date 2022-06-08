@@ -102,13 +102,19 @@ public class LoginDefinition {
 		contactspage.createContact();
 		
 		contactspage.selectContactType(Contactsfile);
-		contactspage.enterContactName(Contactsfile);
 		returnRandomContactEmail = contactspage.enterEmail(Contactsfile);
+		contactspage.enterContactName(Contactsfile, returnRandomContactEmail);
+		
 				
 		contactspage.enterStreetName(Contactsfile);
 		
-		crmpage.pressSaveButton();
+		contactspage.pressSaveButton();
 		
+		//Operate on Child Contacts
+		contactspage.addAllChildContacts(Contactsfile,returnRandomContactEmail);
+		
+		//Finally, press "SAVE" button
+		contactspage.pressSaveButton();
 		}
 	// ============================ WHEN -  ============================//
 	@When ("^Create a new Target Lead from (.*)$")
@@ -197,6 +203,33 @@ public class LoginDefinition {
 		opppage.pressSaveButton();
 		opppage.goToHome();
 		}   
+	
+	@When ("^Create a new Target Lead from (.*) using child contact from (.*)$")
+	public void createNewTargetLead(String Leadsfile, String Contactsfile)  throws Throwable {
+  			
+		Logger.info("Create Target Lead");
+		homePage.gotoModuleCRM();
+		crmpage.createLead();
+		
+		crmpage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
+		
+		
+		//In this scenario, we enter the contact of "Acice", then the other fields are enter automatically
+		crmpage.selectContact(Contactsfile, "Alice");
+		
+		
+		crmpage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.enterCompanyName(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectState(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.enterStreetName(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectTag(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.setCreateManualCheckBox(Leadsfile, Constants.TARGET_LEAD);
+		
+		crmpage.pressSaveButton();
+		crmpage.goToHome();
+		}
 	@When ("^Create a new Source Lead from (.*)$")
 	public void createNewSourceLead(String Leadsfile)  throws Throwable {
   			

@@ -13,7 +13,7 @@ import utils.common.Constants;
 import utils.data.dataJsonContact;
 import utils.data.dataJsonLead;
 
-public class objContact<T, S extends String> {
+public class objContact<T , S extends String> {
 	
 	/**This method get the value of 'father' contact based on the entered "inputKey"
 	 * @param testFileName
@@ -64,7 +64,7 @@ public class objContact<T, S extends String> {
 	 * @param inputChildName
 	 * @return value of "inputKey"
 	 */
-	public T getJsonValue(S testFileName, S inputKey, S inputChildName)
+	public T getJsonValueOfChildContactByContactName(S testFileName, S inputKey, S inputChildName)
 	{
 		T returnValue=null;
 		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
@@ -117,58 +117,76 @@ public class objContact<T, S extends String> {
 	    } 
 		return returnValue;	
 	}
+	/**This method get the value of 'child' contact based on the entered "childContactIndex" and then "inputKeyChildContact" from child contact
+	 * @param testFileName
+	 * @param inputKeyChildContact
+	 * @param childContactIndex
+	 * @return value of "inputKey"
+	 */
+	public T getJsonValueOfChildContactByIndex(S testFileName, S inputKeyChildContact, int childContactIndex)
+	{
+		T returnValue=null;
+		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
+		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
+		
+		Object obj;
+        try {
+        	
+            obj = new JSONParser().parse(new FileReader(jsonPath));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONObject contactXObject;
+            //List of Contacts
+			//1. Position of first Contact is 0
+            JSONArray contactListArray = (JSONArray) jsonObject.get(dataJsonContact.CONTACTLIST.getValue());
+            contactXObject = (JSONObject) contactListArray.get(0);
+            
+            	//3. "contactChild" is another JSONObject
+                JSONArray contactChildListArray = (JSONArray) contactXObject.get(dataJsonContact.CONTACTCHILD.getValue());
+                	//Go through list of contactChildListArray to find out the desired value of "inputKey" using the navigator as "inputChildName"
+	               
+	                    JSONObject jobject = (JSONObject) contactChildListArray.get(childContactIndex);
+	                    //Find the desired contactChild using the navigator as "inputChildName"
+	                    if(!jobject.isEmpty())
+	                    {
+	                    	returnValue = (T) jobject.get(inputKeyChildContact);	                    	
+	                    }	             
+         } 
+	    catch (Exception e) 
+	    {
+	        e.printStackTrace();
+	    } 
+		return returnValue;	
+	}
 	
-	
-//	public static String getJsonValue(String testFileName, String leadType, String inputKey)
-//	{
-//		String returnValue ="";
-//		String inputjsonPath = "\\src\\test\\java\\utils\\data\\MergedLead\\SameCompanyEmail\\"+testFileName+".json";
-//		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
-//		System.out.println("jsonPath: "+ jsonPath);
-//		
-//		
-//		Object obj;
-//        try {
-//        	
-//            obj = new JSONParser().parse(new FileReader(jsonPath));
-//            JSONObject jsonObject = (JSONObject) obj;
-//            JSONObject leadXObject;
-//            //List of Leads
-//			//1. Iterator itr1 = leadList.iterator();
-//            JSONArray leadListArry = (JSONArray) jsonObject.get(dataJsonLead.LEADLIST.getValue());
-//            
-//            //2. Position of Target lead is 0; position of Source lead is 1
-//            if(leadType.equalsIgnoreCase(Constants.TARGET_LEAD))
-//            {
-//            	leadXObject = (JSONObject) leadListArry.get(0);
-//            }
-//            else
-//            {
-//            	leadXObject = (JSONObject) leadListArry.get(1);
-//            }
-//             //3. "address" is another JSONObject
-//            JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.ADDRESS.getValue());
-//            System.out.println("Address:" + JSONValue.toJSONString(addressObject));
-//            
-//            if(isAddressKey(inputKey))
-//            {
-//            	returnValue = (String) addressObject.get(inputKey);
-//            	
-//            }//If not in group of key "address"
-//            else
-//            {
-//            	returnValue = (String) leadXObject.get(inputKey);
-//            	
-//            }
-//         } 
-//	    catch (Exception e) 
-//	    {
-//	        e.printStackTrace();
-//	    } 
-//		
-//		return returnValue;
-//		
-//	}
+	public int getTotalChildContacs(S testFileName)
+	{
+		int returnValue=0;
+		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
+		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
+		
+		Object obj;
+        try {
+        	
+            obj = new JSONParser().parse(new FileReader(jsonPath));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONObject contactXObject;
+            //List of Contacts
+			//1. Position of first Contact is 0
+            JSONArray contactListArray = (JSONArray) jsonObject.get(dataJsonContact.CONTACTLIST.getValue());
+            contactXObject = (JSONObject) contactListArray.get(0);
+            
+            //3. "contactChild" is another JSONObject
+            JSONArray contactChildListArray = (JSONArray) contactXObject.get(dataJsonContact.CONTACTCHILD.getValue());
+        	//Go through list of contactChildListArray to find out the desired value of "inputKey" using the navigator as "inputChildName"
+            returnValue = contactChildListArray.size();
+         } 
+	    catch (Exception e) 
+	    {
+	        e.printStackTrace();
+	    } 
+		return returnValue;	
+	}
+
 	public static void setJsonValue(String testFileName, String leadType, String inputKey, String inputValue)
 	{
 		String returnValue ="";

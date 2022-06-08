@@ -1,7 +1,7 @@
 {
    "contactList":[{
          "contactType":"company",
-         "contactName":"automation test contact",
+         "contactName":"Company Contact",
          "emailAddress":"",
          "address":{
             "country":"United States",

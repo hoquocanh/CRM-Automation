@@ -23,8 +23,10 @@ import org.openqa.selenium.WebDriver;
 
 import utils.common.Common;
 import utils.common.Constants;
+import utils.data.dataJsonContact;
 import utils.data.dataJsonLead;
 import utils.helper.Logger;
+import utils.object.objContact;
 import utils.object.objLead;
 
 /**
@@ -89,6 +91,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	By txt_send_message =By.xpath("//textarea[contains(@class,'composer_text_field')]");
 	
 	//Combobox
+	By cbb_contact =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'partner_id')][1]/descendant::input");
 	By cbb_sales_team =By.xpath("//select[contains(@name,'team_id')]");
 	By cbb_country =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'country_id')][1]/descendant::input");	
 	By cbb_state  =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'state_id')][1]/descendant::input");
@@ -284,6 +287,37 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		getDriver().findElement(txt_email).sendKeys(inputEmail);
 		
 	}
+	
+	/**This method is used to enter an existing email
+	 * <pre>
+	 * This method is used to create the Source lead
+	 * </pre>
+	 * @param testFileName
+	 * @param leadType
+	 * @param inputEmail
+	 * @throws Throwable
+	 */
+	public void selectContact(String testContactsFileName, String chidlContactName) throws Throwable	
+	
+	{
+		objContact<String, String> tempContactsFile = new objContact<String, String>();
+		String inputChildContactEmail = tempContactsFile.getJsonValueOfChildContactByContactName(testContactsFileName,dataJsonContact.CHILDEMAILADDRESS.getValue(),chidlContactName);
+		
+		if(!inputChildContactEmail.isEmpty())
+		{
+			waitForElementResponse();
+
+			getDriver().findElement(cbb_contact).click();
+			waitForElementResponse();
+			getDriver().findElement(cbb_contact).sendKeys(inputChildContactEmail);	
+			waitForElementResponse();
+			//Press "Enter" on keyboard
+			getDriver().findElement(cbb_contact).sendKeys(Keys.RETURN);		
+		}
+				
+	}
+	
+	
 	public void enterStreetName(String testFileName, String leadType) throws Throwable
 	{
 		objLead<String, String> temp = new objLead<String, String>();

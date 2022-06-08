@@ -30,6 +30,7 @@ public class ContactsPage extends GeneralHomePage {
 		//1. Detail Contacts page
 		
 		By btn_save =By.xpath("(//button[contains(text(),'Save')])[1]");
+		By btn_edit =By.xpath("//button[contains(text(),'Edit')]");
 		
 		By rdb_individual =By.xpath("//input[contains(@data-value,'person')]");
 		By div_rdb_individual =By.xpath("//div/input[contains(@data-value,'person')]");
@@ -56,9 +57,10 @@ public class ContactsPage extends GeneralHomePage {
 		By tab_contact_addresses  =By.xpath("//a[contains(text(),'Contacts & Addresses')]");
 		By lnk_add  =By.xpath("//div[contains(@name,'child_ids')]/descendant::button[contains(text(),'Add')]");
 		
-		By txt_child_name 	=By.xpath("//input[@name='name'][2]");
+		By txt_child_name 	=By.xpath("(//input[@name='name'])[2]");
 		By txt_child_email 	=By.xpath("(//input[contains(@name,'email')])[4]");
-		//button/span[contains(text(),'Save & Close')]
+		By btn_child_save_close 	=By.xpath("//button/span[contains(text(),'Save & Close')]");
+		
 	// ============================ Constructor declaration============================//
 	//Login Page continues to use the Driver which created at GeneralHomePage
 	public ContactsPage()
@@ -79,6 +81,26 @@ public class ContactsPage extends GeneralHomePage {
 		getDriver().findElement(txt_name);
 		
 	}
+	public void pressSaveButton() throws Throwable
+	{
+		getDriver().findElement(btn_save).click();
+		waitForPageDisplay();
+	}
+	public void pressEditButton() throws Throwable
+	{
+		getDriver().findElement(btn_edit).click();
+		waitForPageDisplay();
+	}
+	public void pressTab_ContactAddresses() throws Throwable
+	{
+		getDriver().findElement(tab_contact_addresses).click();
+		waitForPageDisplay();
+	}
+	public void pressTab_ContactAddresses_AddButton() throws Throwable
+	{
+		getDriver().findElement(lnk_add).click();
+		waitForPageDisplay();
+	}
 	/**This method is used to create a Contact
 	 * <pre>
 	 * Pre-condition: The screen is being Home page
@@ -95,17 +117,17 @@ public class ContactsPage extends GeneralHomePage {
 		
 	}
 	//---------------------------------------Contact page------------------------------------------------
-		public void enterContactName(String testFileName) throws Throwable
+		public void enterContactName(String testFileName, String fatherContactEmail) throws Throwable
 		{
 			objContact<String, String> temp = new objContact<String, String>();
 			String inputText = temp.getJsonValue(testFileName,dataJsonContact.CONTACTNAME.getValue());
-			getDriver().findElement(txt_name).sendKeys(inputText);
+			getDriver().findElement(txt_name).sendKeys(this.generateContactName(testFileName, fatherContactEmail, inputText));
 			
 		}
 		public void enterContactChildName(String testFileName, String inputChildName) throws Throwable
 		{
 			objContact<String, String> temp = new objContact<String, String>();
-			String inputText = temp.getJsonValue(testFileName,dataJsonContact.CHILDCONTACTNAME.getValue(), inputChildName);
+			String inputText = temp.getJsonValueOfChildContactByContactName(testFileName,dataJsonContact.CHILDCONTACTNAME.getValue(), inputChildName);
 			getDriver().findElement(txt_name).sendKeys(inputText);
 			
 		}
@@ -264,5 +286,62 @@ public class ContactsPage extends GeneralHomePage {
 					System.out.println(outputString);
 					return outputString;
 					
-				}
+		}
+		
+		public String generateContactName(String testFileName, String fatherContactEmail, String fatherContactName) 
+		{
+			String outputString = null;
+			
+			int positionOfIndex = fatherContactEmail.indexOf("@");
+			//The output father contact name be as "Comany Contact TEST_AUTOMATION_2022_05_13T10_45_06"
+			outputString = fatherContactName + " " + fatherContactEmail.substring(0,positionOfIndex-1) ;
+			
+			System.out.println("Output adjusted contact name: " + outputString);
+			return outputString;
+					
+		}
+		//-------------------------Child Contact-----------------------------
+		
+		public void addAllChildContacts(String testFileName, String fatherContactEmail) throws Throwable
+		{
+			String childContactName =""; 
+			objContact<String, String> temp = new objContact<String, String>();
+			
+			
+			int totalChildContacts = temp.getTotalChildContacs(testFileName);
+			
+			//Firstly, press EDIT button on father Contact
+			this.pressEditButton();
+			
+			//Secondly, add every child Contact
+			for(int i=0; i<totalChildContacts; i++ )
+				{
+					//Pre-condition:
+					
+					this.pressTab_ContactAddresses();
+					this.pressTab_ContactAddresses_AddButton();
+					
+					//Implement
+					childContactName = temp.getJsonValueOfChildContactByIndex(testFileName, dataJsonContact.CHILDCONTACTNAME.getValue(), i);
+					getDriver().findElement(txt_child_name).sendKeys(childContactName);
+					getDriver().findElement(txt_child_email).sendKeys(generateChildContactEmail(testFileName,fatherContactEmail,childContactName));
+					
+					//Press SAVE & CLOSE
+					getDriver().findElement(btn_child_save_close).click();				
+				}			
+		}
+		
+		public String generateChildContactEmail(String testFileName, String fatherContactEmail, String childContactName) 
+		{
+			String outputString = null;
+			
+			int positionOfIndex = fatherContactEmail.indexOf("@");
+			//The outputEmail be as "Bob@company_2022_05_12T17_50_39.com
+			outputString = childContactName + fatherContactEmail.substring(positionOfIndex,fatherContactEmail.length()) ;
+			
+			System.out.println("Output childContactEmail: " + outputString);
+			return outputString;
+					
+		}
+		
 }
