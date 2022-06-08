@@ -16,7 +16,7 @@
          "leadForm":"Download Free Trial",
          "createManual":false,
          "tags":"Trial download",
-         "testcaseType":"company domain",
+         "testcaseType":"test domain",
          "salesTeam":"Install Base"
       },
       {
@@ -37,7 +37,7 @@
          "leadForm":"License",
          "createManual":false,
          "tags":"Product Registration",
-         "testcaseType":"company domain",
+         "testcaseType":"test domain",
          "salesTeam":"Marketing"
       }
    ]

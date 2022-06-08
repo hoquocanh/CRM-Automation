@@ -17,7 +17,7 @@
          "leadForm":"Download Free Trial",
          "createManual":false,
          "tags":"Trial download",
-         "testcaseType":"company domain",
+         "testcaseType":"test domain",
          "salesTeam":"CM_Channel_Management"
       },
       {
@@ -39,7 +39,7 @@
          "emailAddress":"",
          "leadType":"source lead",
          "leadForm":"Download Free Trial",
-         "testcaseType":"company domain",
+         "testcaseType":"test domain",
          "createManual":false
       }
    ]

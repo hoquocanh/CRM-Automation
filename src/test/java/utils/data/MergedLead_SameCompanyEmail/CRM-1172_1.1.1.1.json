@@ -16,7 +16,7 @@
          "leadForm":"IB NC Leads",
          "createManual":false,
          "tags":"Renewal",
-         "testcaseType":"company domain",
+         "testcaseType":"test domain",
          "salesTeam":"CM_Channel_Management"
       },
       {
@@ -37,7 +37,7 @@
          "leadForm":"Download Free Trial",
          "createManual":false,
          "tags":"Trial download",
-         "testcaseType":"company domain",
+         "testcaseType":"test domain",
          "salesTeam":"CM_Channel_Management"
       }
    ]

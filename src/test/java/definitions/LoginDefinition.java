@@ -23,7 +23,7 @@ import utils.helper.Logger;
 import org.openqa.selenium.WebDriver;
 
 
-public class LoginDefinition {
+public class LoginDefinition  {
 	String returnRandomEmail = "";
 	String returnRandomContactEmail ="";
 	GeneralHomePage homePage = new GeneralHomePage();

@@ -13,7 +13,8 @@
 		<classes>
 <!--  			<class name="LinkingCucumber.MergedLead.Merged_leads_from_the_same_company_email"></class> -->  		
 <!--  			<class name="LinkingCucumber.MergedLead.Merged_leads_from_the_same_public_email"></class> -->
-				<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_company"></class>		
+<!--				<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_company"></class>	-->
+				<class name="LinkingCucumber.MergedLead.Merged_leads_from_the_same_company_email"></class>	
 		</classes>
 	</test>
 	
