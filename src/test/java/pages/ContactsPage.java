@@ -330,7 +330,36 @@ public class ContactsPage extends GeneralHomePage {
 					getDriver().findElement(btn_child_save_close).click();				
 				}			
 		}
-		
+		public String addChildContactsByIndex(String testFileName, String fatherContactEmail, int index) throws Throwable
+		{
+			String childContactName =""; 
+			objContact<String, String> temp = new objContact<String, String>();
+			
+			//Firstly, press EDIT button on father Contact
+			this.pressEditButton();
+			
+			//Secondly, add every child Contact by index			
+			//Pre-condition:
+			
+			this.pressTab_ContactAddresses();
+			this.pressTab_ContactAddresses_AddButton();
+			
+			//Implement
+			childContactName = temp.getJsonValueOfChildContactByIndex(testFileName, dataJsonContact.CHILDCONTACTNAME.getValue(), index);
+			String randomEmail = generateChildContactEmail(testFileName,fatherContactEmail,childContactName);
+			
+			getDriver().findElement(txt_child_name).sendKeys(childContactName);
+			getDriver().findElement(txt_child_email).sendKeys(randomEmail);
+			
+			//Press SAVE & CLOSE
+			getDriver().findElement(btn_child_save_close).click();	
+			waitForElementResponse();
+			//Press SAVE button on Contact father
+			pressSaveButton();
+			
+			return randomEmail;
+							
+		}
 		public String generateChildContactEmail(String testFileName, String fatherContactEmail, String childContactName) 
 		{
 			String outputString = null;

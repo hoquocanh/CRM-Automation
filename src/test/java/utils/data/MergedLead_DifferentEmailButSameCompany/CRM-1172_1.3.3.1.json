@@ -1,0 +1,44 @@
+{
+   "leadsList":[
+      {
+         "leadName":"target lead-Higher priority",
+         "leadType":"target lead",
+         "contactname":"",
+         "emailAddress":"",
+         "address":{
+            "country":"United States",
+            "streetAddress":"123street",
+            "city":"",
+            "postalCode":"",
+            "state":"Texas (US)"
+         },                  
+         "companyName":"test123",
+         "leadForm":"Download Free Trial",
+         "createManual":false,
+         "tags":"Trial download",
+         "testcaseType":"test domain",
+         "salesTeam":"CM_Channel_Management"
+      },
+      {
+         "leadName":"source lead-Lower priority",
+         "leadType":"source lead",
+         "contactname":"test contact",
+         "emailAddress":"",
+         "address":{
+            "country":"United States",
+            "streetAddress":"123street",
+            "city":"",
+            "postalCode":"",
+            "state":"Texas (US)"
+         },                  
+         "companyName":"test12345",
+         "userLogNotes":"target lead log notes",
+         "publicMessage":"target lead message",
+         "leadForm":"License",
+         "createManual":false,
+         "tags":"Product Registration",
+         "testcaseType":"test domain",
+         "salesTeam":"CM_Channel_Management"
+      }
+   ]
+}

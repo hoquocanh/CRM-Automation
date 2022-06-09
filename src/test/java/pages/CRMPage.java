@@ -288,21 +288,17 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		
 	}
 	
-	/**This method is used to enter an existing email
+	/**This method is used to enter an existing email to the "Contact" dropdownlist
 	 * <pre>
-	 * This method is used to create the Source lead
+	 * 
 	 * </pre>
 	 * @param testFileName
 	 * @param leadType
-	 * @param inputEmail
+	 * @param inputChildContactEmail 
 	 * @throws Throwable
 	 */
-	public void selectContact(String testContactsFileName, String chidlContactName) throws Throwable	
-	
+	public void selectContact(String testFileName, String leadType, String inputChildContactEmail) throws Throwable	
 	{
-		objContact<String, String> tempContactsFile = new objContact<String, String>();
-		String inputChildContactEmail = tempContactsFile.getJsonValueOfChildContactByContactName(testContactsFileName,dataJsonContact.CHILDEMAILADDRESS.getValue(),chidlContactName);
-		
 		if(!inputChildContactEmail.isEmpty())
 		{
 			waitForElementResponse();
@@ -316,8 +312,6 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		}
 				
 	}
-	
-	
 	public void enterStreetName(String testFileName, String leadType) throws Throwable
 	{
 		objLead<String, String> temp = new objLead<String, String>();
@@ -371,8 +365,6 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			
 			if(!inputText.isEmpty())
 			{
-				
-				
 				getDriver().findElement(cbb_country).click();
 				waitForElementResponse();
 				getDriver().findElement(cbb_country).sendKeys(inputText);	
@@ -418,6 +410,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			getDriver().findElement(cbb_tags).sendKeys(Keys.RETURN);
 		}
 		}
+	
 	public void setCreateManualCheckBox(String testFileName, String leadType) throws Throwable
 	{
 		objLead<Boolean, String> temp = new objLead<Boolean, String>();

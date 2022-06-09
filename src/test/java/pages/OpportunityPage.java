@@ -103,6 +103,7 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	
 	//Combobox
 	By cbb_sales_team =By.xpath("//select[contains(@name,'team_id')]");
+	By cbb_contact =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'partner_id')][2]/descendant::input");
 	By cbb_country =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'country_id')][2]/descendant::input");	
 	By cbb_state  =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'state_id')][2]/descendant::input");
 	By cbb_tags =By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::div[contains(@name, 'tag_ids')][1]/descendant::input[contains(@type,'text')]");
@@ -313,6 +314,30 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		//objLead.setJsonValue(testFileName,leadType,dataJsonLead.EMAILADDRESS.getValue(), inputEmail);
 		getDriver().findElement(txt_email).sendKeys(inputEmail);
 		
+	}
+	/**This method is used to enter an existing email to the "Contact" dropdownlist
+	 * <pre>
+	 * 
+	 * </pre>
+	 * @param testFileName
+	 * @param leadType
+	 * @param inputChildContactEmail 
+	 * @throws Throwable
+	 */
+	public void selectContact(String testFileName, String leadType, String inputChildContactEmail) throws Throwable	
+	{
+		if(!inputChildContactEmail.isEmpty())
+		{
+			waitForElementResponse();
+
+			getDriver().findElement(cbb_contact).click();
+			waitForElementResponse();
+			getDriver().findElement(cbb_contact).sendKeys(inputChildContactEmail);	
+			waitForElementResponse();
+			//Press "Enter" on keyboard
+			getDriver().findElement(cbb_contact).sendKeys(Keys.RETURN);		
+		}
+				
 	}
 	public void enterStreetName(String testFileName, String leadType) throws Throwable
 	{
