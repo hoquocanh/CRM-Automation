@@ -23,7 +23,9 @@ public enum dataJsonContact {
 		CHILDEMAILADDRESS("childEmailAddress"),
 	//Others	
 	TAGS("tags"),	
-	SALESTEAM("salesTeam");
+	SALESTEAM("salesTeam"),
+	PARTNERLEVEL("partnerLevel"),
+	ACTIVATIONDATE("activationDate");
 	
 		
 	private String value;

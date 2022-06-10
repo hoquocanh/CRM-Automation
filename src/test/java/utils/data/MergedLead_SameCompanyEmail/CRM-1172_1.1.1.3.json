@@ -1,7 +1,7 @@
 {
    "leadsList":[
       {
-         "leadType":"target lead-Manual created",
+         "leadType":"target lead",
          "contactname":"",
          "emailAddress":"",
          "address":{
@@ -11,7 +11,7 @@
             "postalCode":"",
             "state":"Texas (US)"
          },         
-         "leadName":"target lead",
+         "leadName":"target lead-Manual created",
          "companyName":"test123",
          "leadForm":"",
          "createManual":true,

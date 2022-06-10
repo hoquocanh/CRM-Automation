@@ -94,6 +94,7 @@ public class Constants {
 	public static final String TEST_DOMAIN_EMAIL = "@test.com";	
 	public static final String GMAIL_DOMAIN_EMAIL = "@gmail.com";
 	public static final String COMPANY_DOMAIN_EMAIL = "@companyREPLACE.com";
+	public static final String INDIVIDUAL_DOMAIN_EMAIL = "@individualREPLACE.com";
 	public static final String TARGET_LEAD = "target lead";
 	public static final String SOURCE_LEAD = "source lead";
 }

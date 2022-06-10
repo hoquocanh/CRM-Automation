@@ -1,6 +1,7 @@
 {
    "leadsList":[
       {
+         "leadName":"target lead-Higher priority",
          "leadType":"target lead",
          "contactname":"",
          "emailAddress":"",
@@ -10,16 +11,16 @@
             "city":"",
             "postalCode":"",
             "state":"Texas (US)"
-         },         
-         "leadName":"target lead-Manual created",
+         },                  
          "companyName":"test123",
-         "leadForm":"",
-         "createManual":true,
-         "tags":"",
-         "testcaseType":"public domain",
+         "leadForm":"Download Free Trial",
+         "createManual":false,
+         "tags":"Trial download",
+         "testcaseType":"test domain",
          "salesTeam":"CM_Channel_Management"
       },
       {
+         "leadName":"source lead-Lower priority",
          "leadType":"source lead",
          "contactname":"test contact",
          "emailAddress":"",
@@ -29,15 +30,14 @@
             "city":"",
             "postalCode":"",
             "state":"Texas (US)"
-         },         
-         "leadName":"source lead-Download Free Trial",
+         },                  
          "companyName":"test12345",
          "userLogNotes":"target lead log notes",
          "publicMessage":"target lead message",
-         "leadForm":"Download Free Trial",
+         "leadForm":"License",
          "createManual":false,
-         "tags":"Trial download",
-         "testcaseType":"public domain",
+         "tags":"Product Registration",
+         "testcaseType":"test domain",
          "salesTeam":"CM_Channel_Management"
       }
    ]

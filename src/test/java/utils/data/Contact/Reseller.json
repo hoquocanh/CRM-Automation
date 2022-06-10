@@ -1,0 +1,19 @@
+{
+   "contactList":[{
+         "contactType":"individual",
+         "contactName":"Reseller Contact",
+         "emailAddress":"",
+         "address":{
+            "country":"United States",
+            "streetAddress":"123street",
+            "city":"",
+            "postalCode":"",
+            "state":"Texas (US)"
+         },                  
+         "tags":"",         
+         "salesTeam":"CM_Channel_Management",
+         "partnerLevel":"Registered",
+         "activationDate":"current date"      
+         }
+      ]
+}

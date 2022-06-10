@@ -183,6 +183,41 @@ public class Common {
 		System.out.println(randomEmail);
 		return randomEmail;
 	}
+	
+	/**
+	 * Generate a random public email based on the current time
+	 * The output email will be as "TEST_AUTOMATION_2022_05_05T10_46_37@company_2022_05_05T10_46_37.com" 
+	 * @author anh.ho	 
+	 * @return a random email
+	 */
+	public static String getRandomIndividualEmail() {
+		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
+		Date date = new Date();
+		
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		//Change the domain of Company to be as "@individual_2022_05_05T10_46_37.com
+		String refineDomain = Constants.INDIVIDUAL_DOMAIN_EMAIL.replace("REPLACE",(String) sdf.format(timestamp));		
+		
+		String randomEmail =  "TEST_AUTOMATION" + sdf.format(timestamp) + refineDomain;
+		System.out.println(randomEmail);
+		return randomEmail;
+	}
+	/**
+	 * Generate a current date in template MM/dd/yyyy
+	 * @author anh.ho	 
+	 * @return current data in template MM/dd/yyyy
+	 */
+	public static String getCurrentDateAsString() 
+	{	
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		String returnString = (String) sdf.format(timestamp);	
+		return returnString;
+	}
 	/**
 	 * Replace a dynamic controll
 	 * @author anh.ho	

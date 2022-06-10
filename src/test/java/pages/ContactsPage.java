@@ -61,6 +61,10 @@ public class ContactsPage extends GeneralHomePage {
 		By txt_child_email 	=By.xpath("(//input[contains(@name,'email')])[4]");
 		By btn_child_save_close 	=By.xpath("//button/span[contains(text(),'Save & Close')]");
 		
+		//3. "Partner Assignation" tab....
+		By tab_partner_assignation  =By.xpath("//a[contains(text(),'Partner Assignation')]");
+		By cbb_level  =By.xpath("//select[contains(@name,'grade_id')]");
+		By cbb_activation_date = By.xpath("//input[contains(@name,'activation_date')]");
 	// ============================ Constructor declaration============================//
 	//Login Page continues to use the Driver which created at GeneralHomePage
 	public ContactsPage()
@@ -94,6 +98,11 @@ public class ContactsPage extends GeneralHomePage {
 	public void pressTab_ContactAddresses() throws Throwable
 	{
 		getDriver().findElement(tab_contact_addresses).click();
+		waitForPageDisplay();
+	}
+	public void pressTab_PartnerAssignation() throws Throwable
+	{
+		getDriver().findElement(tab_partner_assignation).click();
 		waitForPageDisplay();
 	}
 	public void pressTab_ContactAddresses_AddButton() throws Throwable
@@ -193,8 +202,15 @@ public class ContactsPage extends GeneralHomePage {
 		 */
 		public String enterEmail(String testFileName) throws Throwable			
 		{
-			String randomEmail = Common.getRandomCompanyEmail();
-						
+			String randomEmail = "";
+			objContact<String, String> temp = new objContact<String, String>();
+			//Contact type will be (1) "company" or (2) "individual"
+			String inputText = temp.getJsonValue(testFileName,dataJsonContact.CONTACTTYPE.getValue());	
+			
+			if(inputText.equalsIgnoreCase("company"))
+				randomEmail = Common.getRandomCompanyEmail();
+			else if (inputText.equalsIgnoreCase("individual"))
+				randomEmail = Common.getRandomIndividualEmail();
 			System.out.println("Random email:"+ randomEmail);
 			Logger.info("Random email:"+ randomEmail);
 						
@@ -276,7 +292,47 @@ public class ContactsPage extends GeneralHomePage {
 			getDriver().findElement(txt_street).sendKeys(inputText);
 			
 		}
-		
+		//For the kind of Partner level combobox, that contains the long list of items, we need to enter the name of item -> enter for selecting that item
+		public void selectPartnerLevel(String testFileName) throws Throwable
+		{
+			objContact<String, String> temp = new objContact<String, String>();
+			String inputText = temp.getJsonValue(testFileName,dataJsonContact.PARTNERLEVEL.getValue());		
+			
+			if(!inputText.isEmpty())
+			{
+				waitForElementResponse();
+				
+				getDriver().findElement(cbb_level).click();
+				waitForElementResponse();
+				getDriver().findElement(cbb_level).sendKeys(inputText);	
+				waitForElementResponse();
+				//Press "Enter" on keyboard
+				getDriver().findElement(cbb_level).sendKeys(Keys.RETURN);		
+			}
+			
+		}
+		//For the kind of Activation Date combobox, that contains the Calenda
+		public void selectActivationDate(String testFileName) throws Throwable
+		{
+			objContact<String, String> temp = new objContact<String, String>();
+			String type = temp.getJsonValue(testFileName,dataJsonContact.ACTIVATIONDATE.getValue());		
+			
+			if(!type.isEmpty())
+				if(type.equalsIgnoreCase("current date"))
+				{
+				waitForElementResponse();
+				
+				getDriver().findElement(cbb_activation_date).click();
+				waitForElementResponse();
+				getDriver().findElement(cbb_activation_date).sendKeys(Common.getCurrentDateAsString());	
+				waitForElementResponse();
+				//Press "ENTER" on keyboard
+				getDriver().findElement(cbb_activation_date).sendKeys(Keys.ENTER);
+				//Press "TAB" on keyboard
+				getDriver().findElement(cbb_activation_date).sendKeys(Keys.TAB);		
+				}
+			
+		}
 		public String refineStateString (String inputState) 
 		{
 			String outputString = null;
