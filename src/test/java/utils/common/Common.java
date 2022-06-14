@@ -166,6 +166,76 @@ public class Common {
 	}
 	/**
 	 * Generate a random public email based on the current time
+	 * The output email will be as "TEST_AUTOMATION_2022_05_05T10_46_37@gmail.com" 
+	 * @author anh.ho	 
+	 * @return a random email
+	 */
+	public static String getRandomGmailEmail(String localPart) {
+		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
+		Date date = new Date();
+		
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		System.out.println(timestamp.getTime());
+		
+		String randomEmail =  localPart + Constants.GMAIL_DOMAIN_EMAIL;
+		System.out.println(randomEmail);
+		return randomEmail;
+	}
+	/**
+	 * Generate a random public email based on the current time
+	 * The output email will be as "TEST_AUTOMATION_2022_05_05T10_46_37@yahoo.com" 
+	 * @author anh.ho	 
+	 * @return a random email
+	 */
+	public static String getRandomYahooEmail(String localPart) {
+		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
+		Date date = new Date();
+		
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		System.out.println(timestamp.getTime());
+		
+		String randomEmail =  localPart + Constants.YAHOOMAIL_DOMAIN_EMAIL;
+		System.out.println(randomEmail);
+		return randomEmail;
+	}
+	/**
+	 * Generate a random loca part of an email based on the current time
+	 * The output email will be as "TEST_AUTOMATION_2022_05_05T10_46_37" 
+	 * @author anh.ho	 
+	 * @return a random email
+	 */
+	public static String getRandomLocalPartEmail() {
+		SimpleDateFormat sdf = new SimpleDateFormat("_yyyy_MM_dd'T'HH_mm_ss");
+		Date date = new Date();
+		
+		Timestamp timestamp = new Timestamp(date.getTime());
+		
+		System.out.println(timestamp.getTime());
+		
+		String randomLocalPartEmail =  "TEST_AUTOMATION" + sdf.format(timestamp);
+		
+		return randomLocalPartEmail;
+	}
+	/**
+	 * Generate a random public email based on the carbonEmail and tartgetEmailDomain
+	 * @param carbonEmail
+	 * @param targetEmailDomain 
+	 * @author anh.ho	 
+	 * @return a random email
+	 */
+	public static String getSameLocalPartEmail(String carbonEmail,String tartgetEmailDomain) {
+		//Step#1: Take the local part of inputEmail. The outputEmail would be like "TEST_AUTOMATION_2022_05_05T10_46_37"
+		String localPart = carbonEmail.substring(0, carbonEmail.indexOf("@"));
+		
+		//Step#2: Hook local part and email domain		
+		String randomEmail =  localPart + tartgetEmailDomain;
+		
+		return randomEmail;
+	}
+	/**
+	 * Generate a random public email based on the current time
 	 * The output email will be as "TEST_AUTOMATION_2022_05_05T10_46_37@company_2022_05_05T10_46_37.com" 
 	 * @author anh.ho	 
 	 * @return a random email

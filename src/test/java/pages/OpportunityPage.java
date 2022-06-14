@@ -23,8 +23,10 @@ import org.openqa.selenium.WebDriver;
 
 import utils.common.Common;
 import utils.common.Constants;
+import utils.data.dataJsonContact;
 import utils.data.dataJsonLead;
 import utils.helper.Logger;
+import utils.object.objContact;
 import utils.object.objLead;
 
 /**
@@ -771,6 +773,79 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 			
 		
 	}
+	/**This method is the combo checking on multiple fields on Target Lead. Technically, only if the value on fields of Target lead is empty AND the value on the same fields of Source lead is not empty. These value will copy from Source Lead fields to Target lead fields.
+	 * <pre>The current fields being check:</pre>
+	 * <pre>Email</pre>
+	 * <pre>Street name</pre>
+	 * <pre>Country</pre>
+	 * <pre>State</pre>
+	 * <pre>Contact name</pre>
+	 * <pre>List of tags</pre>
+	 * @param testFileName
+	 */
+	public void checkValueOfFieldOnTargetLead(String testFileName, String Contactsfile, String returnRandomEmail)
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputEmail = null;	
+		String inputAddress = null;
+		String inputCountry = null;
+		String inputState = null;
+		String inputContactName = null;
+		ArrayList<String> inputTags = new ArrayList<String>();
+		objContact<String, String> temp2 = new objContact<String, String>();
+		String contactNameFromConctactObj = temp2.getJsonValue(Contactsfile,dataJsonContact.CONTACTNAME.getValue());
+		//1. Check Email
+			//1.1. If the value of Email field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
+			if(!returnRandomEmail.isEmpty())
+				inputEmail = returnRandomEmail;
+			//1.2. Check the value on UI
+			checkEmail(inputEmail);
+		
+		//2. Check Street name
+			//2.1. If the value of Street name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
+			if(!temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.STREETADDRESS.getValue()).isEmpty())
+				inputAddress = temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.STREETADDRESS.getValue());
+			else //Else, if there is no value at that field on Target Lead, the value from Source Lead will be added to the field on Target lead
+				inputAddress = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.STREETADDRESS.getValue());
+			//2.2. Check the value on UI
+			checkStreetAddress(inputAddress);	
+			
+		//3. Check Country
+			//3.1. If the value of Country field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
+			if(!temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.COUNTRY.getValue()).isEmpty())
+				inputCountry = temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.COUNTRY.getValue());
+			else //Else, if there is no value at that field on Target Lead, the value from Source Lead will be added to the field on Target lead
+				inputCountry = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.COUNTRY.getValue());
+			//3.2. Check the value on UI
+			this.checkCountry(inputCountry);	
+			
+		//4. Check State
+			//4.1. If the value of State field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
+			if(!temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.STATE.getValue()).isEmpty())
+				inputState = temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.STATE.getValue());
+			else //Else, if there is no value at that field on Target Lead, the value from Source Lead will be added to the field on Target lead
+				inputState = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.STATE.getValue());
+			//4.2. Check the value on UI
+			this.checkState(inputState);	
+			
+		//5. Check Contact name			
+			//5.2. Check the value on UI
+			this.checkContactName(contactNameFromConctactObj);	
+			
+		//6. Check Tag
+			//6.1. If the value of Tag name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
+			if(!temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.TAGS.getValue()).isEmpty())
+			{
+				inputTags.add(temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.TAGS.getValue()));
+				inputTags.add(temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.TAGS.getValue()));
+			}
+			else //Else, if there is no value at that field on Target Lead, the value from Source Lead will be added to the field on Target lead
+				inputTags.add(temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.TAGS.getValue()));
+			//6.2. Check the value on UI
+			this.checkTag(inputTags);	
+			
+		
+	}
 	
 	/**This method is the combo checking on multiple fields on Source Lead. Technically, the value on fields of Source remain unchanged. 
 	 * 
@@ -823,6 +898,64 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 				inputContactName = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.CONTACTNAME.getValue());
 			//5.2. Check the value on UI
 			this.checkContactName(inputContactName);	
+			
+		//6. Check Tag
+			//6.1 Get value from input JSON file 
+				inputTags.add(temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.TAGS.getValue()));
+			//6.2. Check the value on UI
+			this.checkTag(inputTags);	
+		
+	}
+	/**This method is the combo checking on multiple fields on Source Lead. Technically, the value on fields of Source remain unchanged. 
+	 * 
+	 * <pre>The current fields being check:</pre>
+	 * <pre>Email</pre>
+	 * <pre>Street name</pre>
+	 * <pre>Country</pre>
+	 * <pre>State</pre>
+	 * <pre>Contact name</pre>
+	 * <pre>List of tags</pre>
+	 * @param testFileName
+	 */
+	public void checkValueOfFieldOnSourceLead(String testFileName, String Contactsfile,String returnRandomEmail)
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputEmail = null;	
+		String inputAddress = null;
+		String inputCountry = null;
+		String inputState = null;
+		String inputContactName = null;
+		ArrayList<String> inputTags = new ArrayList<String>();
+		objContact<String, String> temp2 = new objContact<String, String>();
+		String contactNameFromConctactObj = temp2.getJsonValue(Contactsfile,dataJsonContact.CONTACTNAME.getValue());
+		//1. Check Email
+			//1.1 Get value from input JSON file 
+			if(!returnRandomEmail.isEmpty())
+			inputEmail = returnRandomEmail;
+			//1.2. Check the value on UI
+			checkEmail(inputEmail);
+		
+		//2. Check Street name
+			//2.1 Get value from input JSON file 
+				inputAddress = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.STREETADDRESS.getValue());
+			//2.2. Check the value on UI
+			checkStreetAddress(inputAddress);	
+			
+		//3. Check Country
+			//3.1 Get value from input JSON file 
+				inputCountry = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.COUNTRY.getValue());
+			//3.2. Check the value on UI
+			this.checkCountry(inputCountry);	
+			
+		//4. Check State
+			//4.1 Get value from input JSON file 
+				inputState = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.STATE.getValue());
+			//4.2. Check the value on UI
+			this.checkState(inputState);	
+			
+		//5. Check Contact name			
+			//5.2. Check the value on UI
+			this.checkContactName(contactNameFromConctactObj);	
 			
 		//6. Check Tag
 			//6.1 Get value from input JSON file 

@@ -130,7 +130,9 @@ public class ContactsPage extends GeneralHomePage {
 		{
 			objContact<String, String> temp = new objContact<String, String>();
 			String inputText = temp.getJsonValue(testFileName,dataJsonContact.CONTACTNAME.getValue());
-			getDriver().findElement(txt_name).sendKeys(this.generateContactName(testFileName, fatherContactEmail, inputText));
+			getDriver().findElement(txt_name).sendKeys(inputText);
+			//Old method that generate an unique Contact name as template "Reseller Contact TEST_AUTOMATION_2022_06_10T11_30_0"
+				//getDriver().findElement(txt_name).sendKeys(this.generateContactName(testFileName, fatherContactEmail, inputText));
 			
 		}
 		public void enterContactChildName(String testFileName, String inputChildName) throws Throwable

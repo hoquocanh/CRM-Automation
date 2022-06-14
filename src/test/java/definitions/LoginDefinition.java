@@ -24,7 +24,9 @@ import org.openqa.selenium.WebDriver;
 
 
 public class LoginDefinition  {
+	String varContactsfile="";
 	String returnRandomEmail = "";
+	String returnDifferentEmail = "";
 	String returnRandomContactEmail ="";
 	String returnRandomEmail_ContactChild1="";
 	String returnRandomEmail_ContactChild2="";
@@ -98,7 +100,10 @@ public class LoginDefinition  {
 	
 	@Given ("^Create a Contact and its child contacts from (.*)$")
 	public void createNewContactandChildContacts(String Contactsfile)  throws Throwable {
-  			
+  		//Take out the value of "Contactsfile"	
+		varContactsfile = Contactsfile;
+		
+		//Start:
 		Logger.info("Create Contact");
 		homePage.gotoModuleContacts();
 		contactspage.createContact();
@@ -124,7 +129,11 @@ public class LoginDefinition  {
 	
 	@Given ("^Create a Reseller from (.*)$")
 	public void createNewReseller(String Contactsfile)  throws Throwable {
-  			
+  		
+		//Take out the value of "Contactsfile"	
+		varContactsfile = Contactsfile;
+				
+		//Start:
 		Logger.info("Create Reseller");
 		homePage.gotoModuleContacts();
 		contactspage.createContact();
@@ -168,7 +177,7 @@ public class LoginDefinition  {
 		crmpage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectState(Leadsfile, Constants.TARGET_LEAD);
-		crmpage.enterStreetName(Leadsfile, Constants.TARGET_LEAD);
+		
 		crmpage.selectTag(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.setCreateManualCheckBox(Leadsfile, Constants.TARGET_LEAD);
@@ -191,7 +200,7 @@ public class LoginDefinition  {
 		crmpage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectState(Leadsfile, Constants.TARGET_LEAD);
-		crmpage.enterStreetName(Leadsfile, Constants.TARGET_LEAD);
+		
 		crmpage.selectTag(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.setCreateManualCheckBox(Leadsfile, Constants.TARGET_LEAD);
@@ -213,7 +222,7 @@ public class LoginDefinition  {
 		
 		opppage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
 		opppage.selectState(Leadsfile, Constants.TARGET_LEAD);
-		opppage.enterStreetName(Leadsfile, Constants.TARGET_LEAD);
+		
 		opppage.selectTag(Leadsfile, Constants.TARGET_LEAD);
 		opppage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
 		opppage.setCreateManualCheckBox(Leadsfile, Constants.TARGET_LEAD);
@@ -222,7 +231,29 @@ public class LoginDefinition  {
 		opppage.pressSaveButton();
 		opppage.goToHome();
 		}   
-	
+	@Given ("^Secondly, setup a new Target Opportunity using Reseller contact from (.*)$")
+	public void createNewTargetOppUsingResellerContact(String Leadsfile)  throws Throwable {
+  			
+		Logger.info("Create Target Opportunity");
+		
+		opppage.createOpp();
+		
+		opppage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
+		opppage.enterEmail(Leadsfile, Constants.TARGET_LEAD,returnRandomContactEmail);
+		
+		opppage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
+		
+		opppage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
+		opppage.selectState(Leadsfile, Constants.TARGET_LEAD);
+		
+		opppage.selectTag(Leadsfile, Constants.TARGET_LEAD);
+		opppage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
+		opppage.setCreateManualCheckBox(Leadsfile, Constants.TARGET_LEAD);
+		opppage.setStageOpp(Leadsfile, Constants.TARGET_LEAD);
+		
+		opppage.pressSaveButton();
+		opppage.goToHome();
+		}   
 	@Given ("^Create a new Source Lead using Contact child from (.*)$")
 	public void createNewSourceLeadUsingContactChild(String Leadsfile)  throws Throwable {
   			
@@ -238,7 +269,7 @@ public class LoginDefinition  {
 		crmpage.enterLeadForm(Leadsfile, Constants.SOURCE_LEAD);		
 		crmpage.selectCountry(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.selectState(Leadsfile, Constants.SOURCE_LEAD);
-		crmpage.enterStreetName(Leadsfile, Constants.SOURCE_LEAD);
+		
 		
 		crmpage.selectTag(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.selectSalesTeam(Leadsfile, Constants.SOURCE_LEAD);
@@ -263,7 +294,7 @@ public class LoginDefinition  {
 		crmpage.enterLeadForm(Leadsfile, Constants.SOURCE_LEAD);		
 		crmpage.selectCountry(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.selectState(Leadsfile, Constants.SOURCE_LEAD);
-		crmpage.enterStreetName(Leadsfile, Constants.SOURCE_LEAD);
+		
 		
 		crmpage.selectTag(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.selectSalesTeam(Leadsfile, Constants.SOURCE_LEAD);
@@ -288,7 +319,7 @@ public class LoginDefinition  {
 		
 		opppage.selectCountry(Leadsfile, Constants.SOURCE_LEAD);
 		opppage.selectState(Leadsfile, Constants.SOURCE_LEAD);
-		opppage.enterStreetName(Leadsfile, Constants.SOURCE_LEAD);
+		
 		
 		opppage.selectTag(Leadsfile, Constants.SOURCE_LEAD);
 		opppage.selectSalesTeam(Leadsfile, Constants.SOURCE_LEAD);
@@ -313,7 +344,7 @@ public class LoginDefinition  {
 		crmpage.enterCompanyName(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.selectCountry(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.selectState(Leadsfile, Constants.SOURCE_LEAD);
-		crmpage.enterStreetName(Leadsfile, Constants.SOURCE_LEAD);
+		
 		crmpage.enterContactName(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.selectTag(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.selectSalesTeam(Leadsfile, Constants.SOURCE_LEAD);
@@ -323,6 +354,33 @@ public class LoginDefinition  {
 		crmpage.goToHome();
 		
 		}
+	@Given ("^Firstly, setup a new Source Opportunity using Reseller contact from (.*)$")
+	public void firstlycreateNewSourceOppUsingResellerContact(String Leadsfile)  throws Throwable {
+  			
+		Logger.info("Create Source Opportunity");
+		
+		opppage.createOpp();
+		
+		opppage.enterLeadName(Leadsfile, Constants.SOURCE_LEAD);
+		//Slecting an existing Contact will make Email, Contact Name, Company Name, Address be auto filled
+		opppage.selectContact(Leadsfile, Constants.SOURCE_LEAD, returnRandomContactEmail);
+		
+		opppage.enterLeadForm(Leadsfile, Constants.SOURCE_LEAD);
+		
+		opppage.selectCountry(Leadsfile, Constants.SOURCE_LEAD);
+		opppage.selectState(Leadsfile, Constants.SOURCE_LEAD);
+		
+		
+		opppage.selectTag(Leadsfile, Constants.SOURCE_LEAD);
+		opppage.selectSalesTeam(Leadsfile, Constants.SOURCE_LEAD);
+		opppage.setCreateManualCheckBox(Leadsfile, Constants.SOURCE_LEAD);
+		opppage.setStageOpp(Leadsfile, Constants.SOURCE_LEAD);
+		
+		opppage.pressSaveButton();		
+		opppage.goToHome();
+		
+		}
+	
 	// ============================ WHEN -  ============================//
 	@When ("^Create a new Target Lead from (.*)$")
 	public void createNewTargetLead(String Leadsfile)  throws Throwable {
@@ -504,7 +562,30 @@ public class LoginDefinition  {
 		opppage.goToHome();
 		
 		}
-	
+	@When ("^Create a new Source Lead using different email domain from (.*)$")
+	public void createNewSourceLeadUsingDifferentEmailDomain(String Leadsfile)  throws Throwable {
+  			
+		Logger.info("Create Source Lead");
+		homePage.gotoModuleCRM();
+		crmpage.createLead();
+		
+		crmpage.enterLeadName(Leadsfile, Constants.SOURCE_LEAD);
+		returnDifferentEmail= crmpage.enterDifferentDomainEmail(Leadsfile, Constants.SOURCE_LEAD,Common.getSameLocalPartEmail(returnRandomEmail, Constants.YAHOOMAIL_DOMAIN_EMAIL));
+		
+		crmpage.enterLeadForm(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.enterCompanyName(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.selectCountry(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.selectState(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.enterStreetName(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.enterContactName(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.selectTag(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.selectSalesTeam(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.setCreateManualCheckBox(Leadsfile, Constants.SOURCE_LEAD);
+		
+		crmpage.pressSaveButton();
+		crmpage.goToHome();
+		
+		}
 	
 	// ============================ THEN - close page ============================//
 	@Then ("^Check Target Lead after merged with Source Lead from (.*)$")
@@ -562,7 +643,7 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnTargetLead(Leadsfile,returnRandomEmail_ContactChild1);	
+		crmpage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild1);	
 			//crmpage.checkMergeMessageOnTargetLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
 		crmpage.checkMergeMessageOnTargetLead(Leadsfile,returnRandomEmail_ContactChild1);
 		
@@ -596,7 +677,7 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnTargetLead(Leadsfile,returnRandomContactEmail);	
+		crmpage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
 			//crmpage.checkMergeMessageOnTargetLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
 		crmpage.checkMergeMessageOnTargetLead(Leadsfile,returnRandomContactEmail);
 		
@@ -661,7 +742,7 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		opppage.checkValueOfFieldOnTargetLead(Leadsfile,returnRandomEmail_ContactChild1);	
+		opppage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild1);	
 		opppage.checkMergeMessageOnTargetLead(Leadsfile,returnRandomEmail_ContactChild1);
 		
 		opppage.clickCRMDeveloper();
@@ -673,7 +754,38 @@ public class LoginDefinition  {
 		opppage.goToHome();
 		
 		}
-	
+	@Then ("^Check Target Opportunity after merged with Source Opportunity using Reseller contact from (.*)$")
+	public void checkTargetOppUsingResellerContact(String Leadsfile)  throws Throwable {
+		
+		//Pre-condition: Wait for a certain time to make System merge leads
+		homePage.waitForLeadMerging();
+		
+		Logger.info("Check on Target Opportunity");
+		homePage.gotoModuleCRM();
+		opppage.goToSub_ArchiveMenu("All");
+			//opppage.searchOnArchive("2022_04_13T17_10_28@test.com");
+		opppage.searchOnArchive(returnRandomContactEmail);
+		
+		
+		//1. Check Target lead first
+		//1.1. Go to CRM page of Target Lead first
+		opppage.clickOnItemLead(Leadsfile, Constants.TARGET_LEAD);
+		
+		
+		//*1.2. Check the fields after doing merging action
+		
+		opppage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
+		opppage.checkMergeMessageOnTargetLead(Leadsfile,returnRandomContactEmail);
+		
+		opppage.clickCRMDeveloper();
+		opppage.checkIsWon("Pending");
+		opppage.checkActive(true);
+		opppage.checkLostReason("");
+		
+		//1.3. Get back to Home screen
+		opppage.goToHome();
+		
+		}
 	@Then ("^Check Source Lead after merged with Target Lead from (.*)$")
 	public void checkSourceLead(String Leadsfile)  throws Throwable {
   		
@@ -730,7 +842,7 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,returnRandomEmail_ContactChild2);	
+		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild2);	
 			//crmpage.checkMergeMessageOnSourceLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
 		crmpage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomEmail_ContactChild2);
 		
@@ -765,7 +877,7 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,returnRandomContactEmail);	
+		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
 			//crmpage.checkMergeMessageOnSourceLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
 		crmpage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomContactEmail);
 		
@@ -828,7 +940,7 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		opppage.checkValueOfFieldOnSourceLead(Leadsfile,returnRandomEmail_ContactChild2);	
+		opppage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild2);	
 		opppage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomEmail_ContactChild2);
 		
 		opppage.clickCRMDeveloper();
@@ -840,7 +952,72 @@ public class LoginDefinition  {
 		opppage.goToHome();
 		
 		}	
+	@Then ("^Check Source Opportunity after merged with Target Opportunity using Reseller contact from (.*)$")
+	public void checkSourceOpportunityUsingResellerContact(String Leadsfile)  throws Throwable {
+  		
+		//Pre-condition: Wait for a certain time to make System merge leads
+		homePage.waitForLeadMerging();
+		
+		Logger.info("Check on Source Lead");
+		opppage.gotoModuleCRM();
+		opppage.goToSub_ArchiveMenu("All");
+			//crmpage.searchOnArchive("2022_04_13T17_10_28@test.com");
+		opppage.searchOnArchive(returnRandomContactEmail);
+		//1. Check Target lead first
+		//1.1. Go to CRM page of Target Lead first
+		opppage.clickOnItemLead(Leadsfile, Constants.SOURCE_LEAD);
+		opppage.clickCRMDeveloper();
+		
+		//*1.2. Check the fields after doing merging action
+		
+		opppage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
+		opppage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomContactEmail);
+		
+		opppage.clickCRMDeveloper();
+		opppage.checkIsWon("Lost");
+		opppage.checkActive(false);
+		opppage.checkLostReason("Duplicate");
+		
+		//1.3. Get back to Home screen
+		opppage.goToHome();
+		
+		}	
 	
+	@Then ("^Check Source Lead after merged with Target Lead using different email domain from (.*)$")
+	public void checkSourceLeadUsingDifferentEmail(String Leadsfile)  throws Throwable {
+  		
+		//Pre-condition: Wait for a certain time to make System merge leads
+		homePage.waitForLeadMerging();
+		
+		Logger.info("Check on Source Lead");
+		homePage.gotoModuleCRM();
+		crmpage.goToSub_ArchiveMenu("All");
+		
+			//crmpage.searchOnArchive("TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
+		crmpage.searchOnArchive(returnDifferentEmail);
+		
+		
+		//1. Check Target lead first
+		//1.1. Go to CRM page of Target Lead first
+		crmpage.clickOnItemLead(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.clickCRMDeveloper();
+		
+		//*1.2. Check the fields after doing merging action
+		
+		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,returnRandomEmail);	
+			//crmpage.checkMergeMessageOnSourceLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
+		crmpage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomEmail);
+		
+		
+		crmpage.clickCRMDeveloper();
+		crmpage.checkIsWon("Lost");
+		crmpage.checkActive(false);
+		crmpage.checkLostReason("Duplicate");
+		
+		//1.3. Get back to Home screen
+		crmpage.goToHome();
+		
+		}	
 	@Then("^Close$")   
 	    public void ClosePage() throws Throwable {
 			Logger.info("Close page");	

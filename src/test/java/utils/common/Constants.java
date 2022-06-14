@@ -93,6 +93,7 @@ public class Constants {
 	public static final String UAT_PASSWORD = PropertiesHelper.getPropValue("profile.uat_password");	
 	public static final String TEST_DOMAIN_EMAIL = "@test.com";	
 	public static final String GMAIL_DOMAIN_EMAIL = "@gmail.com";
+	public static final String YAHOOMAIL_DOMAIN_EMAIL = "@yahoo.com";
 	public static final String COMPANY_DOMAIN_EMAIL = "@companyREPLACE.com";
 	public static final String INDIVIDUAL_DOMAIN_EMAIL = "@individualREPLACE.com";
 	public static final String TARGET_LEAD = "target lead";
