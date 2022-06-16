@@ -135,6 +135,15 @@ public class ContactsPage extends GeneralHomePage {
 				//getDriver().findElement(txt_name).sendKeys(this.generateContactName(testFileName, fatherContactEmail, inputText));
 			
 		}
+		public void enterContactName(String testFileName, int indexOfFatherContact) throws Throwable
+		{
+			objContact<String, String> temp = new objContact<String, String>();
+			String inputText = temp.getJsonValueOfFatherContactByIndex(testFileName,dataJsonContact.CONTACTNAME.getValue(),indexOfFatherContact);
+			getDriver().findElement(txt_name).sendKeys(inputText);
+			//Old method that generate an unique Contact name as template "Reseller Contact TEST_AUTOMATION_2022_06_10T11_30_0"
+				//getDriver().findElement(txt_name).sendKeys(this.generateContactName(testFileName, fatherContactEmail, inputText));
+			
+		}
 		public void enterContactChildName(String testFileName, String inputChildName) throws Throwable
 		{
 			objContact<String, String> temp = new objContact<String, String>();
@@ -189,11 +198,57 @@ public class ContactsPage extends GeneralHomePage {
 					if(isChecked == false)
 						Js1.executeScript(clickTheRadioButton_Jscript);
 				}
-			
-			
 			waitForElementResponse();
 		}
-		
+		public void selectContactType(String testFileName, int indexOfFatherContact) throws Throwable
+		{				
+			WebDriver dr = super.getDriver();
+			JavascriptExecutor Js1 = (JavascriptExecutor) dr;
+			
+			objContact<String, String> temp = new objContact<String, String>();
+			String inputText = temp.getJsonValueOfFatherContactByIndex(testFileName,dataJsonContact.CONTACTTYPE.getValue(),indexOfFatherContact );
+			String attributeValue ="";
+			if(!inputText.isEmpty())
+				if(inputText.equalsIgnoreCase("company"))
+				{	
+					//1. Get value of //input[@id]
+					attributeValue = getDriver().findElement(rdb_company).getAttribute("id");
+					//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
+					String checkTheRadioButton_Jscript= 
+							  "return document.querySelector(\'#" + attributeValue + "\')" +
+							  ".checked";
+					
+					String clickTheRadioButton_Jscript = 
+							  "document.querySelector(\'#" + attributeValue + "\')" +
+							  ".click()";
+					//Logger.info("Checkbox element is "+ checkTheRadioButton);	
+					Boolean isChecked = (Boolean) Js1.executeScript(checkTheRadioButton_Jscript);
+					
+					//3. If the Company radiobutton is UNcheck -> click on it
+					if(isChecked == false)
+						Js1.executeScript(clickTheRadioButton_Jscript);
+				}	
+				else if(inputText.equalsIgnoreCase("individual"))
+				{
+					//1. Get value of //input[@id]
+					attributeValue = getDriver().findElement(rdb_individual).getAttribute("id");
+					//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
+					String checkTheRadioButton_Jscript = 
+					  "return document.querySelector(\'#" + attributeValue + "\')" +
+					  ".checked";
+			
+					String clickTheRadioButton_Jscript = 
+							  "document.querySelector(\'#" + attributeValue + "\')" +
+							  ".click()";
+					//Logger.info("Checkbox element is "+ checkTheRadioButton);	
+					Boolean isChecked = (Boolean) Js1.executeScript(checkTheRadioButton_Jscript);
+					
+					//3. If the Company radiobutton is UNcheck -> click on it
+					if(isChecked == false)
+						Js1.executeScript(clickTheRadioButton_Jscript);
+				}
+			waitForElementResponse();
+		}
 		/**This method is used to generate a random email and create a Contact with that email
 		 * <pre>
 		 * This method is used to create the Target lead
@@ -208,6 +263,32 @@ public class ContactsPage extends GeneralHomePage {
 			objContact<String, String> temp = new objContact<String, String>();
 			//Contact type will be (1) "company" or (2) "individual"
 			String inputText = temp.getJsonValue(testFileName,dataJsonContact.CONTACTTYPE.getValue());	
+			
+			if(inputText.equalsIgnoreCase("company"))
+				randomEmail = Common.getRandomCompanyEmail();
+			else if (inputText.equalsIgnoreCase("individual"))
+				randomEmail = Common.getRandomIndividualEmail();
+			System.out.println("Random email:"+ randomEmail);
+			Logger.info("Random email:"+ randomEmail);
+						
+			getDriver().findElement(txt_email).sendKeys(randomEmail);
+			
+			return randomEmail;
+		}
+		/**This method is used to generate a random email and create a Contact with that email
+		 * <pre>
+		 * This method is used to create the Target lead
+		 * </pre>
+		 * @param testFileName
+		 * @throws Throwable
+		 * @return randomEmail
+		 */
+		public String enterEmail(String testFileName, int indexOfFatherContact) throws Throwable			
+		{
+			String randomEmail = "";
+			objContact<String, String> temp = new objContact<String, String>();
+			//Contact type will be (1) "company" or (2) "individual"
+			String inputText = temp.getJsonValueOfFatherContactByIndex(testFileName,dataJsonContact.CONTACTTYPE.getValue(),indexOfFatherContact);	
 			
 			if(inputText.equalsIgnoreCase("company"))
 				randomEmail = Common.getRandomCompanyEmail();
@@ -237,8 +318,25 @@ public class ContactsPage extends GeneralHomePage {
 				waitForElementResponse();
 				//Press "Enter" on keyboard
 				getDriver().findElement(cbb_country).sendKeys(Keys.RETURN);		
-			}
+			}			
+		}
+		//For the kind of Country combobox, that contains the long list of items, we need to enter the name of item -> enter for selecting that item
+		public void selectCountry(String testFileName, int indexOfFatherContact) throws Throwable
+		{
+			objContact<String, String> temp = new objContact<String, String>();
+			String inputText = temp.getJsonValueOfFatherContactByIndex(testFileName,dataJsonContact.COUNTRY.getValue(),indexOfFatherContact);		
 			
+			if(!inputText.isEmpty())
+			{
+				waitForElementResponse();
+				
+				getDriver().findElement(cbb_country).click();
+				waitForElementResponse();
+				getDriver().findElement(cbb_country).sendKeys(inputText);	
+				waitForElementResponse();
+				//Press "Enter" on keyboard
+				getDriver().findElement(cbb_country).sendKeys(Keys.RETURN);		
+			}			
 		}
 		
 		/**THIS METHOD IS NOT COMPLETE YET
@@ -291,6 +389,13 @@ public class ContactsPage extends GeneralHomePage {
 		{
 			objContact<String, String> temp = new objContact<String, String>();
 			String inputText = temp.getJsonValue(testFileName,dataJsonContact.STREETADDRESS.getValue());
+			getDriver().findElement(txt_street).sendKeys(inputText);
+			
+		}
+		public void enterStreetName(String testFileName, int indexOfFatherContact) throws Throwable
+		{
+			objContact<String, String> temp = new objContact<String, String>();
+			String inputText = temp.getJsonValueOfFatherContactByIndex(testFileName,dataJsonContact.STREETADDRESS.getValue(),indexOfFatherContact);
 			getDriver().findElement(txt_street).sendKeys(inputText);
 			
 		}

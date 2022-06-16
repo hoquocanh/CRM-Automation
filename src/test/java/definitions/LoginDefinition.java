@@ -14,6 +14,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+
 import utils.common.Common;
 import utils.common.Constants;
 import utils.helper.Logger;
@@ -28,6 +29,8 @@ public class LoginDefinition  {
 	String returnRandomEmail = "";
 	String returnDifferentEmail = "";
 	String returnRandomContactEmail ="";
+	String returnRandomContactEmail_1 ="";
+	String returnRandomContactEmail_2 ="";
 	String returnRandomEmail_ContactChild1="";
 	String returnRandomEmail_ContactChild2="";
 	GeneralHomePage homePage = new GeneralHomePage();
@@ -126,7 +129,36 @@ public class LoginDefinition  {
 		//Return HOME
 		contactspage.goToHome();
 		}
-	
+	@Given ("^Create 2 contacts from (.*)$")
+	public void create2Contacts(String Contactsfile)  throws Throwable {
+  		//Take out the value of "Contactsfile"	
+		varContactsfile = Contactsfile;
+		
+		Logger.info("Create Contact");
+		//Start to go to Contact page:		
+		homePage.gotoModuleContacts();		
+		
+		//Start to create Company 1:
+		contactspage.createContact();
+		contactspage.selectContactType(Contactsfile, 1);
+		returnRandomContactEmail_1 = contactspage.enterEmail(Contactsfile, 1);
+		contactspage.enterContactName(Contactsfile,1);
+		contactspage.enterStreetName(Contactsfile, 1);
+		
+		contactspage.pressSaveButton();
+		
+		//Start to create Company 1:
+		contactspage.createContact();
+		contactspage.selectContactType(Contactsfile, 2);
+		returnRandomContactEmail_2 = contactspage.enterEmail(Contactsfile, 2);
+		contactspage.enterContactName(Contactsfile,2);
+		contactspage.enterStreetName(Contactsfile, 2);
+		
+		contactspage.pressSaveButton();
+		
+		//Return HOME
+		contactspage.goToHome();
+		}
 	@Given ("^Create a Reseller from (.*)$")
 	public void createNewReseller(String Contactsfile)  throws Throwable {
   		
@@ -196,6 +228,29 @@ public class LoginDefinition  {
 		
 		//Slecting an existing Contact will make Email, Contact Name, Company Name, Address be auto filled
 		crmpage.selectContact(Leadsfile, Constants.TARGET_LEAD, returnRandomContactEmail);
+		
+		crmpage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectState(Leadsfile, Constants.TARGET_LEAD);
+		
+		crmpage.selectTag(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.setCreateManualCheckBox(Leadsfile, Constants.TARGET_LEAD);
+		
+		crmpage.pressSaveButton();
+		crmpage.goToHome();
+		}
+	@Given ("^Create a new Target Lead using contact from (.*)$")
+	public void createNewTargetLeadUsingContact(String Leadsfile)  throws Throwable {
+  			
+		Logger.info("Create Target Lead");
+		homePage.gotoModuleCRM();
+		crmpage.createLead();
+		
+		crmpage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
+		
+		//Slecting an existing Contact will make Email, Contact Name, Company Name, Address be auto filled
+		crmpage.selectContact(Leadsfile, Constants.TARGET_LEAD, returnRandomContactEmail_1);
 		
 		crmpage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
@@ -295,6 +350,28 @@ public class LoginDefinition  {
 		crmpage.selectCountry(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.selectState(Leadsfile, Constants.SOURCE_LEAD);
 		
+		crmpage.selectTag(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.selectSalesTeam(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.setCreateManualCheckBox(Leadsfile, Constants.SOURCE_LEAD);
+		
+		crmpage.pressSaveButton();
+		crmpage.goToHome();
+		}
+	@Given ("^Create a new Source Lead using contact from (.*)$")
+	public void createNewSourceLeadUsingContact(String Leadsfile)  throws Throwable {
+  			
+		Logger.info("Create Source Lead");
+		homePage.gotoModuleCRM();
+		crmpage.createLead();
+		
+		crmpage.enterLeadName(Leadsfile, Constants.SOURCE_LEAD);
+		
+		//Slecting an existing Contact will make Email, Contact Name, Company Name, Address be auto filled
+		crmpage.selectContact(Leadsfile, Constants.SOURCE_LEAD, returnRandomContactEmail_2);
+		
+		crmpage.enterLeadForm(Leadsfile, Constants.SOURCE_LEAD);		
+		crmpage.selectCountry(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.selectState(Leadsfile, Constants.SOURCE_LEAD);
 		
 		crmpage.selectTag(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.selectSalesTeam(Leadsfile, Constants.SOURCE_LEAD);
@@ -302,7 +379,6 @@ public class LoginDefinition  {
 		
 		crmpage.pressSaveButton();
 		crmpage.goToHome();
-		
 		}
 	@Given ("^Firstly, create a new Source Opportunity using Contact child from (.*)$")
 	public void firstlyCreateNewSourceOppUsingContactChild(String Leadsfile)  throws Throwable {
@@ -391,6 +467,28 @@ public class LoginDefinition  {
 		
 		crmpage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
 		returnRandomEmail = crmpage.enterEmail(Leadsfile, Constants.TARGET_LEAD);
+		
+		crmpage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.enterCompanyName(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectState(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.enterStreetName(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectTag(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
+		crmpage.setCreateManualCheckBox(Leadsfile, Constants.TARGET_LEAD);
+		
+		crmpage.pressSaveButton();
+		crmpage.goToHome();
+		}
+	@When ("^Create a new Target Lead using different email domain from (.*)$")
+	public void createNewTargetLeadUsingDifferentEmail(String Leadsfile)  throws Throwable {
+  			
+		Logger.info("Create Target Lead");
+		homePage.gotoModuleCRM();
+		crmpage.createLead();
+		
+		crmpage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
+		returnRandomContactEmail_1 = crmpage.enterEmail(Leadsfile, Constants.TARGET_LEAD);
 		
 		crmpage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.enterCompanyName(Leadsfile, Constants.TARGET_LEAD);
@@ -570,7 +668,7 @@ public class LoginDefinition  {
 		crmpage.createLead();
 		
 		crmpage.enterLeadName(Leadsfile, Constants.SOURCE_LEAD);
-		returnDifferentEmail= crmpage.enterDifferentDomainEmail(Leadsfile, Constants.SOURCE_LEAD,Common.getSameLocalPartEmail(returnRandomEmail, Constants.YAHOOMAIL_DOMAIN_EMAIL));
+		returnRandomContactEmail_2= crmpage.enterDifferentDomainEmail(Leadsfile, Constants.SOURCE_LEAD,Common.getSameLocalPartEmail(returnRandomEmail, Constants.YAHOOMAIL_DOMAIN_EMAIL));
 		
 		crmpage.enterLeadForm(Leadsfile, Constants.SOURCE_LEAD);
 		crmpage.enterCompanyName(Leadsfile, Constants.SOURCE_LEAD);
@@ -786,6 +884,68 @@ public class LoginDefinition  {
 		opppage.goToHome();
 		
 		}
+	@Then ("^Check Target Lead NOT merged with Source Lead from (.*)$")
+	public void checkTargetLead_NOTMerged(String Leadsfile)  throws Throwable {
+		
+		//Pre-condition: Wait for a certain time to make System merge leads
+		homePage.waitForLeadMerging();
+		
+		Logger.info("Check on Target Lead");
+		homePage.gotoModuleCRM();
+		crmpage.goToSub_ArchiveMenu("All");
+		
+			//crmpage.searchOnArchive("TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
+		crmpage.searchOnArchive(returnRandomContactEmail_1);
+		
+		
+		//1. Check Target lead first
+		//1.1. Go to CRM page of Target Lead first
+		crmpage.clickOnItemLead(Leadsfile, Constants.TARGET_LEAD);
+				
+		//*1.2. Check the fields after doing merging action
+		
+		crmpage.checkValueOfFieldOnTargetLead_NOTMerged(Leadsfile,returnRandomContactEmail_1);	
+		
+		crmpage.clickCRMDeveloper();
+		crmpage.checkIsWon("Pending");
+		crmpage.checkActive(true);
+		crmpage.checkLostReason("");
+		
+		//1.3. Get back to Home screen
+		crmpage.goToHome();
+		
+		}
+	@Then ("^Check Target Lead NOT merged with Source Lead using contact from (.*)$")
+	public void checkTargetLeadUsingContact_NOTMerged(String Leadsfile)  throws Throwable {
+		
+		//Pre-condition: Wait for a certain time to make System merge leads
+		homePage.waitForLeadMerging();
+		
+		Logger.info("Check on Target Lead");
+		homePage.gotoModuleCRM();
+		crmpage.goToSub_ArchiveMenu("All");
+		
+			//crmpage.searchOnArchive("TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
+		crmpage.searchOnArchive(returnRandomContactEmail_1);
+		
+		
+		//1. Check Target lead first
+		//1.1. Go to CRM page of Target Lead first
+		crmpage.clickOnItemLead(Leadsfile, Constants.TARGET_LEAD);
+				
+		//*1.2. Check the fields after doing merging action
+		
+		crmpage.checkValueOfFieldOnTargetLead_NOTMerged(Leadsfile,varContactsfile,returnRandomContactEmail_1);	
+		
+		crmpage.clickCRMDeveloper();
+		crmpage.checkIsWon("Pending");
+		crmpage.checkActive(true);
+		crmpage.checkLostReason("");
+		
+		//1.3. Get back to Home screen
+		crmpage.goToHome();
+		
+		}
 	@Then ("^Check Source Lead after merged with Target Lead from (.*)$")
 	public void checkSourceLead(String Leadsfile)  throws Throwable {
   		
@@ -983,8 +1143,8 @@ public class LoginDefinition  {
 		
 		}	
 	
-	@Then ("^Check Source Lead after merged with Target Lead using different email domain from (.*)$")
-	public void checkSourceLeadUsingDifferentEmail(String Leadsfile)  throws Throwable {
+	@Then ("^Check Source Lead NOT merged with Target Lead from (.*)$")
+	public void checkSourceLead_NOTMerged(String Leadsfile)  throws Throwable {
   		
 		//Pre-condition: Wait for a certain time to make System merge leads
 		homePage.waitForLeadMerging();
@@ -994,7 +1154,7 @@ public class LoginDefinition  {
 		crmpage.goToSub_ArchiveMenu("All");
 		
 			//crmpage.searchOnArchive("TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
-		crmpage.searchOnArchive(returnDifferentEmail);
+		crmpage.searchOnArchive(returnRandomContactEmail_2);
 		
 		
 		//1. Check Target lead first
@@ -1004,21 +1164,50 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,returnRandomEmail);	
-			//crmpage.checkMergeMessageOnSourceLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
-		crmpage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomEmail);
-		
+		crmpage.checkValueOfFieldOnSourceLead_NOTMerged(Leadsfile,returnRandomContactEmail_2);						
 		
 		crmpage.clickCRMDeveloper();
-		crmpage.checkIsWon("Lost");
-		crmpage.checkActive(false);
-		crmpage.checkLostReason("Duplicate");
+		crmpage.checkIsWon("Pending");
+		crmpage.checkActive(true);
+		crmpage.checkLostReason("");
 		
 		//1.3. Get back to Home screen
 		crmpage.goToHome();
 		
 		}	
-	@Then("^Close$")   
+	@Then ("^Check Source Lead NOT merged with Target Lead using contact from (.*)$")
+	public void checkSourceLeadUsingContact_NOTMerged(String Leadsfile)  throws Throwable {
+  		
+		//Pre-condition: Wait for a certain time to make System merge leads
+		homePage.waitForLeadMerging();
+		
+		Logger.info("Check on Source Lead");
+		homePage.gotoModuleCRM();
+		crmpage.goToSub_ArchiveMenu("All");
+		
+			//crmpage.searchOnArchive("TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
+		crmpage.searchOnArchive(returnRandomContactEmail_2);
+		
+		
+		//1. Check Target lead first
+		//1.1. Go to CRM page of Target Lead first
+		crmpage.clickOnItemLead(Leadsfile, Constants.SOURCE_LEAD);
+		crmpage.clickCRMDeveloper();
+		
+		//*1.2. Check the fields after doing merging action
+		
+		crmpage.checkValueOfFieldOnSourceLead_NOTMerged(Leadsfile,varContactsfile,returnRandomContactEmail_2);						
+		
+		crmpage.clickCRMDeveloper();
+		crmpage.checkIsWon("Pending");
+		crmpage.checkActive(true);
+		crmpage.checkLostReason("");
+		
+		//1.3. Get back to Home screen
+		crmpage.goToHome();
+		
+		}	
+	@Then ("^Close$")   
 	    public void ClosePage() throws Throwable {
 			Logger.info("Close page");	
 			loginpage.closePage();

@@ -1,0 +1,32 @@
+{
+  "contactList": [
+    {
+      "contactType": "company",
+      "contactName": "Australia Company Contact",
+      "emailAddress": "",
+      "address": {
+        "country":"Australia",
+        "streetAddress":"Target Lead street",
+        "city":"",
+        "postalCode":"",
+        "state":"Victoria (AU)"
+      },
+      "tags": "",
+      "salesTeam": "CM_Channel_Management"
+    },
+    {
+      "contactType": "individual",
+      "contactName": "United States Individual Contact",
+      "emailAddress": "",
+      "address": {
+        "country": "United States",
+        "streetAddress": "123street",
+        "city": "",
+        "postalCode": "",
+        "state": "Texas (US)"
+      },
+      "tags": "",
+      "salesTeam": "CM_Channel_Management"
+    }
+  ]
+}

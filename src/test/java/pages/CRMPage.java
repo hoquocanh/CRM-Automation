@@ -69,8 +69,6 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	By lnk_dynamic_source_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'TARGET_NAME#1')]");
 	By lnk_dynamic_targe_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'TARGET_NAME#1')]");
 	
-	
-	
 	//IV. In CRM page		
 	//1. Detail Lead page
 	
@@ -122,6 +120,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'email_from')]");
 	By lbl_address = By.xpath("(//span[contains(@name,'street2')])[1]");
 	By lbl_contact_name = By.xpath("(//span[contains(@name,'contact_name')])[4]");
+	By lbl_company_name = By.xpath("(//span[contains(@name,'partner_name')])[1]");
 	By lbl_state = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::span[contains(@name, 'state_id')][1]");
 	By lbl_country = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::span[contains(@name, 'country_id')][1]");
 		//lbl_tag is a special lbl, it will give us the number of tags selected
@@ -305,30 +304,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	public String enterDifferentDomainEmail(String testFileName, String leadType, String inputEmail) throws Throwable	
 	
 	{
-		String randomEmail = "";
-		objLead<String, String> temp = new objLead<String, String>();
-		String inputTestCaseType = temp.getJsonValue(testFileName,leadType,dataJsonLead.TESTCASETYPE.getValue());
-		
-		//Explanation: If the value of key "testcaseType" in JSON file is "public domain" or "company domain"
-		if(inputTestCaseType.equalsIgnoreCase("public domain"))
-			randomEmail = Common.getRandomPublicEmail();
-		else if(inputTestCaseType.equalsIgnoreCase("test domain"))
-			randomEmail = Common.getRandomTestEmail();
-		else if(inputTestCaseType.equalsIgnoreCase("gmail domain"))
-			randomEmail = Common.getRandomGmailEmail(Common.getRandomLocalPartEmail());
-		else if(inputTestCaseType.equalsIgnoreCase("yahoo domain"))
-			randomEmail = Common.getRandomYahooEmail(Common.getRandomLocalPartEmail());
-		
-		
-		System.out.println("Random email:"+ randomEmail);
-		Logger.info("Random email:"+ randomEmail);
-		//Set random email to the Email address on the Json file
-			//objLead.setJsonValue(testFileName,leadType,dataJsonLead.EMAILADDRESS.getValue(), randomEmail);
-			//objLead.setJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.EMAILADDRESS.getValue(), randomEmail);
-		
-		getDriver().findElement(txt_email).sendKeys(randomEmail);
-		
-		return randomEmail;
+		getDriver().findElement(txt_email).sendKeys(inputEmail);
+		return inputEmail;
 	}
 	/**This method is used to enter an existing email to the "Contact" dropdownlist
 	 * <pre>
@@ -565,11 +542,21 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		}catch(AssertionError e)
 		{
 			System.out.println("Assertion error. ");
-		}
-		
-		
+		}				
 	}
-	
+	public void checkEmailTest(String valueCheck)
+	{
+		String outputvalue = (String) getDriver().findElement(lbl_email).getText();
+		if(!valueCheck.isEmpty())
+			Logger.verify("Verify the Email is " + valueCheck);
+		else
+			Logger.verify("Verify the Email is " + "EMPTY");
+		
+		
+			Assert.assertTrue(outputvalue.equals(valueCheck),
+					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
+					
+	}
 	public void checkStreetAddress(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_address).getText();
@@ -620,8 +607,19 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		}catch(AssertionError e)
 		{
 			System.out.println("Assertion error. ");
-		}
-		
+		}		
+	}
+	public void checkCompanyName(String valueCheck)
+	{
+		String outputvalue = (String) getDriver().findElement(lbl_company_name).getText();
+		Logger.verify("Verify the Company name is " + valueCheck);
+		try {
+			Assert.assertTrue(outputvalue.equals(valueCheck),
+					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
+		}catch(AssertionError e)
+		{
+			System.out.println("Assertion error. ");
+		}		
 	}
 	public void checkTag(ArrayList<String> valueCheck)
 	{
@@ -635,8 +633,6 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 				Assert.assertTrue((outputvalue.contains(i)),"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
 				
 			}
-		
-			
 	}
 	public void checkPriority(String valueCheck)
 	{
@@ -760,6 +756,141 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			}
 			
 	}
+	
+	/**This method is the combo checking on multiple fields on Target Lead. Technically, the value on Target lead fields remain unchanged.
+	 * <pre>The current fields being check:</pre>
+	 * <pre>Email</pre>
+	 * <pre>Street name</pre>
+	 * <pre>Country</pre>
+	 * <pre>State</pre>
+	 * <pre>Contact name</pre>
+	 * <pre>List of tags</pre>
+	 * @param testFileName
+	 */
+	public void checkValueOfFieldOnTargetLead_NOTMerged(String testFileName, String returnRandomEmail)
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputEmail = null;	
+		String inputAddress = null;
+		String inputCountry = null;
+		String inputState = null;
+		String inputContactName = null;
+		ArrayList<String> inputTags = new ArrayList<String>();
+		String inputPriority = null;
+		
+		//1. Check Email
+			//1.1. If the value of Email field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
+			if(!returnRandomEmail.isEmpty())
+				inputEmail = returnRandomEmail;
+			
+			//1.2. Check the value on UI
+			checkEmail(inputEmail);
+		
+		//2. Check Street name
+			inputAddress = temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.STREETADDRESS.getValue());			
+			//2.2. Check the value on UI
+			checkStreetAddress(inputAddress);	
+			
+		//3. Check Country			
+			inputCountry = temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.COUNTRY.getValue());			
+			//3.2. Check the value on UI
+			this.checkCountry(inputCountry);	
+			
+		//4. Check State			
+			inputState = temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.STATE.getValue());			
+			//4.2. Check the value on UI
+			this.checkState(inputState);	
+			
+		//5. Check Contact name			
+			inputContactName = temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.CONTACTNAME.getValue());			
+			//5.2. Check the value on UI
+			this.checkContactName(inputContactName);	
+			
+		//6. Check Tag			
+			inputTags.add(temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.TAGS.getValue()));			
+			//6.2. Check the value on UI
+			this.checkTag(inputTags);		
+			
+		//7. Check Priority if required
+			//7.1. If the Key "priority" in JSON is existed in Target Lead, the value of "priority" is the remaining no changed 
+			if(temp.getJsonValue(testFileName,Constants.TARGET_LEAD,dataJsonLead.PRIORITY.getValue())!=null)
+			{
+				inputPriority = temp.getJsonValue(testFileName,Constants.TARGET_LEAD,dataJsonLead.PRIORITY.getValue());
+				this.checkPriority(inputPriority);
+			}
+			
+	}
+	/**This method is the combo checking on multiple fields on Target Lead. Technically, the value on Target lead fields remain unchanged.
+	 * <pre>The current fields being check:</pre>
+	 * <pre>Email</pre>
+	 * <pre>Street name</pre>
+	 * <pre>Country</pre>
+	 * <pre>State</pre>
+	 * <pre>Contact name</pre>
+	 * <pre>List of tags</pre>
+	 * @param testFileName
+	 */
+	public void checkValueOfFieldOnTargetLead_NOTMerged(String testFileName, String Contactsfile, String returnRandomEmail)
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputEmail = null;	
+		String inputAddress = null;
+		String inputCountry = null;
+		String inputState = null;
+		String inputContactName = null;
+		ArrayList<String> inputTags = new ArrayList<String>();
+		String inputPriority = null;
+		objContact<String, String> temp2 = new objContact<String, String>();
+		
+		
+		//1. Check Email
+			//1.1. If the value of Email field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
+			if(!returnRandomEmail.isEmpty())
+				inputEmail = returnRandomEmail;
+			
+			//1.2. Check the value on UI
+			checkEmail(inputEmail);
+		
+		//2. Check Street name. In this scenario, we will compare with streetAddress that moved from Contact object
+			//NOTICE: We assume the 1st Company in input Contactsfile is the Company for the Target Lead
+			String streetAddressFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.STREETADDRESS.getValue(),1);			
+			//2.2. Check the value on UI
+			checkStreetAddress(streetAddressFromConctactObj);	
+			
+		//3. Check Country			
+			inputCountry = temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.COUNTRY.getValue());			
+			//3.2. Check the value on UI
+			this.checkCountry(inputCountry);	
+			
+		//4. Check State			
+			inputState = temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.STATE.getValue());			
+			//4.2. Check the value on UI
+			this.checkState(inputState);	
+			
+		//5. Check Contact name. In this scenario, we will compare with Contact Name that moved from Contact object		
+			//NOTICE: We assume the 1st Company in input Contactsfile is the Company for the Target Lead
+			String contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTNAME.getValue(),1);			
+			String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),1);
+			//5.2. Check the value on UI
+			if (contactType.equalsIgnoreCase("individual"))
+				this.checkContactName(contactNameFromConctactObj);
+			else if (contactType.equalsIgnoreCase("company"))
+				this.checkCompanyName(contactNameFromConctactObj);
+			
+		//6. Check Tag			
+			inputTags.add(temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.TAGS.getValue()));			
+			//6.2. Check the value on UI
+			this.checkTag(inputTags);		
+			
+		//7. Check Priority if required
+			//7.1. If the Key "priority" in JSON is existed in Target Lead, the value of "priority" is the remaining no changed 
+			if(temp.getJsonValue(testFileName,Constants.TARGET_LEAD,dataJsonLead.PRIORITY.getValue())!=null)
+			{
+				inputPriority = temp.getJsonValue(testFileName,Constants.TARGET_LEAD,dataJsonLead.PRIORITY.getValue());
+				this.checkPriority(inputPriority);
+			}
+	}
+	
 	/**This method is the combo checking on multiple fields on Target Lead. Technically, only if the value on fields of Target lead is empty AND the value on the same fields of Source lead is not empty. These value will copy from Source Lead fields to Target lead fields.
 	 * <pre>The current fields being check:</pre>
 	 * <pre>Email</pre>
@@ -782,7 +913,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		String inputPriority = null;
 		
 		objContact<String, String> temp2 = new objContact<String, String>();
-		String contactNameFromConctactObj = temp2.getJsonValue(Contactsfile,dataJsonContact.CONTACTNAME.getValue());
+		
 		//1. Check Email
 			//1.1. If the value of Email field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
 			if(!returnRandomEmail.isEmpty())
@@ -820,8 +951,14 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			
 		//5. Check Contact name
 			//5.1. If the value of Contact name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
-			if(!contactNameFromConctactObj.isEmpty())
-					this.checkContactName(contactNameFromConctactObj);	
+			String contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTNAME.getValue(),1);			
+			String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),1);
+			//5.2. Check the value on UI
+			if (contactType.equalsIgnoreCase("individual"))
+				this.checkContactName(contactNameFromConctactObj);
+			else if (contactType.equalsIgnoreCase("company"))
+				this.checkCompanyName(contactNameFromConctactObj);
+
 			
 		//6. Check Tag
 			//6.1. If the value of Tag name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
@@ -905,9 +1042,148 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			
 		//7. Check Priority if required
 			//7.1. If the Key "priority" in JSON is existed in Target Lead, the value of "priority" is the remaining no changed 
-			if(temp.getJsonValue(testFileName,Constants.TARGET_LEAD,dataJsonLead.PRIORITY.getValue())!=null)
+			if(temp.getJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.PRIORITY.getValue())!=null)
 			{
-				inputPriority = temp.getJsonValue(testFileName,Constants.TARGET_LEAD,dataJsonLead.PRIORITY.getValue());
+				inputPriority = temp.getJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.PRIORITY.getValue());
+				this.checkPriority(inputPriority);
+			}
+	}			
+	/**This method is the combo checking on multiple fields on Source Lead. Technically, the value on fields of Source remain unchanged. 
+	 * 
+	 * <pre>The current fields being check:</pre>
+	 * <pre>Email</pre>
+	 * <pre>Street name</pre>
+	 * <pre>Country</pre>
+	 * <pre>State</pre>
+	 * <pre>Contact name</pre>
+	 * <pre>List of tags</pre>
+	 * @param testFileName
+	 */
+	public void checkValueOfFieldOnSourceLead_NOTMerged(String testFileName, String Contactsfile, String returnRandomEmail)
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputEmail = null;	
+		String inputAddress = null;
+		String inputCountry = null;
+		String inputState = null;
+		String inputContactName = null;
+		ArrayList<String> inputTags = new ArrayList<String>();
+		String inputPriority = null;
+		objContact<String, String> temp2 = new objContact<String, String>();
+		//1. Check Email
+			//1.1 Get value from input JSON file 
+			if(!returnRandomEmail.isEmpty())
+			inputEmail = returnRandomEmail;
+			//1.2. Check the value on UI
+			checkEmail(inputEmail);
+		
+		//2. Check Street name
+			//NOTICE: We assume the 2nd Company in input Contactsfile is the Company for the Target Lead
+			String streetAddressFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.STREETADDRESS.getValue(),2);			
+			//2.2. Check the value on UI
+			checkStreetAddress(streetAddressFromConctactObj);	
+			
+		//3. Check Country
+			//3.1 Get value from input JSON file 
+				inputCountry = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.COUNTRY.getValue());
+			//3.2. Check the value on UI
+			this.checkCountry(inputCountry);	
+			
+		//4. Check State
+			//4.1 Get value from input JSON file 
+				inputState = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.STATE.getValue());
+			//4.2. Check the value on UI
+			this.checkState(inputState);	
+			
+		//5. Check Contact name
+			//NOTICE: We assume the 2nd Company in input Contactsfile is the Company for the Target Lead
+			String contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTNAME.getValue(),2);			
+			String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),2);
+			//5.2. Check the value on UI
+			if (contactType.equalsIgnoreCase("individual"))
+				this.checkContactName(contactNameFromConctactObj);
+			else if (contactType.equalsIgnoreCase("company"))
+				this.checkCompanyName(contactNameFromConctactObj);
+
+			
+		//6. Check Tag
+			//6.1 Get value from input JSON file 
+				inputTags.add(temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.TAGS.getValue()));
+			//6.2. Check the value on UI
+			this.checkTag(inputTags);	
+			
+		//7. Check Priority if required
+			//7.1. If the Key "priority" in JSON is existed in Target Lead, the value of "priority" is the remaining no changed 
+			if(temp.getJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.PRIORITY.getValue())!=null)
+			{
+				inputPriority = temp.getJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.PRIORITY.getValue());
+				this.checkPriority(inputPriority);
+			}
+	}
+	/**This method is the combo checking on multiple fields on Source Lead. Technically, the value on fields of Source remain unchanged. 
+	 * 
+	 * <pre>The current fields being check:</pre>
+	 * <pre>Email</pre>
+	 * <pre>Street name</pre>
+	 * <pre>Country</pre>
+	 * <pre>State</pre>
+	 * <pre>Contact name</pre>
+	 * <pre>List of tags</pre>
+	 * @param testFileName
+	 */
+	public void checkValueOfFieldOnSourceLead_NOTMerged(String testFileName, String returnRandomEmail)
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputEmail = null;	
+		String inputAddress = null;
+		String inputCountry = null;
+		String inputState = null;
+		String inputContactName = null;
+		ArrayList<String> inputTags = new ArrayList<String>();
+		String inputPriority = null;
+		
+		//1. Check Email
+			//1.1 Get value from input JSON file 
+			if(!returnRandomEmail.isEmpty())
+			inputEmail = returnRandomEmail;
+			//1.2. Check the value on UI
+			checkEmail(inputEmail);
+		
+		//2. Check Street name
+			//2.1 Get value from input JSON file 
+				inputAddress = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.STREETADDRESS.getValue());
+			//2.2. Check the value on UI
+			checkStreetAddress(inputAddress);	
+			
+		//3. Check Country
+			//3.1 Get value from input JSON file 
+				inputCountry = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.COUNTRY.getValue());
+			//3.2. Check the value on UI
+			this.checkCountry(inputCountry);	
+			
+		//4. Check State
+			//4.1 Get value from input JSON file 
+				inputState = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.STATE.getValue());
+			//4.2. Check the value on UI
+			this.checkState(inputState);	
+			
+		//5. Check Contact name
+			//5.1 Get value from input JSON file 
+				inputContactName = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.CONTACTNAME.getValue());
+			//5.2. Check the value on UI
+			this.checkContactName(inputContactName);	
+			
+		//6. Check Tag
+			//6.1 Get value from input JSON file 
+				inputTags.add(temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.TAGS.getValue()));
+			//6.2. Check the value on UI
+			this.checkTag(inputTags);	
+			
+		//7. Check Priority if required
+			//7.1. If the Key "priority" in JSON is existed in Target Lead, the value of "priority" is the remaining no changed 
+			if(temp.getJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.PRIORITY.getValue())!=null)
+			{
+				inputPriority = temp.getJsonValue(testFileName,Constants.SOURCE_LEAD,dataJsonLead.PRIORITY.getValue());
 				this.checkPriority(inputPriority);
 			}
 	}
