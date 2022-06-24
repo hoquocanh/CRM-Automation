@@ -36,6 +36,9 @@
 					<excludes>
 						<exclude>**/*.java</exclude>
 					</excludes>
+					<suiteXmlFiles>
+						<suiteXmlFile>TEST.xml</suiteXmlFile>
+					</suiteXmlFiles>
 					<properties>
 						<property>
 							<name>suitethreadpoolsize</name>
