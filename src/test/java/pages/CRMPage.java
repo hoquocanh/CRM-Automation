@@ -66,8 +66,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	By lbl_all_leads = By.xpath("//li[contains(text(),'All Leads')]");
 	
 	//II. All leads page
-	By lnk_dynamic_source_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'TARGET_NAME#1')]");
-	By lnk_dynamic_targe_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'TARGET_NAME#1')]");
+	By lnk_dynamic_lead = By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'TARGET_NAME#1')]");
+	//By lnk_dynamic_targe_lead =  By.xpath("//tr[contains(@class,'o_data_row')]/td[contains(text(),'SOURCE_NAME#1')]");
 	
 	//IV. In CRM page		
 	//1. Detail Lead page
@@ -234,8 +234,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	{
 		objLead<String, String> temp = new objLead<String, String>();
 		String inputText = temp.getJsonValue(testFileName,leadType,dataJsonLead.LEADNAME.getValue());
+		System.out.println("Lead Name is: " + inputText);
 		getDriver().findElement(txt_name).sendKeys(inputText);
-		
 	}
 	
 	/**This method is used to generate a random email and create a lead with that email
@@ -258,11 +258,12 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			randomEmail = Common.getRandomPublicEmail();
 		else if(inputTestCaseType.equalsIgnoreCase("test domain"))
 			randomEmail = Common.getRandomTestEmail();
+		else if(inputTestCaseType.equalsIgnoreCase("company domain"))
+			randomEmail = Common.getRandomCompanyEmail();
 		else if(inputTestCaseType.equalsIgnoreCase("gmail domain"))
 			randomEmail = Common.getRandomGmailEmail(Common.getRandomLocalPartEmail());
 		else if(inputTestCaseType.equalsIgnoreCase("yahoo domain"))
 			randomEmail = Common.getRandomYahooEmail(Common.getRandomLocalPartEmail());
-		
 		
 		System.out.println("Random email:"+ randomEmail);
 		Logger.info("Random email:"+ randomEmail);
@@ -1198,6 +1199,73 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	 * <pre>List of tags</pre>
 	 * @param testFileName
 	 */
+	public void checkValueOfFieldOnSecondSourceLead_NOTMerged(String testFileName, String returnRandomEmail)
+	{
+		objLead<String, String> temp = new objLead<String, String>();
+		String inputEmail = null;	
+		String inputAddress = null;
+		String inputCountry = null;
+		String inputState = null;
+		String inputContactName = null;
+		ArrayList<String> inputTags = new ArrayList<String>();
+		String inputPriority = null;
+		
+		//1. Check Email
+			//1.1 Get value from input JSON file 
+			if(!returnRandomEmail.isEmpty())
+			inputEmail = returnRandomEmail;
+			//1.2. Check the value on UI
+			checkEmail(inputEmail);
+		
+		//2. Check Street name
+			//2.1 Get value from input JSON file 
+				inputAddress = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD_2,dataJsonLead.STREETADDRESS.getValue());
+			//2.2. Check the value on UI
+			checkStreetAddress(inputAddress);	
+			
+		//3. Check Country
+			//3.1 Get value from input JSON file 
+				inputCountry = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD_2,dataJsonLead.COUNTRY.getValue());
+			//3.2. Check the value on UI
+			this.checkCountry(inputCountry);	
+			
+		//4. Check State
+			//4.1 Get value from input JSON file 
+				inputState = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD_2,dataJsonLead.STATE.getValue());
+			//4.2. Check the value on UI
+			this.checkState(inputState);	
+			
+		//5. Check Contact name
+			//5.1 Get value from input JSON file 
+				inputContactName = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD_2,dataJsonLead.CONTACTNAME.getValue());
+			//5.2. Check the value on UI
+			this.checkContactName(inputContactName);	
+			
+		//6. Check Tag
+			//6.1 Get value from input JSON file 
+				inputTags.add(temp.getJsonValue(testFileName, Constants.SOURCE_LEAD_2,dataJsonLead.TAGS.getValue()));
+			//6.2. Check the value on UI
+			this.checkTag(inputTags);	
+			
+		//7. Check Priority if required
+			//7.1. If the Key "priority" in JSON is existed in Target Lead, the value of "priority" is the remaining no changed 
+			if(temp.getJsonValue(testFileName,Constants.SOURCE_LEAD_2,dataJsonLead.PRIORITY.getValue())!=null)
+			{
+				inputPriority = temp.getJsonValue(testFileName,Constants.SOURCE_LEAD_2,dataJsonLead.PRIORITY.getValue());
+				this.checkPriority(inputPriority);
+			}
+	}
+	/**This method is the combo checking on multiple fields on Source Lead. Technically, the value on fields of Source remain unchanged. 
+	 * 
+	 * <pre>The current fields being check:</pre>
+	 * <pre>Email</pre>
+	 * <pre>Street name</pre>
+	 * <pre>Country</pre>
+	 * <pre>State</pre>
+	 * <pre>Contact name</pre>
+	 * <pre>List of tags</pre>
+	 * @param testFileName
+	 */
 	public void checkValueOfFieldOnSourceLead(String testFileName, String Contactsfile, String returnRandomEmail)
 	{
 		objLead<String, String> temp = new objLead<String, String>();
@@ -1447,12 +1515,9 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		By replace_dynamic_control = null;
 		
 		objLead<String, String> temp = new objLead<String, String>();
-		String inputText = temp.getJsonValue(testFileName,leadType,dataJsonLead.LEADNAME.getValue());
+		String inputLeadName = temp.getJsonValue(testFileName,leadType,dataJsonLead.LEADNAME.getValue());
 		
-		if (leadType.equalsIgnoreCase(Constants.TARGET_LEAD))
-			replace_dynamic_control = Common.replaceDynamicControl(lnk_dynamic_targe_lead,"TARGET_NAME#1",inputText);
-		else if (leadType.equalsIgnoreCase(Constants.SOURCE_LEAD))
-			replace_dynamic_control = Common.replaceDynamicControl(lnk_dynamic_source_lead,"TARGET_NAME#1",inputText);
+		replace_dynamic_control = Common.replaceDynamicControl(lnk_dynamic_lead,"TARGET_NAME#1",inputLeadName);
 		
 		getDriver().findElement(replace_dynamic_control).click();
 		waitForPageDisplay();

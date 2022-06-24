@@ -27,7 +27,7 @@ public class objLead<T, S extends String> {
         	
             obj = new JSONParser().parse(new FileReader(jsonPath));
             JSONObject jsonObject = (JSONObject) obj;
-            JSONObject leadXObject;
+            JSONObject leadXObject = (JSONObject) obj ;
             //List of Leads
 			//1. Iterator itr1 = leadList.iterator();
             JSONArray leadListArry = (JSONArray) jsonObject.get(dataJsonLead.LEADLIST.getValue());
@@ -37,9 +37,13 @@ public class objLead<T, S extends String> {
             {
             	leadXObject = (JSONObject) leadListArry.get(0);
             }
-            else
+            else if(leadType.equalsIgnoreCase(Constants.SOURCE_LEAD))
             {
             	leadXObject = (JSONObject) leadListArry.get(1);
+            }
+            else if(leadType.equalsIgnoreCase(Constants.SOURCE_LEAD_2))
+            {
+            	leadXObject = (JSONObject) leadListArry.get(2);
             }
              //3. "address" is another JSONObject
             JSONObject addressObject = (JSONObject) leadXObject.get(dataJsonLead.ADDRESS.getValue());

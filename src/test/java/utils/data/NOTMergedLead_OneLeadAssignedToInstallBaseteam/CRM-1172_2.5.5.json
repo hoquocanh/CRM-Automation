@@ -1,0 +1,65 @@
+{
+   "leadsList":[
+      {
+         "leadType":"target lead",
+         "contactname":"test contact",
+         "emailAddress":"",
+         "address":{
+            "country":"United States",
+            "streetAddress":"123street",
+            "city":"",
+            "postalCode":"",
+            "state":"Texas (US)"
+         },         
+         "leadName":"target lead-IB NC Leads_BD_America team",
+         "companyName":"test123",
+         "leadForm":"IB NC Leads",
+         "createManual":false,
+         "tags":"Renewal",
+         "testcaseType":"company domain",
+         "salesTeam":"BD_America"
+      },
+      {
+         "leadType":"source lead",
+         "contactname":"test contact",
+         "emailAddress":"",
+         "address":{
+            "country":"United States",
+            "streetAddress":"123street",
+            "city":"",
+            "postalCode":"",
+            "state":"Texas (US)"
+         },         
+         "leadName":"source lead-Partner Sign Up_Install Base team",
+         "companyName":"test12345",
+         "userLogNotes":"target lead log notes",
+         "publicMessage":"target lead message",
+         "leadForm":"Partner Sign Up",
+         "createManual":false,
+         "tags":"Trial download",
+         "testcaseType":"company domain",
+         "salesTeam":"Install Base"
+      },
+      {
+         "leadType":"source lead 2",
+         "contactname":"test contact",
+         "emailAddress":"",
+         "address":{
+            "country":"United States",
+            "streetAddress":"123street",
+            "city":"",
+            "postalCode":"",
+            "state":"Texas (US)"
+         },         
+         "leadName":"source lead-NULL",
+         "companyName":"test12345",
+         "userLogNotes":"target lead log notes",
+         "publicMessage":"target lead message",
+         "leadForm":"",
+         "createManual":true,
+         "tags":"Trial download",
+         "testcaseType":"public domain",
+         "salesTeam":"CM_Channel_Management"
+      }
+   ]
+}

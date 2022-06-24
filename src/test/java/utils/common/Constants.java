@@ -98,4 +98,5 @@ public class Constants {
 	public static final String INDIVIDUAL_DOMAIN_EMAIL = "@individualREPLACE.com";
 	public static final String TARGET_LEAD = "target lead";
 	public static final String SOURCE_LEAD = "source lead";
+	public static final String SOURCE_LEAD_2 = "source lead 2";
 }

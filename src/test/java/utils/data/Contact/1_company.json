@@ -1,0 +1,18 @@
+{
+  "contactList": [
+    {
+      "contactType": "company",
+      "contactName": "Australia Company Contact",
+      "emailAddress": "",
+      "address": {
+        "country":"Australia",
+        "streetAddress":"Target Lead street",
+        "city":"",
+        "postalCode":"",
+        "state":"Victoria (AU)"
+      },
+      "tags": "",
+      "salesTeam": "CM_Channel_Management"
+    }
+  ]
+}
