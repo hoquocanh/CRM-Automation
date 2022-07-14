@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.google.api.client.util.Sleeper;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 
@@ -167,6 +169,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	public void clickLeadsSubMenu() throws Throwable 
 	{
 		getDriver().findElement(sub_menu_leads_leads).click();
+		wait(5000);
 		waitForPageDisplay();
 		//Find label "Leads" to make sure the "Leads" page displays completely
 		getDriver().findElement(lbl_leads);
