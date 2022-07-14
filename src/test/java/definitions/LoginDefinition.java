@@ -265,7 +265,7 @@ public class LoginDefinition  {
 	public void createNewTargetLeadUsingContact(String Leadsfile)  throws Throwable {
   			
 		Logger.info("Create Target Lead");
-		//homePage.gotoModuleCRM();
+		homePage.gotoModuleCRM();
 		crmpage.createLead();
 		
 		crmpage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
