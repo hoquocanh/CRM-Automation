@@ -160,6 +160,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	}
 	public void clickLeadsMenu() throws Throwable 
 	{
+		wait(5000);
 		getDriver().findElement(menu_leads).click();
 		waitForElementResponse();
 		
@@ -168,8 +169,9 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	}
 	public void clickLeadsSubMenu() throws Throwable 
 	{
-		getDriver().findElement(sub_menu_leads_leads).click();
 		wait(5000);
+		getDriver().findElement(sub_menu_leads_leads).click();
+		
 		waitForPageDisplay();
 		//Find label "Leads" to make sure the "Leads" page displays completely
 		getDriver().findElement(lbl_leads);
