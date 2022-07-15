@@ -73,8 +73,8 @@ public class GeneralHomePage implements WebDriverEventListener{
 		 
 		
 		driver.navigate().to(url);		
-		driver.manage().window().setSize(d);
-		//driver.manage().window().maximize();
+		//driver.manage().window().setSize(d);
+		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		//Common.waitPageLoad();
 	}

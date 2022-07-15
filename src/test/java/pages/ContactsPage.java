@@ -84,11 +84,11 @@ public class ContactsPage extends GeneralHomePage {
 	 * @param elementName	 
 	 * @throws Throwable
 	 */
-	public void specialInput(By elementName)
+	public void specialInput(By elementName,String inputText)
 	{
 		WebElement elem = getDriver().findElement(elementName);
 		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-		executor.executeScript("arguments[0].sendKeys();", elem);
+		executor.executeScript("arguments[0].sendKeys(inputText);", elem);
 		
 	}
 	/**This method is a way to make the element is clickable on Jenkins
@@ -103,6 +103,20 @@ public class ContactsPage extends GeneralHomePage {
 		WebElement elem = getDriver().findElement(elementName);
 		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
 		executor.executeScript("arguments[0].click();", elem);
+		
+	}
+	/**This method is a way to make the element is able to enter Text on Jenkins
+	 * <pre>
+	 * This method is a way to make the element is  able to enter Text on Jenkins
+	 * </pre>
+	 * @param elementName	 
+	 * @throws Throwable
+	 */
+	public void specialGetAttribute(By elementName)
+	{
+		WebElement elem = getDriver().findElement(elementName);
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+		executor.executeScript("arguments[0].sendKeys(inputText);", elem);
 		
 	}
 	public void clickCreateButton() throws Throwable 
@@ -159,7 +173,9 @@ public class ContactsPage extends GeneralHomePage {
 		{
 			objContact<String, String> temp = new objContact<String, String>();
 			String inputText = temp.getJsonValue(testFileName,dataJsonContact.CONTACTNAME.getValue());
-			getDriver().findElement(txt_name).sendKeys(inputText);
+			
+			//getDriver().findElement(txt_name).sendKeys(inputText);
+			specialInput(txt_name,inputText);
 			//Old method that generate an unique Contact name as template "Reseller Contact TEST_AUTOMATION_2022_06_10T11_30_0"
 				//getDriver().findElement(txt_name).sendKeys(this.generateContactName(testFileName, fatherContactEmail, inputText));
 			
