@@ -122,9 +122,17 @@ public class GeneralHomePage implements WebDriverEventListener{
 		driver.findElement(module_crm);
 		
 	}
-	public void waitForSecond(int second)
+	public void waitForSecond(int second) 
 	{
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(second));
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(second));
+		try        
+		{
+		    Thread.sleep(second*1000);
+		} 
+		catch(InterruptedException ex) 
+		{
+		    Thread.currentThread().interrupt();
+		}
 		
 	}
 	public void waitForPageDisplay()
