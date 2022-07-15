@@ -77,6 +77,20 @@ public class ContactsPage extends GeneralHomePage {
 		super(Driver);
 	}
 	// ============================ Methods============================//
+	/**This method is a way to make the element is able to enter Text on Jenkins
+	 * <pre>
+	 * This method is a way to make the element is  able to enter Text on Jenkins
+	 * </pre>
+	 * @param elementName	 
+	 * @throws Throwable
+	 */
+	public void specialInput(By elementName)
+	{
+		WebElement elem = getDriver().findElement(elementName);
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+		executor.executeScript("arguments[0].sendKeys();", elem);
+		
+	}
 	/**This method is a way to make the element is clickable on Jenkins
 	 * <pre>
 	 * This method is a way to make the element is clickable on Jenkins
@@ -91,7 +105,6 @@ public class ContactsPage extends GeneralHomePage {
 		executor.executeScript("arguments[0].click();", elem);
 		
 	}
-	
 	public void clickCreateButton() throws Throwable 
 	{
 		specialClick(btn_create);
