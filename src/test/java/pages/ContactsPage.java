@@ -112,11 +112,11 @@ public class ContactsPage extends GeneralHomePage {
 	 * @param elementName	 
 	 * @throws Throwable
 	 */
-	public void specialGetAttribute(By elementName)
+	public String specialGetAttributeID(By elementName)
 	{
 		WebElement elem = getDriver().findElement(elementName);
-		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-		executor.executeScript("arguments[0].sendKeys(inputText);", elem);
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();		
+		return executor.executeScript("arguments[0].getAttribute(\"id\");", elem).toString();
 		
 	}
 	public void clickCreateButton() throws Throwable 
@@ -208,7 +208,11 @@ public class ContactsPage extends GeneralHomePage {
 				if(inputText.equalsIgnoreCase("company"))
 				{	
 					//1. Get value of //input[@id]
-					attributeValue = getDriver().findElement(rdb_company).getAttribute("id");
+					
+					//attributeValue = getDriver().findElement(rdb_company).getAttribute("id");
+					
+					attributeValue= specialGetAttributeID(rdb_company);
+					System.out.println("ID of Company: "+ attributeValue);
 					//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
 					String checkTheRadioButton_Jscript= 
 							  "return document.querySelector(\'#" + attributeValue + "\')" +
