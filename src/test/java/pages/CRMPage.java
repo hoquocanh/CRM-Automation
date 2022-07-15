@@ -167,31 +167,14 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	}
 	public void clickLeadsMenu() throws Throwable 
 	{
-		//waitForSecond(5);
-		
 		//getDriver().findElement(menu_leads).click();
 		
 		specialClick(menu_leads);
-		
-		waitForElementResponse();
-		
-		
-		
+		waitForElementResponse();		
 	}
 	public void clickLeadsSubMenu() throws Throwable 
 	{
-		
-		//waitForSecond(10);
-		
-		
-		//WebElement elem = getDriver().findElement(sub_menu_leads_leads);
-		//JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-		//executor.executeScript("arguments[0].click();", elem);
-		
 		specialClick(sub_menu_leads_leads);
-		
-		//getDriver().findElement(sub_menu_leads_leads).click();
-		
 		waitForPageDisplay();
 		//Find label "Leads" to make sure the "Leads" page displays completely
 		getDriver().findElement(lbl_leads);

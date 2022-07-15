@@ -172,22 +172,28 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	{
 		return this;
 	}
+	public void specialClick(By elementName)
+	{
+		WebElement elem = getDriver().findElement(elementName);
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+		executor.executeScript("arguments[0].click();", elem);
+	}
 	public void clickLeadsMenu() throws Throwable 
 	{
-		getDriver().findElement(menu_leads).click();
-		waitForElementResponse();
+		//getDriver().findElement(menu_leads).click();
 		
-		
-		
+		specialClick(menu_leads);
+		waitForElementResponse();		
 	}
 	public void clickLeadsSubMenu() throws Throwable 
 	{
-		getDriver().findElement(sub_menu_leads_leads).click();
+		specialClick(sub_menu_leads_leads);
 		waitForPageDisplay();
 		//Find label "Leads" to make sure the "Leads" page displays completely
 		getDriver().findElement(lbl_leads);
 		
 	}
+	
 	public void clickArchiveMenu() throws Throwable 
 	{
 		getDriver().findElement(menu_archive).click();
