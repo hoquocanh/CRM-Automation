@@ -68,7 +68,7 @@ public class GeneralHomePage implements WebDriverEventListener{
 		
 		String url = Constants.UAT_LINK;
 		
-		Dimension d = new Dimension(1382,744); 
+		Dimension d = new Dimension(2000,1000); 
 		//Resize the current window to the given dimension
 		 
 		
@@ -122,7 +122,11 @@ public class GeneralHomePage implements WebDriverEventListener{
 		driver.findElement(module_crm);
 		
 	}
-	
+	public void waitForSecond(int second)
+	{
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(second));
+		
+	}
 	public void waitForPageDisplay()
 	{
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
