@@ -10,7 +10,8 @@
 		<parameter name="autoLogBug" value="false" />
 		<parameter name="tags" value="@SmokeTest" />
 		<classes>
-			<class name="tests.cucumber.Cogito.all_features"/>
+			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_emails_different_companies"></class>
+				
 		</classes>
 	</test>
 </suite>
