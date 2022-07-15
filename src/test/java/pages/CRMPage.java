@@ -158,11 +158,21 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	{
 		return this;
 	}
+	
+	public void specialClick(By elementName)
+	{
+		WebElement elem = getDriver().findElement(elementName);
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+		executor.executeScript("arguments[0].click();", elem);
+	}
 	public void clickLeadsMenu() throws Throwable 
 	{
 		//waitForSecond(5);
 		
-		getDriver().findElement(menu_leads).click();
+		//getDriver().findElement(menu_leads).click();
+		
+		specialClick(menu_leads);
+		
 		waitForElementResponse();
 		
 		
@@ -171,14 +181,14 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	public void clickLeadsSubMenu() throws Throwable 
 	{
 		
-		waitForSecond(10);
+		//waitForSecond(10);
 		
 		
-		WebElement elem = getDriver().findElement(sub_menu_leads_leads);
-		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-		executor.executeScript("arguments[0].click();", elem);
+		//WebElement elem = getDriver().findElement(sub_menu_leads_leads);
+		//JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+		//executor.executeScript("arguments[0].click();", elem);
 		
-		
+		specialClick(sub_menu_leads_leads);
 		
 		//getDriver().findElement(sub_menu_leads_leads).click();
 		
