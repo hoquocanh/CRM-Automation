@@ -89,6 +89,7 @@ public class ContactsPage extends GeneralHomePage {
 		WebElement elem = getDriver().findElement(elementName);
 		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
 		executor.executeScript("arguments[0].click();", elem);
+		
 	}
 	
 	public void clickCreateButton() throws Throwable 
@@ -97,7 +98,7 @@ public class ContactsPage extends GeneralHomePage {
 		
 		Common.waitPageLoad(3);
 		//Find textbox "Lead Name" to make sure the "Leads" page displays completely
-		getDriver().findElement(txt_name);
+		//getDriver().findElement(txt_name);
 		
 	}
 	public void pressSaveButton() throws Throwable
