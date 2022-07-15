@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import utils.common.Common;
 import utils.common.Constants;
@@ -76,9 +77,23 @@ public class ContactsPage extends GeneralHomePage {
 		super(Driver);
 	}
 	// ============================ Methods============================//
+	/**This method is a way to make the element is clickable on Jenkins
+	 * <pre>
+	 * This method is a way to make the element is clickable on Jenkins
+	 * </pre>
+	 * @param elementName	 
+	 * @throws Throwable
+	 */
+	public void specialClick(By elementName)
+	{
+		WebElement elem = getDriver().findElement(elementName);
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+		executor.executeScript("arguments[0].click();", elem);
+	}
+	
 	public void clickCreateButton() throws Throwable 
 	{
-		getDriver().findElement(btn_create).click();
+		specialClick(btn_create);
 		
 		Common.waitPageLoad(3);
 		//Find textbox "Lead Name" to make sure the "Leads" page displays completely
@@ -87,27 +102,27 @@ public class ContactsPage extends GeneralHomePage {
 	}
 	public void pressSaveButton() throws Throwable
 	{
-		getDriver().findElement(btn_save).click();
+		specialClick(btn_save);
 		waitForPageDisplay();
 	}
 	public void pressEditButton() throws Throwable
 	{
-		getDriver().findElement(btn_edit).click();
+		specialClick(btn_edit);
 		waitForPageDisplay();
 	}
 	public void pressTab_ContactAddresses() throws Throwable
 	{
-		getDriver().findElement(tab_contact_addresses).click();
+		specialClick(tab_contact_addresses);
 		waitForPageDisplay();
 	}
 	public void pressTab_PartnerAssignation() throws Throwable
 	{
-		getDriver().findElement(tab_partner_assignation).click();
+		specialClick(tab_partner_assignation);
 		waitForPageDisplay();
 	}
 	public void pressTab_ContactAddresses_AddButton() throws Throwable
 	{
-		getDriver().findElement(lnk_add).click();
+		specialClick(lnk_add);
 		waitForPageDisplay();
 	}
 	/**This method is used to create a Contact

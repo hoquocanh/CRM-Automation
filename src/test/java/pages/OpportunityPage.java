@@ -172,6 +172,14 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	{
 		return this;
 	}
+	
+	/**This method is a way to make the element is clickable on Jenkins
+	 * <pre>
+	 * This method is a way to make the element is clickable on Jenkins
+	 * </pre>
+	 * @param elementName	 
+	 * @throws Throwable
+	 */
 	public void specialClick(By elementName)
 	{
 		WebElement elem = getDriver().findElement(elementName);
@@ -196,12 +204,12 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	
 	public void clickArchiveMenu() throws Throwable 
 	{
-		getDriver().findElement(menu_archive).click();
+		specialClick(menu_archive);
 		waitForElementResponse();
 	}
 	public void clickArchive_AllSubMenu() throws Throwable 
 	{
-		getDriver().findElement(sub_menu_archive_all).click();
+		specialClick(sub_menu_archive_all);
 		waitForPageDisplay();
 		//Find label "Leads" to make sure the "Leads" page displays completely
 		getDriver().findElement(lbl_all_leads);
@@ -209,7 +217,7 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	}
 	public void clickCreateButton() throws Throwable 
 	{
-		getDriver().findElement(btn_create).click();
+		specialClick(btn_create);
 		
 		Common.waitPageLoad(3);
 		//Find textbox "Lead Name" to make sure the "Leads" page displays completely
