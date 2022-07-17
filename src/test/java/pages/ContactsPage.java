@@ -134,7 +134,7 @@ public class ContactsPage extends GeneralHomePage {
 	}
 	public void clickCreateButtonInDetailsPage() throws Throwable 
 	{
-		Common.waitPageLoad(1);
+		waitForSecond(2);
 		specialClick(btn_create_in_details_page);
 		
 		Common.waitPageLoad(2);
