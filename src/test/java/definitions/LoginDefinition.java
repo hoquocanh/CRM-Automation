@@ -147,8 +147,8 @@ public class LoginDefinition  {
 		
 		contactspage.pressSaveButton();
 		
-		//Start to create Company 1:
-		contactspage.createContact();
+		//Start to create Company 2:
+		contactspage.clickCreateButtonInDetailsPage();
 		contactspage.selectContactType(Contactsfile, 2);
 		returnRandomContactEmail_2 = contactspage.enterEmail(Contactsfile, 2);
 		contactspage.enterContactName(Contactsfile,2);

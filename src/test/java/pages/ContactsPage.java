@@ -25,6 +25,7 @@ public class ContactsPage extends GeneralHomePage {
 		
 	//II. "CREATE" button...
 	By btn_create =By.xpath("//button[contains(text(),'Create')]");
+	By btn_create_in_details_page = By.xpath("(//button[contains(text(),'Create')])[1]");
 	By btn_view_list =By.xpath("//button[contains(@aria-label,'View list')]");
 	
 	//IV. In Contacts page		
@@ -116,7 +117,10 @@ public class ContactsPage extends GeneralHomePage {
 	{
 		WebElement elem = getDriver().findElement(elementName);
 		JavascriptExecutor executor = (JavascriptExecutor) getDriver();		
-		return executor.executeScript("arguments[0].getAttribute(\"id\");", elem).toString();
+		
+		String ID =(String) executor.executeScript("return arguments[0].getAttribute('id')", elem);
+				
+		return ID;
 		
 	}
 	public void clickCreateButton() throws Throwable 
@@ -127,6 +131,13 @@ public class ContactsPage extends GeneralHomePage {
 		//Find textbox "Lead Name" to make sure the "Leads" page displays completely
 		//getDriver().findElement(txt_name);
 		
+	}
+	public void clickCreateButtonInDetailsPage() throws Throwable 
+	{
+		Common.waitPageLoad(1);
+		specialClick(btn_create_in_details_page);
+		
+		Common.waitPageLoad(2);
 	}
 	public void pressSaveButton() throws Throwable
 	{
@@ -162,12 +173,16 @@ public class ContactsPage extends GeneralHomePage {
 	 * @throws Throwable
 	 */
 	public void createContact() throws Throwable
-	{
-				
+	{		
 		//1. Press "CREATE" button
 		this.clickCreateButton();
-		
 	}
+	public void selectCreateButtonInDetailsPage() throws Throwable
+	{		
+		//1. Press "CREATE" button
+		this.clickCreateButton();
+	}
+	
 	//---------------------------------------Contact page------------------------------------------------
 		public void enterContactName(String testFileName, String fatherContactEmail) throws Throwable
 		{
@@ -231,7 +246,8 @@ public class ContactsPage extends GeneralHomePage {
 				else if(inputText.equalsIgnoreCase("individual"))
 				{
 					//1. Get value of //input[@id]
-					attributeValue = getDriver().findElement(rdb_individual).getAttribute("id");
+					//attributeValue = getDriver().findElement(rdb_individual).getAttribute("id");
+					attributeValue = specialGetAttributeID(rdb_individual);
 					//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
 					String checkTheRadioButton_Jscript = 
 					  "return document.querySelector(\'#" + attributeValue + "\')" +
@@ -261,7 +277,10 @@ public class ContactsPage extends GeneralHomePage {
 				if(inputText.equalsIgnoreCase("company"))
 				{	
 					//1. Get value of //input[@id]
-					attributeValue = getDriver().findElement(rdb_company).getAttribute("id");
+					
+					//attributeValue = getDriver().findElement(rdb_company).getAttribute("id");
+					
+					attributeValue= specialGetAttributeID(rdb_company);
 					//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
 					String checkTheRadioButton_Jscript= 
 							  "return document.querySelector(\'#" + attributeValue + "\')" +
@@ -280,7 +299,8 @@ public class ContactsPage extends GeneralHomePage {
 				else if(inputText.equalsIgnoreCase("individual"))
 				{
 					//1. Get value of //input[@id]
-					attributeValue = getDriver().findElement(rdb_individual).getAttribute("id");
+					//attributeValue = getDriver().findElement(rdb_individual).getAttribute("id");
+					attributeValue = specialGetAttributeID(rdb_individual);
 					//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
 					String checkTheRadioButton_Jscript = 
 					  "return document.querySelector(\'#" + attributeValue + "\')" +
