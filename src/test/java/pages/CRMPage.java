@@ -171,6 +171,23 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
 		executor.executeScript("arguments[0].click();", elem);
 	}
+	/**This method is a way to make the element is able to enter Text on Jenkins
+	 * <pre>
+	 * This method is a way to make the element is  able to enter Text on Jenkins
+	 * </pre>
+	 * @param elementName	 
+	 * @throws Throwable
+	 */
+	public String specialGetAttributeID(By elementName)
+	{
+		WebElement elem = getDriver().findElement(elementName);
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();		
+		
+		String ID =(String) executor.executeScript("return arguments[0].getAttribute('id')", elem);
+				
+		return ID;
+		
+	}
 	public void clickLeadsMenu() throws Throwable 
 	{
 		//getDriver().findElement(menu_leads).click();
@@ -337,7 +354,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		{
 			waitForElementResponse();
 
-			getDriver().findElement(cbb_contact).click();
+			//getDriver().findElement(cbb_contact).click();
+			specialClick(cbb_contact);
 			waitForElementResponse();
 			getDriver().findElement(cbb_contact).sendKeys(inputChildContactEmail);	
 			waitForElementResponse();
@@ -399,7 +417,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			
 			if(!inputText.isEmpty())
 			{
-				getDriver().findElement(cbb_country).click();
+				//getDriver().findElement(cbb_country).click();
+				specialClick(cbb_country);
 				waitForElementResponse();
 				getDriver().findElement(cbb_country).sendKeys(inputText);	
 				waitForElementResponse();
@@ -418,7 +437,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			{
 				waitForElementResponse();
 
-				getDriver().findElement(cbb_state).click();
+				//getDriver().findElement(cbb_state).click();
+				specialClick(cbb_state);
 				waitForElementResponse();
 				getDriver().findElement(cbb_state).sendKeys(inputText);	
 				waitForElementResponse();
@@ -437,6 +457,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			waitForElementResponse();
 			
 			getDriver().findElement(cbb_tags).click();	
+			specialClick(cbb_tags);
 			waitForElementResponse();
 			getDriver().findElement(cbb_tags).sendKeys(inputText);	
 			waitForElementResponse();
@@ -461,7 +482,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		JavascriptExecutor Js1 = (JavascriptExecutor) dr;
 		
 		//1. Get value of //input[@id]
-		String attributeValue = getDriver().findElement(chb_is_create_manual).getAttribute("id");
+		//String attributeValue = getDriver().findElement(chb_is_create_manual).getAttribute("id");
+		String attributeValue = specialGetAttributeID(chb_is_create_manual);
 		//Logger.info("Attribute of ID is "+ attributeValue);	
 		
 		//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
@@ -482,7 +504,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		JavascriptExecutor Js1 = (JavascriptExecutor) dr;
 		
 		//1. Get value of //input[@id]
-		String attributeValue = getDriver().findElement(chb_is_create_manual).getAttribute("id");
+		//String attributeValue = getDriver().findElement(chb_is_create_manual).getAttribute("id");
+		String attributeValue = specialGetAttributeID(chb_is_create_manual);
 		//Logger.info("Attribute of ID is "+ attributeValue);	
 		
 		//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
