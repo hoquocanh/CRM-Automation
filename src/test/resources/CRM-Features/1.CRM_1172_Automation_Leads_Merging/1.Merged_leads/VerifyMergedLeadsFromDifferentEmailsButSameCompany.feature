@@ -19,4 +19,3 @@ Feature: Verify the automatic Lead merging happens when the leads from different
    	|Leads file|Contacts file|
    	|MergedLead_DifferentEmailButSameCompany\CRM-1172_1.3.1.1|Contact\Company_with_2_sub-contacts|
 
-

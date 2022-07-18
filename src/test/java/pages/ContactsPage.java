@@ -146,6 +146,7 @@ public class ContactsPage extends GeneralHomePage {
 	}
 	public void pressEditButton() throws Throwable
 	{
+		waitForSecond(3);
 		specialClick(btn_edit);
 		waitForPageDisplay();
 	}

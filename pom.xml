@@ -115,7 +115,12 @@
 			<artifactId>cucumber-java8</artifactId>
 			<version>4.2.0</version>
 		</dependency>
-
+		<dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>3.0.2</version>
+            <scope>test</scope>
+        </dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>gherkin</artifactId>
