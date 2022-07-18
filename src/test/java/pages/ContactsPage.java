@@ -189,8 +189,8 @@ public class ContactsPage extends GeneralHomePage {
 			objContact<String, String> temp = new objContact<String, String>();
 			String inputText = temp.getJsonValue(testFileName,dataJsonContact.CONTACTNAME.getValue());
 			
-			//getDriver().findElement(txt_name).sendKeys(inputText);
-			specialInput(txt_name,inputText);
+			getDriver().findElement(txt_name).sendKeys(inputText);
+			//specialInput(txt_name,inputText);
 			//Old method that generate an unique Contact name as template "Reseller Contact TEST_AUTOMATION_2022_06_10T11_30_0"
 				//getDriver().findElement(txt_name).sendKeys(this.generateContactName(testFileName, fatherContactEmail, inputText));
 			
@@ -568,6 +568,7 @@ public class ContactsPage extends GeneralHomePage {
 			objContact<String, String> temp = new objContact<String, String>();
 			
 			//Firstly, press EDIT button on father Contact
+			waitForSecond(3);
 			this.pressEditButton();
 			
 			//Secondly, add every child Contact by index			
@@ -577,6 +578,7 @@ public class ContactsPage extends GeneralHomePage {
 			this.pressTab_ContactAddresses_AddButton();
 			
 			//Implement
+			
 			childContactName = temp.getJsonValueOfChildContactByIndex(testFileName, dataJsonContact.CHILDCONTACTNAME.getValue(), index);
 			String randomEmail = generateChildContactEmail(testFileName,fatherContactEmail,childContactName);
 			
@@ -584,8 +586,11 @@ public class ContactsPage extends GeneralHomePage {
 			getDriver().findElement(txt_child_email).sendKeys(randomEmail);
 			
 			//Press SAVE & CLOSE
-			getDriver().findElement(btn_child_save_close).click();	
-			waitForElementResponse();
+			//getDriver().findElement(btn_child_save_close).click();	
+			specialClick(btn_child_save_close);
+			
+			//waitForElementResponse();
+			waitForSecond(3);
 			//Press SAVE button on Contact father
 			pressSaveButton();
 			

@@ -11,17 +11,12 @@
   		<parameter name="browser" value="chrome.local" />
 		<parameter name="autoLogBug" value="false" />
 		<classes>
-
-<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_emails_different_companies"></class>
+<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_company"></class>
+<!--<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_emails_different_companies"></class> -->
 
 				
 		</classes>
 	</test>
-	
-<!--  <test name="TEST">  -->
-<!-- 	<classes>  -->
-<!-- 			<class name="LinkingCucumber.GET_PanelInfo.CheckTotalPanels.VerifyTotalPanels"></class>					 -->
-<!-- 		</classes> -->
-<!-- 	</test>  -->
+
 
 </suite>
