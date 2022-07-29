@@ -627,69 +627,44 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_email).getText();
 		Logger.verify("Verify the Email is " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
-		
-		
 	}
 	
 	public void checkStreetAddress(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_address).getText();
 		Logger.verify("Verify the Street Address is " + valueCheck);
-			
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
+		
 	}
 	public void checkCountry(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_country).getText();
 		Logger.verify("Verify the Country is " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
-		
-		
 	}
 	public void checkState(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_state).getText();
 		Logger.verify("Verify the State is " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.contains(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
 		
 	}
 	public void checkContactName(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_contact_name).getText();
 		Logger.verify("Verify the Contact name is " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
-		
 	}
 	public void checkTag(ArrayList<String> valueCheck)
 	{
@@ -697,18 +672,13 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		ArrayList<String> outputvalue = getTagItems();
 		
 		Logger.verify("Verify the Targs name are " + valueCheck);
-		try {
+		
 			for (String i : valueCheck )
 			{
 				Assert.assertTrue((outputvalue.contains(i)),
 						"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
 			}
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
 		
-			
 	}
 	/**This method is the combo checking on multiple fields on Target Lead. Technically, only if the value on fields of Target lead is empty AND the value on the same fields of Source lead is not empty. These value will copy from Source Lead fields to Target lead fields.
 	 * <pre>The current fields being check:</pre>
@@ -982,15 +952,9 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_is_won).getText();
 		Logger.verify("Verify the isWon is " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
-		
-		
 	}
 	public void checkActive(Boolean valueCheck)
 	{
@@ -1013,15 +977,9 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		//3. Now start to check
 		Boolean outputvalue = isChecked;
 		Logger.verify("Verify the checkbox Active is " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck+ "|");
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
-		
-		
 	}
 	public void checkLostReason(String valueCheck)
 	{
@@ -1032,30 +990,18 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 			Logger.verify("Verify the LostReason is " + valueCheck);
 		else
 			Logger.verify("Verify the LostReason is " + "EMPTY");
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck+ "|");
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
-		
-		
 	}
 	public void checkTag(String valueCheck)
 	{
 		ArrayList<String> outputvalue = this.getTagItems();
 		
 		Logger.verify("Verify the Tags list contain  " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.contains(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck+ "|");
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
-		
-		
 	}
 	/**This method is used to check the message on Target Lead like ["target lead's name", has been merged into this lead]
 	 * <pre>
@@ -1082,23 +1028,16 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		
 		
 		Logger.verify("Verify the System log note is [\"target lead's name\",has been merged into this lead]");		
-		try {
+		
 			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_1).isDisplayed());				
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
 		
 		//2. The system log note on Target Lead will be ["Another lead from SOURCE_EMAIL#1 has been automatically merged into your lead target lead's name"]
 		replace_dynamic_control_2_1 = Common.replaceDynamicControl(lbl_dynamic_merge_target_lead_2,"SOURCE_EMAIL#1",returnRandomEmail);
 		replace_dynamic_control_2_2 = Common.replaceDynamicControl(replace_dynamic_control_2_1,"TARGET_NAME#1",targetName);
 		Logger.verify("Verify the System log note is [\"Another lead from SOURCE_EMAIL#1 has been automatically merged into your lead target lead's name\"]");		
-		try {
+		
 			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_2_2).isDisplayed());				
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
+		
 	}
 	
 	/**This method is used to check the message on Source Lead like [This lead has been merged into target lead]
@@ -1124,23 +1063,16 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		replace_dynamic_control_1 = Common.replaceDynamicControl(lbl_dynamic_merge_source_lead_1,"TARGET_NAME#1",targetLeadName);
 				
 		Logger.verify("Verify the System log note is [This lead has been merged into \"target lead's name\"]");		
-		try {
+		
 			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_1).isDisplayed());	
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
 		
 		//2. The system log note on Source Lead will be [Your lead  "source lead's name"has been automatically merged into "target lead's name" and closed.]
 		replace_dynamic_control_2_1 = Common.replaceDynamicControl(lbl_dynamic_merge_source_lead_2,"SOURCE_NAME#1",sourceLeadName);
 		replace_dynamic_control_2_2 = Common.replaceDynamicControl(replace_dynamic_control_2_1,"TARGET_NAME#1",targetLeadName);
 		Logger.verify("Verify the System log note is [Your lead  \"source lead's name\"has been automatically merged into \"target lead's name\" and closed.]");		
-		try {
+		
 			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_2_2).isDisplayed());				
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
+		
 	}
 	//---------------------------------------Archive page------------------------------------------------
 	

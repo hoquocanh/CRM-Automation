@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import com.google.api.client.util.Sleeper;
 
@@ -50,7 +51,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	 * 4. Enter email same as Target email
 	 * 
 	 */
-	
+	SoftAssert softAssertion= new SoftAssert();
 	// ============================ Element declaration============================//
 	//I. Pipeline page
 	//1.Menu "Leads"
@@ -149,6 +150,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	public CRMPage()
 	{
 		super();
+		
 	}
 	public CRMPage(WebDriver Driver)
 	{
@@ -602,13 +604,10 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		else
 			Logger.verify("Verify the Email is " + "EMPTY");
 		
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}				
+			
 	}
 	public void checkEmailTest(String valueCheck)
 	{
@@ -628,25 +627,19 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		String outputvalue = (String) getDriver().findElement(lbl_address).getText();
 		Logger.verify("Verify the Street Address is " + valueCheck);
 			
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
+		
 	}
 	public void checkCountry(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_country).getText();
 		Logger.verify("Verify the Country is " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
+		
 		
 		
 	}
@@ -654,38 +647,29 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_state).getText();
 		Logger.verify("Verify the State is " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.contains(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
+		
 		
 	}
 	public void checkContactName(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_contact_name).getText();
 		Logger.verify("Verify the Contact name is " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}		
+		
 	}
 	public void checkCompanyName(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_company_name).getText();
 		Logger.verify("Verify the Company name is " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}		
+		
 	}
 	public void checkTag(ArrayList<String> valueCheck)
 	{
@@ -706,13 +690,10 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		String outputValue = (String) getDriver().findElement(lbl_being_checked_star).getAttribute("title");
 		String inputValue = convertStarToPriorityLevel(valueCheck);
 		Logger.verify("Verify the Priority is " + valueCheck + " equal to " + inputValue);
-		try {
+		
 			Assert.assertTrue(outputValue.equals(inputValue),
 					"output value : " + outputValue + " ; expected value : "+ inputValue + "|");		
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
+		
 		
 	}
 	public String convertStarToPriorityLevel(String inputText)
@@ -1398,10 +1379,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			Logger.verify("Verify the isWon is " + "EMPTY");
 		
 		
-			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");
-		
-		
+		softAssertion.assertTrue(outputvalue.equals(valueCheck),"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");
+			
 	}
 	public void checkActive(Boolean valueCheck)
 	{
@@ -1425,13 +1404,10 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		Boolean outputvalue = isChecked;
 		Logger.verify("Verify the checkbox Active is " + valueCheck);
 		
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck+ "|");
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}		
+		
 	}
 	public void setLeadToActive() throws Throwable
 	{
@@ -1474,14 +1450,9 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		else
 			Logger.verify("Verify the LostReason is " + "EMPTY");
 		
-		try {
+	
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck+ "|");
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
-		
 		
 	}
 	public void checkTag(String valueCheck)
@@ -1489,14 +1460,9 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		ArrayList<String> outputvalue = this.getTagItems();
 		
 		Logger.verify("Verify the Tags list contain  " + valueCheck);
-		try {
+		
 			Assert.assertTrue(outputvalue.contains(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck+ "|");
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
-		
 		
 	}
 	/**This method is used to check the message on Target Lead like ["target lead's name", has been merged into this lead]
@@ -1524,23 +1490,16 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		
 		
 		Logger.verify("Verify the System log note is [\"target lead's name\",has been merged into this lead]");		
-		try {
+		
 			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_1).isDisplayed());				
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
 		
 		//2. The system log note on Target Lead will be ["Another lead from SOURCE_EMAIL#1 has been automatically merged into your lead target lead's name"]
 		replace_dynamic_control_2_1 = Common.replaceDynamicControl(lbl_dynamic_merge_target_lead_2,"SOURCE_EMAIL#1",returnRandomEmail);
 		replace_dynamic_control_2_2 = Common.replaceDynamicControl(replace_dynamic_control_2_1,"TARGET_NAME#1",targetName);
 		Logger.verify("Verify the System log note is [\"Another lead from SOURCE_EMAIL#1 has been automatically merged into your lead target lead's name\"]");		
-		try {
+		
 			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_2_2).isDisplayed());				
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
+		
 	}
 	
 	/**This method is used to check the message on Source Lead like [This lead has been merged into target lead]
@@ -1577,12 +1536,9 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		replace_dynamic_control_2_1 = Common.replaceDynamicControl(lbl_dynamic_merge_source_lead_2,"SOURCE_NAME#1",sourceLeadName);
 		replace_dynamic_control_2_2 = Common.replaceDynamicControl(replace_dynamic_control_2_1,"TARGET_NAME#1",targetLeadName);
 		Logger.verify("Verify the System log note is [Your lead  \"source lead's name\"has been automatically merged into \"target lead's name\" and closed.]");		
-		try {
+		
 			Assert.assertTrue(getDriver().findElement(replace_dynamic_control_2_2).isDisplayed());				
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
+		
 	}
 	//---------------------------------------Archive page------------------------------------------------
 	
