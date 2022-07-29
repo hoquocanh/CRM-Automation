@@ -10,8 +10,8 @@
   		<parameter name="browser" value="chrome.local" />
 		<parameter name="autoLogBug" value="false" />
 		<classes>
-			<class name="LinkingCucumber.Merged_leads_feature"></class>
-
+			<class name="LinkingCucumber.Merged_leads_feature"></class> 
+					
 		</classes>
 	</test>
 
