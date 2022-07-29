@@ -1379,7 +1379,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			Logger.verify("Verify the isWon is " + "EMPTY");
 		
 		
-		softAssertion.assertTrue(outputvalue.equals(valueCheck),"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");
+		Assert.assertTrue(outputvalue.equals(valueCheck),"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");
 			
 	}
 	public void checkActive(Boolean valueCheck)
