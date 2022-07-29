@@ -979,7 +979,7 @@ public class LoginDefinition  {
 		crmpage.checkValueOfFieldOnTargetLead_NOTMerged(Leadsfile,returnRandomContactEmail_1);	
 		
 		crmpage.clickCRMDeveloper();
-		crmpage.checkIsWon("Pending TEST");
+		crmpage.checkIsWon("Pending");
 		crmpage.checkActive(true);
 		crmpage.checkLostReason("");
 		
