@@ -1,15 +1,19 @@
 package pages;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
@@ -25,7 +29,9 @@ import utils.data.dataGenralHomePage;
 public class GeneralHomePage implements WebDriverEventListener{
 	
 	//A variable "driver" is a static variable which is created at beginning and being used through the session
-	private static WebDriver driver;
+	private static WebDriver driver=null;
+	
+	//private static ChromeOptions  options ;
 	private dataGenralHomePage _homeInfo;
 	// ============================ Element declaration============================//
 		//Modules
@@ -33,8 +39,6 @@ public class GeneralHomePage implements WebDriverEventListener{
 		By module_settings  =By.xpath("//div[contains (text(),'Settings')]");
 		By module_contacts  =By.xpath("//div[contains (text(),'Contacts')]");
 		By btn_application  =By.xpath("//a[contains (@title,'Applications')]");
-		
-		
 		
 		
 		By btn_expand_menu  =By.xpath("//a[@role= 'button' and @data-toggle='dropdown']/i[@class='fa fa-plus']");
@@ -46,7 +50,10 @@ public class GeneralHomePage implements WebDriverEventListener{
 			System.out.println("Project path is: " + projectPath);
 			
 			System.setProperty("webdriver.chrome.driver",
-					projectPath+"/driver/chromedriver.exe");
+					projectPath+"\\driver\\chromedriver.exe");
+			
+			System.out.println("TEXT:.....");
+			System.out.println(projectPath+"\\driver\\chromedriver.exe");
 			
 			this.driver = new ChromeDriver();
 		}
@@ -72,7 +79,14 @@ public class GeneralHomePage implements WebDriverEventListener{
 		//Resize the current window to the given dimension
 		 
 		
+		System.out.println("Test...................................");
+		System.out.println(url);
+		System.out.println(driver.navigate());
+		
 		driver.navigate().to(url);		
+		
+		
+		
 		//driver.manage().window().setSize(d);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

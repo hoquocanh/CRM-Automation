@@ -6,10 +6,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utils.config.Driver;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
+import pages.GeneralHomePage;
 
 public class test_base extends AbstractTestNGCucumberTests {
 	
-	
+	private static WebDriver driver=null;
+	public test_base()
+	{
+		//this.driver = GeneralHomePage.getDriver();
+	}
 	
 	@BeforeMethod(alwaysRun = true)
 	public void beforeMethod() {
@@ -21,8 +26,8 @@ public class test_base extends AbstractTestNGCucumberTests {
 	@AfterMethod(alwaysRun = true)
 	public void cleanUp(ITestResult result) {
 		//DriverUtils.quitBrowser();
-		//driver.close();
-		//driver.quit();
+		
+		GeneralHomePage.getDriver().quit();
 		
 	}
 	

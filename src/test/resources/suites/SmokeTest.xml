@@ -2,16 +2,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" thread-count="5" parallel="false">
 	<listeners>
-		<listener class-name="utils.config.CucumberTestListener" />
+		<listener class-name="utils.config.TestListener" />
 	</listeners>
 
-	<test name="Run Daily Regression">
+	<test name="Run Smoke test">
 		<parameter name="browser" value="chrome.local" />
 		<parameter name="autoLogBug" value="false" />
 		<parameter name="tags" value="@SmokeTest" />
 		<classes>
-			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_emails_different_companies"></class>
+			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_public_email"></class> 	
 				
 		</classes>
 	</test>
 </suite>
+
+

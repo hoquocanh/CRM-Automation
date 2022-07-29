@@ -77,8 +77,9 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	By btn_save =By.xpath("//button[contains(text(),'Save')]");
 	By btn_discard 	=By.xpath("//button[contains(text(),'Discard')]");
 	By btn_paper_plane =By.xpath("//button[contains(@class,'paper-plane')]");
-		
-	
+	By btn_action =By.xpath("//button[contains(text(),'Action')]");
+	By btn_lost_read =By.xpath("//a[contains(text(),'Lost Read')]");
+					
 	//Textbox
 	By txt_name 	=By.xpath("//input[@name='name']");
 	By txt_email 	=By.xpath("(//input[contains(@name,'email_from')])[2]");
@@ -158,6 +159,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	{
 		return this;
 	}
+	
 	/**This method is a way to make the element is clickable on Jenkins
 	 * <pre>
 	 * This method is a way to make the element is clickable on Jenkins
@@ -170,6 +172,21 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		WebElement elem = getDriver().findElement(elementName);
 		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
 		executor.executeScript("arguments[0].click();", elem);
+	}
+	/**This method is a way to make the element is able to send keys on Jenkins
+	 * <pre>
+	 * This method is a way to make the element is able to send keys on Jenkins
+	 * </pre>
+	 * @param elementName	 
+	 * @throws Throwable
+	 */
+	public void specialEnterText(By elementName, String textSearch)
+	{
+		WebElement elem = getDriver().findElement(elementName);
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+		executor.executeScript("arguments[0].value='arguments[1]'", elem, textSearch);
+		
+		
 	}
 	/**This method is a way to make the element is able to enter Text on Jenkins
 	 * <pre>
@@ -225,6 +242,17 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		getDriver().findElement(txt_name);
 		
 	}
+	public void clickAction() throws Throwable 
+	{
+		specialClick(btn_action);
+		waitForElementResponse();		
+	}
+	public void clickLostRead() throws Throwable 
+	{
+		specialClick(btn_lost_read);
+		waitForElementResponse();		
+	}
+	
 	/**This method is used to create a Lead
 	 * <pre>
 	 * Pre-condition: The screen is being Home page
@@ -1362,17 +1390,16 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_is_won).getText();
 		if (!valueCheck.isEmpty())
-			Logger.verify("Verify the isWon is " + valueCheck);
+		{
+			System.out.println("For isWon: The get value is " + outputvalue +" ; the check value is " + valueCheck);
+			Logger.verify("For isWon: The get value is " + outputvalue +" ; the check value is " + valueCheck);
+		}
 		else
 			Logger.verify("Verify the isWon is " + "EMPTY");
 		
-		try {
+		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");
-		}catch(AssertionError e)
-		{
-			System.out.println("Assertion error. ");
-		}
 		
 		
 	}
@@ -1404,10 +1431,40 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		}catch(AssertionError e)
 		{
 			System.out.println("Assertion error. ");
-		}
-		
-		
+		}		
 	}
+	public void setLeadToActive() throws Throwable
+	{
+		WebDriver dr = super.getDriver();
+		JavascriptExecutor Js1 = (JavascriptExecutor) dr;
+		
+		//1. Get value of //input[@id]
+		String attributeValue = getDriver().findElement(chb_active).getAttribute("id");
+		//Logger.info("Attribute of ID is "+ attributeValue);	
+		
+		//2. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the beginning of command to return the value of checking
+		String checkTheCheckBox = 
+				  "return document.querySelector(\'#" + attributeValue + "\')" +
+				  ".checked";
+		
+		//Logger.info("Checkbox element is "+ checkTheCheckBox);	
+		Boolean isChecked = (Boolean) Js1.executeScript(checkTheCheckBox);
+		//3. Now start to check
+		if(isChecked)
+		{
+			try
+			{
+				clickAction();
+				clickLostRead();
+			}
+			catch(Exception e)
+			{
+				System.out.println("Unable to click Action button");
+			}
+			
+		}		
+	}
+	
 	public void checkLostReason(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(cbb_lost_reason).getText();
@@ -1532,8 +1589,10 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	
 	public void searchOnArchive(String textSearch) throws Throwable
 	{
-		
+		waitForSecond(5);
 		getDriver().findElement(txt_search).sendKeys(textSearch);
+		
+		//specialEnterText(txt_search, textSearch);
 		waitForElementResponse();
 		//Press "Enter" on keyboard
 		getDriver().findElement(txt_search).sendKeys(Keys.RETURN);
@@ -1555,8 +1614,9 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		String inputLeadName = temp.getJsonValue(testFileName,leadType,dataJsonLead.LEADNAME.getValue());
 		
 		replace_dynamic_control = Common.replaceDynamicControl(lnk_dynamic_lead,"TARGET_NAME#1",inputLeadName);
-		
-		getDriver().findElement(replace_dynamic_control).click();
+				
+		//getDriver().findElement(replace_dynamic_control).click();
+		specialClick(replace_dynamic_control);
 		waitForPageDisplay();
 	}
 	/**This method is used to get list of Tags on Target Lead or Source Lead (after creating these 2 leads completely)

@@ -15,8 +15,7 @@ Then Check Target Lead NOT merged with Source Lead using same email from <Leads 
 Then Check Source Lead NOT merged with Target Lead using same email from <Leads file>  
 #Step#3: Observe the second Source Lead
 Then Check second Source Lead NOT merged with Target Lead using same email from <Leads file>  
-#Post-condition:
-Then Close
+
 
 Examples: 
 |Leads file|

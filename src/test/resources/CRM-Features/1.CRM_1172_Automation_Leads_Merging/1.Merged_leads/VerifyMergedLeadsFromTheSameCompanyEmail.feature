@@ -12,8 +12,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
+  
     
     Examples: 
    	|Leads file|
@@ -31,8 +30,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
+  
     
     Examples: 
    	|Leads file|
@@ -50,8 +48,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
+  
  
     Examples: 
    	|Leads file|
@@ -69,8 +66,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Opportunity after merged with Source Opportunity from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Opportunity after merged with Target Opportunity from <Leads file>  
- #Post-condition:
-  Then Close
+ 
 	
 	Examples: 
    	|Leads file|
@@ -88,8 +84,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
+  
     
     Examples: 
    	|Leads file|
@@ -107,8 +102,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
+  
     
     Examples: 
    	|Leads file|
@@ -126,8 +120,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
+  
     
     Examples: 
    	|Leads file|

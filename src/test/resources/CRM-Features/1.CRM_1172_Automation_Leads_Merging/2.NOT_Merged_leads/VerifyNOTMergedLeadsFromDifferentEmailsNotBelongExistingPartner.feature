@@ -12,8 +12,7 @@ When Create a new Source Lead using different email domains from <Leads file>
 Then Check Target Lead NOT merged with Source Lead from <Leads file>    
 #Step#2: Observe the Source Lead
 Then Check Source Lead NOT merged with Target Lead from <Leads file>  
-#Post-condition:
-Then Close
+
 
 Examples: 
 |Leads file|
@@ -32,8 +31,6 @@ When Create a new Source Lead using different email domains from <Leads file>
 Then Check Target Lead NOT merged with Source Lead using contact from <Leads file>    
 #Step#2: Observe the Source Lead
 Then Check Source Lead NOT merged with Target Lead from <Leads file>  
-#Post-condition:
-Then Close
 
 Examples: 
 |Leads file|Contacts file|

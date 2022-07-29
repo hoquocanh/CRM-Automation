@@ -69,7 +69,7 @@ public class LoginDefinition  {
 	// ============================ GIVEN - for most of scenarios============================//
 	@Given("^Launch Odoo Page$")
 	public void LaunchPage()  throws Throwable {
-  		//Pre-condition: Select the correct configuration
+  		
 		homePage.launchWebPage();
 		System.out.println("Launch page");
 		Logger.info("Launch page");	
@@ -979,7 +979,7 @@ public class LoginDefinition  {
 		crmpage.checkValueOfFieldOnTargetLead_NOTMerged(Leadsfile,returnRandomContactEmail_1);	
 		
 		crmpage.clickCRMDeveloper();
-		crmpage.checkIsWon("Pending");
+		crmpage.checkIsWon("Pending TEST");
 		crmpage.checkActive(true);
 		crmpage.checkLostReason("");
 		
@@ -1371,6 +1371,27 @@ public class LoginDefinition  {
 		crmpage.goToHome();
 		
 		}	
+	
+	@Then ("^Set Target Lead to archived (.*)$")
+	public void setTargetLeadToArchived(String Leadsfile)  throws Throwable {
+		
+		Logger.info("Set Target Lead to archived");
+		homePage.gotoModuleCRM();
+		crmpage.goToSub_ArchiveMenu("All");
+		Logger.info("Set goToSub_ArchiveMenu");
+			//crmpage.searchOnArchive("TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
+		crmpage.searchOnArchive(returnRandomEmail_ContactChild1);
+		
+		//1.1. Go to CRM page of Target Lead first
+		crmpage.clickOnItemLead(Leadsfile, Constants.TARGET_LEAD);
+		
+		//*1.2. Check the fields after doing merging action
+		crmpage.setLeadToActive();
+		
+		//1.3. Get back to Home screen
+		crmpage.goToHome();
+		
+		}
 	@Then ("^Close$")   
 	    public void ClosePage() throws Throwable {
 			Logger.info("Close page");	

@@ -12,8 +12,6 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
   
     
     Examples: 
@@ -32,9 +30,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
-    
+  
     Examples: 
    	|Leads file|
    	|MergedLead_SamePublicEmail\CRM-1172_1.2.1.2|
@@ -51,9 +47,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
-    
+  
     Examples: 
    	|Leads file|
    	|MergedLead_SamePublicEmail\CRM-1172_1.2.1.3|
@@ -70,9 +64,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Opportunity after merged with Source Opportunity from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Opportunity after merged with Target Opportunity from <Leads file>  
- #Post-condition:
-  Then Close
-    
+ 
     Examples: 
    	|Leads file|
    	|MergedLead_SamePublicEmail\CRM-1172_1.2.2.1|
@@ -89,9 +81,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
-    
+  
     Examples: 
    	|Leads file|
    	|MergedLead_SamePublicEmail\CRM-1172_1.2.3.1|
@@ -108,9 +98,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
-    
+  
     Examples: 
    	|Leads file|
    	|MergedLead_SamePublicEmail\CRM-1172_1.2.4.1|
@@ -127,9 +115,7 @@ Feature: Verify the automatic Lead merging happens when the leads from the same 
   Then Check Target Lead after merged with Source Lead from <Leads file>    
   #Step#2: Observe the Source Lead
   Then Check Source Lead after merged with Target Lead from <Leads file>  
-  #Post-condition:
-  Then Close
-    
+  
     Examples: 
    	|Leads file|
    	|MergedLead_SamePublicEmail\CRM-1172_1.2.5.1|

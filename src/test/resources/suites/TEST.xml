@@ -11,11 +11,28 @@
   		<parameter name="browser" value="chrome.local" />
 		<parameter name="autoLogBug" value="false" />
 		<classes>
-<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_partner"></class>
-<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_company"></class>
+<!--<class name="LinkingCucumber.Merged_leads_feature"></class> -->
+<class name="LinkingCucumber.TEST"></class> 
+
+<!--<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_company"></class> -->
 <!--<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_emails_different_companies"></class> -->
 
 				
+				
+<!--Merge Leads -->
+			<!-- 
+			<class name="LinkingCucumber.MergedLead.Merged_leads_from_the_same_company_email"></class>		
+			<class name="LinkingCucumber.MergedLead.Merged_leads_from_the_same_public_email"></class> 
+			<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_company"></class>
+			<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_partner"></class>
+			
+			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_public_email"></class> 	
+			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_emails_different_companies"></class>
+			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_emails_Not_belong_existing_partner"></class> 
+			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_FromIBleadsPartnerSignUpNULL"></class> 
+			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_IfOneLeadAssignedToInstallBaseTeam"></class>	
+			
+			 -->				
 		</classes>
 	</test>
 
