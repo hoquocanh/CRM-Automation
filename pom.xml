@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.commscope.imVisionXRESTAPI</groupId>
+	<groupId>CRM</groupId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>imVisionXRESTAPI</name>
+	<name>CRM-Automation</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -45,8 +45,33 @@
 							<value>2</value>
 						</property>
 					</properties>
+					<testFailureIgnore>true</testFailureIgnore>					
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.6.2</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>CRM-Automation</projectName>
+                            <outputDirectory>${project.build.directory}/target/html-report/cucumber-html-reports.html</outputDirectory>
+                            <cucumberOutput>${project.build.directory}/target/cucumber-reports/cucumber.json</cucumberOutput>
+                            <inputDirectory>${project.build.directory}/target/cucumber-reports</inputDirectory>
+                            <jsonFiles>
+                                <param>>**/*.json</param>
+                            </jsonFiles>
+                            <buildNumber>42</buildNumber>                           
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 	<repositories>
@@ -97,7 +122,13 @@
 			<artifactId>cucumber-java</artifactId>
 			<version>4.2.0</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/net.masterthought/maven-cucumber-reporting -->
+<dependency>
+    <groupId>net.masterthought</groupId>
+    <artifactId>maven-cucumber-reporting</artifactId>
+    <version>5.6.2</version>
+</dependency>
+		
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-testng</artifactId>
@@ -299,5 +330,5 @@
 
 		
 	</dependencies>
-	<artifactId>imVisionXRESTAPI </artifactId>
+	<artifactId>CRM-Automation </artifactId>
 </project>

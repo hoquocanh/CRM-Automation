@@ -10,6 +10,9 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
+import org.apache.log4j.LogManager;
+import cucumber.api.Scenario;
+
 import utils.report.ExtentTestManager;
 
 
@@ -23,7 +26,8 @@ public class Logger {
 	private static List<String> currentLogs = new ArrayList<>();
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Logger.class);
-
+	
+	public static Scenario scenario;
 	public static void info(String message) {
 		//info(message,null);
 		

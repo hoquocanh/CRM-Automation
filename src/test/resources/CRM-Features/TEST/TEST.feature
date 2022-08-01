@@ -6,7 +6,7 @@ Feature: Verify that the merging leads do NOT happens  when the leads from the d
   Given Login successfully
   Given Active developer mode 
   #Pre-condition:
-  When Create a new Target Lead from <Leads file>  
+  #When Create a new Target Lead from <Leads file>  
   #Then Set Target Lead to archived <Leads file>
 
  Examples: 
