@@ -10,7 +10,7 @@ import cucumber.api.CucumberOptions;
                         "pretty", "html:target/html-report/cucumber-html-reports.html",
                         "junit:target/cucumber-reports/cucumber.xml"}
 	)	
-public class TEST extends test_base
+public class M1_TEST extends test_base
 {
 
 }

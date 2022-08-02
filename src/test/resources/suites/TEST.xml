@@ -12,7 +12,7 @@
 		<parameter name="autoLogBug" value="false" />
 		<classes>
 <!--<class name="LinkingCucumber.Merged_leads_feature"></class> -->
-<class name="LinkingCucumber.TEST"></class> 
+<class name="LinkingCucumber.M1_TEST"></class> 
 
 <!--<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_company"></class> -->
 <!--<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_emails_different_companies"></class> -->
