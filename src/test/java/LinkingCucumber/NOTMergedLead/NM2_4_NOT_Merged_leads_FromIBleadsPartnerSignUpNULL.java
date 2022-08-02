@@ -1,17 +1,15 @@
-package LinkingCucumber.MergedLead;
-
+package LinkingCucumber.NOTMergedLead;
 import LinkingCucumber.test_base;
 import cucumber.api.CucumberOptions;
 
 @CucumberOptions(
-		features = {"src/test/resources/CRM-Features/1.CRM_1172_Automation_Leads_Merging/1.Merged_leads/VerifyMergedLeadsFromTheSamePublicEmail.feature"}, 				
+		features = {"src/test/resources/CRM-Features/1.CRM_1172_Automation_Leads_Merging/2.NOT_Merged_leads/NM2_4_VerifyNOTMergedLeadsFromIBLeadsPartnerSignupNULL.feature"}, 				
         glue = {"definitions"},
         plugin = {"utils.config.TestListener","json:target/cucumber-reports/cucumber.json",
                         "pretty", "html:target/html-report/cucumber-html-reports.html",
                         "junit:target/cucumber-reports/cucumber.xml"}
 	)	
-public class Merged_leads_from_the_same_public_email extends test_base
+public class NM2_4_NOT_Merged_leads_FromIBleadsPartnerSignUpNULL extends test_base
 {
 
 }
-

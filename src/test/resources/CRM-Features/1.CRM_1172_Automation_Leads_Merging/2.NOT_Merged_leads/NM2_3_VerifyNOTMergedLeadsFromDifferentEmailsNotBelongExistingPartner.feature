@@ -1,4 +1,4 @@
-Feature: Verify that the merging leads do NOT happens  when the leads from the different emails, not belong to a domain of an existing partner
+Feature: NM2_3_Verify that the merging leads do NOT happens  when the leads from the different emails, not belong to a domain of an existing partner
 
 #Scenario_CRM-1172_2.3.1:Verify that the merging leads do NOT happens  when the leads from different emails and 2 leads are not belong to a domain of an existing partner
 Scenario Outline: CRM-1172_2.3.1:Verify that the merging leads do NOT happens  when the leads from different emails and 2 leads are not belong to a domain of an existing partner

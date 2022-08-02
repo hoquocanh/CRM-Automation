@@ -1,4 +1,4 @@
-Feature: Verify the automatic Lead merging happens when the leads from different emails but same partner
+Feature: M1_4_Verify the automatic Lead merging happens when the leads from different emails but same partner
 
 #Scenario_CRM-1172_1.4.1.1:Verify that the merging lead happens successfully when Multiple  leads from different emails, not belong to the same company but the domain belongs to an existing partner but One of lead has Lead Form as IB NC Leads
 Scenario Outline: CRM-1172_1.4.1.1_Verify that the merging lead happens successfully when Multiple  leads from different emails, not belong to the same company but the domain belongs to an existing partner but One of lead has Lead Form as IB NC Leads

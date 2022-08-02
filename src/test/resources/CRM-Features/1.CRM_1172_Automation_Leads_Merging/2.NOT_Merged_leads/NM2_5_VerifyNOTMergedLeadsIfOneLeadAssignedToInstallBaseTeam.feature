@@ -1,4 +1,4 @@
-Feature: Verify that the merging leads do NOT happens when One lead is assigned to Install Base team and another lead is assigned to another team except Marketing
+Feature: NM2_5_Verify that the merging leads do NOT happens when One lead is assigned to Install Base team and another lead is assigned to another team except Marketing
 
 #Scenario_CRM-1172_2.5.1:Verify that the merging lead NOT happens when One lead is assigned to Install Base team and another lead is assigned to CM_Channel_Management
 Scenario Outline: CRM-1172_2.5.1:Verify that the merging lead NOT happens when One lead is assigned to Install Base team and another lead is assigned to CM_Channel_Management

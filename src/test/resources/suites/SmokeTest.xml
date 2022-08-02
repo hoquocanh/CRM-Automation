@@ -9,9 +9,8 @@
 		<parameter name="browser" value="chrome.local" />
 		<parameter name="autoLogBug" value="false" />
 		<parameter name="tags" value="@SmokeTest" />
-		<classes>
-			<!-- <class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_public_email"></class> 	-->
-			<class name="LinkingCucumber.MergedLead.Merged_leads_from_the_same_company_email"></class>		
+		<classes>			
+			<class name="LinkingCucumber.MergedLead.M1_1_Merged_leads_from_the_same_company_email"></class>			
 		</classes>
 	</test>
 </suite>

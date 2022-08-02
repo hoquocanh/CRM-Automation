@@ -1,4 +1,4 @@
-Feature: Verify the automatic Lead merging happens when the leads from the same public email
+Feature: M1_2_Verify the automatic Lead merging happens when the leads from the same public email
 
 #Scenario#CRM-1172_1.2.1.1:Verify that the merging lead happens successfully when the leads from the same public email but One of lead has Lead Form as IB NC Leads
   Scenario Outline: Verify that the merging lead happens successfully when the leads from the same public email but One of lead has Lead Form as IB NC Leads

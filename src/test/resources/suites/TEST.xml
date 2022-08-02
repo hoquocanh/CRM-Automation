@@ -21,16 +21,16 @@
 				
 <!--Merge Leads -->
 			<!-- 
-			<class name="LinkingCucumber.MergedLead.Merged_leads_from_the_same_company_email"></class>		
-			<class name="LinkingCucumber.MergedLead.Merged_leads_from_the_same_public_email"></class> 
-			<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_company"></class>
-			<class name="LinkingCucumber.MergedLead.Merged_leads_from_different_emails_but_same_partner"></class>
+			<class name="LinkingCucumber.MergedLead.M1_1_Merged_leads_from_the_same_company_email"></class>		
+			<class name="LinkingCucumber.MergedLead.M1_2_Merged_leads_from_the_same_public_email"></class> 
+			<class name="LinkingCucumber.MergedLead.M1_3_Merged_leads_from_different_emails_but_same_company"></class>
+			<class name="LinkingCucumber.MergedLead.M1_4_Merged_leads_from_different_emails_but_same_partner"></class>
 			
-			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_public_email"></class> 	
-			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_emails_different_companies"></class>
-			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_from_the_different_emails_Not_belong_existing_partner"></class> 
-			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_FromIBleadsPartnerSignUpNULL"></class> 
-			<class name="LinkingCucumber.NOTMergedLead.NOT_Merged_leads_IfOneLeadAssignedToInstallBaseTeam"></class>	
+			<class name="LinkingCucumber.NOTMergedLead.NM2_1_NOT_Merged_leads_from_the_different_public_email"></class> 	
+			<class name="LinkingCucumber.NOTMergedLead.NM2_2_NOT_Merged_leads_from_the_different_emails_different_companies"></class>
+			<class name="LinkingCucumber.NOTMergedLead.NM2_3_NOT_Merged_leads_from_the_different_emails_Not_belong_existing_partner"></class> 
+			<class name="LinkingCucumber.NOTMergedLead.NM2_4_NOT_Merged_leads_FromIBleadsPartnerSignUpNULL"></class> 
+			<class name="LinkingCucumber.NOTMergedLead.NM2_5_NOT_Merged_leads_IfOneLeadAssignedToInstallBaseTeam"></class>	
 			
 			 -->				
 		</classes>
