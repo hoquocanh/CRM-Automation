@@ -17,7 +17,7 @@
          "createManual":false,
          "tags":"Trial download",
          "testcaseType":"test domain",
-         "salesTeam":"CM_Channel_Management"
+         "salesTeam":"CMR"
       },
       {
          "leadName":"source lead-Lower priority",
@@ -38,7 +38,7 @@
          "createManual":false,
          "tags":"Product Registration",
          "testcaseType":"test domain",
-         "salesTeam":"CM_Channel_Management"
+         "salesTeam":"CMR"
       }
    ]
 }

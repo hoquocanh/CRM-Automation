@@ -11,13 +11,13 @@
             "postalCode":"",
             "state":"Texas (US)"
          },         
-         "leadName":"target lead-IB NC Leads_CM_Channel_Management team",
+         "leadName":"target lead-Download Free Trial_CMR team",
          "companyName":"test123",
          "leadForm":"Download Free Trial",
          "createManual":false,
          "tags":"Trial download",
          "testcaseType":"company domain",
-         "salesTeam":"CM_Channel_Management"
+         "salesTeam":"CMR"
       },
       {
          "leadType":"source lead",
@@ -30,7 +30,7 @@
             "postalCode":"",
             "state":"Texas (US)"
          },         
-         "leadName":"source lead-Partner Sign Up_Install Base team",
+         "leadName":"source lead-Download Free Trial_Install Base team",
          "companyName":"test12345",
          "userLogNotes":"target lead log notes",
          "publicMessage":"target lead message",
@@ -38,28 +38,7 @@
          "createManual":false,
          "tags":"Trial download",
          "testcaseType":"company domain",
-         "salesTeam":"Install Base"
-      },
-      {
-         "leadType":"source lead 2",
-         "contactname":"test contact",
-         "emailAddress":"",
-         "address":{
-            "country":"United States",
-            "streetAddress":"123street",
-            "city":"",
-            "postalCode":"",
-            "state":"Texas (US)"
-         },         
-         "leadName":"source lead-NULL",
-         "companyName":"test12345",
-         "userLogNotes":"target lead log notes",
-         "publicMessage":"target lead message",
-         "leadForm":"",
-         "createManual":true,
-         "tags":"Trial download",
-         "testcaseType":"public domain",
-         "salesTeam":"CM_Channel_Management"
+         "salesTeam":"IBSA"
       }
    ]
 }

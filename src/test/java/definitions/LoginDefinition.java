@@ -569,7 +569,7 @@ public class LoginDefinition  {
 	@When ("^Secondly, create a new Target Opportunity from (.*)$")
 	public void createNewTargetOpp(String Leadsfile)  throws Throwable {
   			
-		Logger.info("Create Target Lead");
+		Logger.info("Create Target Opp");
 		
 		opppage.createOpp();
 		
