@@ -221,7 +221,7 @@ public class LoginDefinition  {
 		Logger.info("Create Target Lead");
 		homePage.gotoModuleCRM();
 		crmpage.createLead();
-		
+		crmpage.waitForSecond(2);
 		crmpage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
 		
 		//Slecting an existing Contact will make Email, Contact Name, Company Name, Address be auto filled
