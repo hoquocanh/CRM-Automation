@@ -221,7 +221,7 @@ public class LoginDefinition  {
 		Logger.info("Create Target Lead");
 		homePage.gotoModuleCRM();
 		crmpage.createLead();
-		crmpage.waitForSecond(2);
+		crmpage.waitForSecond(1);
 		crmpage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
 		
 		//Slecting an existing Contact will make Email, Contact Name, Company Name, Address be auto filled
@@ -231,6 +231,7 @@ public class LoginDefinition  {
 		crmpage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectState(Leadsfile, Constants.TARGET_LEAD);
 		
+		crmpage.waitForSecond(1);
 		crmpage.selectTag(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.setCreateManualCheckBox(Leadsfile, Constants.TARGET_LEAD);
