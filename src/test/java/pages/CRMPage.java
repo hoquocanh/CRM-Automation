@@ -602,10 +602,8 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			Logger.verify("Verify the Email is " + valueCheck);
 		else
 			Logger.verify("Verify the Email is " + "EMPTY");
-		
-		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
+					"Email output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
 			
 	}
 	public void checkEmailTest(String valueCheck)
@@ -615,20 +613,16 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			Logger.verify("Verify the Email is " + valueCheck);
 		else
 			Logger.verify("Verify the Email is " + "EMPTY");
-		
-		
-			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
+		Assert.assertTrue(outputvalue.equals(valueCheck),
+					"Email output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
 					
 	}
 	public void checkStreetAddress(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_address).getText();
 		Logger.verify("Verify the Street Address is " + valueCheck);
-			
-		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
+					"Street output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
 		
 	}
 	public void checkCountry(String valueCheck)
@@ -637,10 +631,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		Logger.verify("Verify the Country is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
-		
-		
-		
+					"Country output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");				
 	}
 	public void checkState(String valueCheck)
 	{
@@ -648,9 +639,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		Logger.verify("Verify the State is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.contains(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
-		
-		
+					"State output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");				
 	}
 	public void checkContactName(String valueCheck)
 	{
@@ -658,7 +647,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		Logger.verify("Verify the Contact name is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
+					"Contact name output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
 		
 	}
 	public void checkCompanyName(String valueCheck)
@@ -667,7 +656,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		Logger.verify("Verify the Company name is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
+					"Company name output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
 		
 	}
 	public void checkTag(ArrayList<String> valueCheck)
@@ -679,7 +668,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		
 			for (String i : valueCheck )
 			{
-				Assert.assertTrue((outputvalue.contains(i)),"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
+				Assert.assertTrue((outputvalue.contains(i)),"Tag output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
 				
 			}
 	}
@@ -691,7 +680,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		Logger.verify("Verify the Priority is " + valueCheck + " equal to " + inputValue);
 		
 			Assert.assertTrue(outputValue.equals(inputValue),
-					"output value : " + outputValue + " ; expected value : "+ inputValue + "|");		
+					"Priority output value : " + outputValue + " ; expected value : "+ inputValue + "|");		
 		
 		
 	}
@@ -921,7 +910,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			if (contactType.equalsIgnoreCase("individual"))
 				this.checkContactName(contactNameFromConctactObj);
 			else if (contactType.equalsIgnoreCase("company"))
-				this.checkCompanyName(contactNameFromConctactObj);
+				this.checkContactName(contactNameFromConctactObj);
 			
 		//6. Check Tag			
 			inputTags.add(temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.TAGS.getValue()));			
@@ -997,13 +986,13 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			
 		//5. Check Contact name
 			//5.1. If the value of Contact name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
-			String contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTNAME.getValue(),1);			
+			String contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),1);			
 			String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),1);
 			//5.2. Check the value on UI
 			if (contactType.equalsIgnoreCase("individual"))
 				this.checkContactName(contactNameFromConctactObj);
 			else if (contactType.equalsIgnoreCase("company"))
-				this.checkCompanyName(contactNameFromConctactObj);
+				this.checkContactName(contactNameFromConctactObj);
 
 			
 		//6. Check Tag
@@ -1149,7 +1138,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			if (contactType.equalsIgnoreCase("individual"))
 				this.checkContactName(contactNameFromConctactObj);
 			else if (contactType.equalsIgnoreCase("company"))
-				this.checkCompanyName(contactNameFromConctactObj);
+				this.checkContactName(contactNameFromConctactObj);
 
 			
 		//6. Check Tag
@@ -1323,7 +1312,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		String inputPriority = null;
 		
 		objContact<String, String> temp2 = new objContact<String, String>();
-		String contactNameFromConctactObj = temp2.getJsonValue(Contactsfile,dataJsonContact.CONTACTNAME.getValue());
+		
 		//1. Check Email
 			//1.1 Get value from input JSON file 
 			if(!returnRandomEmail.isEmpty())
@@ -1350,8 +1339,14 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			this.checkState(inputState);	
 			
 		//5. Check Contact name			
-			this.checkContactName(contactNameFromConctactObj);	
-			
+			String contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),2);			
+			String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),1);
+			//5.2. Check the value on UI
+			if (contactType.equalsIgnoreCase("individual"))
+				this.checkContactName(contactNameFromConctactObj);
+			else if (contactType.equalsIgnoreCase("company"))
+				this.checkContactName(contactNameFromConctactObj);
+						
 		//6. Check Tag
 			//6.1 Get value from input JSON file 
 				inputTags.add(temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.TAGS.getValue()));

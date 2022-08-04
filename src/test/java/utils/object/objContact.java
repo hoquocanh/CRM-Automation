@@ -163,7 +163,7 @@ public class objContact<T , S extends String> {
 	/**This method get the value of 'child' contact based on the entered "childContactIndex" and then "inputKeyChildContact" from child contact
 	 * @param testFileName
 	 * @param inputKeyChildContact
-	 * @param childContactIndex
+	 * @param childContactIndex  is started with 1
 	 * @return value of "inputKey"
 	 */
 	public T getJsonValueOfChildContactByIndex(S testFileName, S inputKeyChildContact, int childContactIndex)
@@ -179,7 +179,7 @@ public class objContact<T , S extends String> {
             JSONObject jsonObject = (JSONObject) obj;
             JSONObject contactXObject;
             //List of Contacts
-			//1. Position of first Contact is 0
+			//1. Position of first Contact is 1
             JSONArray contactListArray = (JSONArray) jsonObject.get(dataJsonContact.CONTACTLIST.getValue());
             contactXObject = (JSONObject) contactListArray.get(0);
             
@@ -187,7 +187,7 @@ public class objContact<T , S extends String> {
                 JSONArray contactChildListArray = (JSONArray) contactXObject.get(dataJsonContact.CONTACTCHILD.getValue());
                 	//Go through list of contactChildListArray to find out the desired value of "inputKey" using the navigator as "inputChildName"
 	               
-	                    JSONObject jobject = (JSONObject) contactChildListArray.get(childContactIndex);
+	                    JSONObject jobject = (JSONObject) contactChildListArray.get(childContactIndex-1);
 	                    //Find the desired contactChild using the navigator as "inputChildName"
 	                    if(!jobject.isEmpty())
 	                    {

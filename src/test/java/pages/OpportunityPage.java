@@ -135,9 +135,10 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	
 	
 	
-	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'email_from')]");
+	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'partner_address_email')]");
 	By lbl_address = By.xpath("(//span[contains(@name,'street2')])[2]");
 	By lbl_contact_name = By.xpath("(//span[contains(@name,'contact_name')])[3]");
+	By lbl_company_name = By.xpath("(//span[contains(@name,'partner_name')])[3]");
 	By lbl_state = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::span[contains(@name, 'state_id')][2]");
 	By lbl_country = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::span[contains(@name, 'country_id')][2]");
 		//lbl_tag is a special lbl, it will give us the number of tags selected
@@ -271,10 +272,9 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 //---------------------------------------Pipeline page------------------------------------------------	
 	public void clickViewList() throws Throwable 
 	{
-		getDriver().findElement(btn_view_list).click();
-		
+		//getDriver().findElement(btn_view_list).click();
+		specialClick(btn_view_list);
 		Common.waitPageLoad(3);
-		
 		
 	}
 //---------------------------------------CRM page------------------------------------------------
@@ -629,7 +629,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		Logger.verify("Verify the Email is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
+					"Email output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
 	}
 	
 	public void checkStreetAddress(String valueCheck)
@@ -638,7 +638,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		Logger.verify("Verify the Street Address is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
+					"Street output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
 		
 	}
 	public void checkCountry(String valueCheck)
@@ -647,7 +647,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		Logger.verify("Verify the Country is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
+					"Country output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
 	}
 	public void checkState(String valueCheck)
 	{
@@ -655,7 +655,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		Logger.verify("Verify the State is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.contains(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
+					"State output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
 		
 	}
 	public void checkContactName(String valueCheck)
@@ -664,7 +664,16 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		Logger.verify("Verify the Contact name is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
-					"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
+					"Contact Name output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
+	}
+	public void checkCompanyName(String valueCheck)
+	{
+		String outputvalue = (String) getDriver().findElement(lbl_company_name).getText();
+		Logger.verify("Verify the Company name is " + valueCheck);
+		
+			Assert.assertTrue(outputvalue.equals(valueCheck),
+					"Company name output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
+		
 	}
 	public void checkTag(ArrayList<String> valueCheck)
 	{
@@ -676,7 +685,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 			for (String i : valueCheck )
 			{
 				Assert.assertTrue((outputvalue.contains(i)),
-						"output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
+						"Tag output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
 			}
 		
 	}
@@ -777,7 +786,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		String inputContactName = null;
 		ArrayList<String> inputTags = new ArrayList<String>();
 		objContact<String, String> temp2 = new objContact<String, String>();
-		String contactNameFromConctactObj = temp2.getJsonValue(Contactsfile,dataJsonContact.CONTACTNAME.getValue());
+		
 		//1. Check Email
 			//1.1. If the value of Email field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
 			if(!returnRandomEmail.isEmpty())
@@ -812,9 +821,15 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 			//4.2. Check the value on UI
 			this.checkState(inputState);	
 			
-		//5. Check Contact name			
+		//5. Check Contact name						
+			//5.1. If the value of Contact name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
+			String contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTNAME.getValue(),1);			
+			String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),1);
 			//5.2. Check the value on UI
-			this.checkContactName(contactNameFromConctactObj);	
+			if (contactType.equalsIgnoreCase("individual"))
+				this.checkContactName(contactNameFromConctactObj);
+			else if (contactType.equalsIgnoreCase("company"))
+				this.checkCompanyName(contactNameFromConctactObj);
 			
 		//6. Check Tag
 			//6.1. If the value of Tag name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 

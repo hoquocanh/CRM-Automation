@@ -123,8 +123,8 @@ public class LoginDefinition  {
 		//Operate on Child Contacts
 		Logger.info("Create Contact child");
 		//Add 2 child contacts
-		returnRandomEmail_ContactChild1 = contactspage.addChildContactsByIndex(Contactsfile,returnRandomContactEmail, 0);
-		returnRandomEmail_ContactChild2 = contactspage.addChildContactsByIndex(Contactsfile,returnRandomContactEmail, 1);
+		returnRandomEmail_ContactChild1 = contactspage.addChildContactsByIndex(Contactsfile,returnRandomContactEmail, 1);
+		returnRandomEmail_ContactChild2 = contactspage.addChildContactsByIndex(Contactsfile,returnRandomContactEmail, 2);
 		
 		//Return HOME
 		contactspage.goToHome();
@@ -293,8 +293,9 @@ public class LoginDefinition  {
 		opppage.createOpp();
 		
 		opppage.enterLeadName(Leadsfile, Constants.TARGET_LEAD);
-		opppage.enterEmail(Leadsfile, Constants.TARGET_LEAD,returnRandomEmail_ContactChild1);
-		
+		//opppage.enterEmail(Leadsfile, Constants.TARGET_LEAD,returnRandomEmail_ContactChild1);
+		//Slecting an existing Contact will make Email, Contact Name, Company Name, Address be auto filled
+		opppage.selectContact(Leadsfile, Constants.SOURCE_LEAD, returnRandomEmail_ContactChild1);
 		opppage.enterLeadForm(Leadsfile, Constants.TARGET_LEAD);
 		
 		opppage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
@@ -307,6 +308,7 @@ public class LoginDefinition  {
 		
 		opppage.pressSaveButton();
 		opppage.goToHome();
+
 		}   
 	@Given ("^Secondly, setup a new Target Opportunity using Reseller contact from (.*)$")
 	public void createNewTargetOppUsingResellerContact(String Leadsfile)  throws Throwable {
