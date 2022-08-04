@@ -17,4 +17,3 @@ Feature: M1_3_Verify the automatic Lead merging happens when the leads from diff
     Examples: 
    	|Leads file|Contacts file|
    	|MergedLead_DifferentEmailButSameCompany\CRM-1172_1.3.1.1|Contact\Company_with_2_sub-contacts|
-
