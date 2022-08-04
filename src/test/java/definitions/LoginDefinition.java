@@ -231,7 +231,7 @@ public class LoginDefinition  {
 		crmpage.selectCountry(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectState(Leadsfile, Constants.TARGET_LEAD);
 		
-		crmpage.waitForSecond(1);
+		crmpage.waitForSecond(3);
 		crmpage.selectTag(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.selectSalesTeam(Leadsfile, Constants.TARGET_LEAD);
 		crmpage.setCreateManualCheckBox(Leadsfile, Constants.TARGET_LEAD);
