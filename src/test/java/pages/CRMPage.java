@@ -486,7 +486,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		{
 			waitForElementResponse();
 			
-			getDriver().findElement(cbb_tags).click();	
+			//getDriver().findElement(cbb_tags).click();	
 			specialClick(cbb_tags);
 			waitForElementResponse();
 			getDriver().findElement(cbb_tags).sendKeys(inputText);	
