@@ -822,14 +822,12 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 			this.checkState(inputState);	
 			
 		//5. Check Contact name						
-			//5.1. If the value of Contact name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
-			String contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTNAME.getValue(),1);			
-			String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),1);
+			//NOTICE: From the input Contactsfile, the setup for the 1st child contact is used for Target Opp							
+			String contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),1);
 			//5.2. Check the value on UI
-			if (contactType.equalsIgnoreCase("individual"))
 				this.checkContactName(contactNameFromConctactObj);
-			else if (contactType.equalsIgnoreCase("company"))
-				this.checkCompanyName(contactNameFromConctactObj);
+			
+			
 			
 		//6. Check Tag
 			//6.1. If the value of Tag name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
@@ -926,7 +924,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		String inputContactName = null;
 		ArrayList<String> inputTags = new ArrayList<String>();
 		objContact<String, String> temp2 = new objContact<String, String>();
-		String contactNameFromConctactObj = temp2.getJsonValue(Contactsfile,dataJsonContact.CONTACTNAME.getValue());
+		//String contactNameFromConctactObj = temp2.getJsonValue(Contactsfile,dataJsonContact.CONTACTNAME.getValue());
 		//1. Check Email
 			//1.1 Get value from input JSON file 
 			if(!returnRandomEmail.isEmpty())
@@ -953,8 +951,10 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 			this.checkState(inputState);	
 			
 		//5. Check Contact name			
-			//5.2. Check the value on UI
-			this.checkContactName(contactNameFromConctactObj);	
+			//NOTICE: We assume the 2nd Company in input Contactsfile is the Company for the Target Lead
+			String contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),2);						
+			//5.2. Check the value on UI			
+				this.checkContactName(contactNameFromConctactObj);
 			
 		//6. Check Tag
 			//6.1 Get value from input JSON file 
