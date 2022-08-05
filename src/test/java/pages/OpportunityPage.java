@@ -345,8 +345,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		if(!inputChildContactEmail.isEmpty())
 		{
 			waitForElementResponse();
-
-			getDriver().findElement(cbb_contact).click();
+			specialClick(cbb_contact);			
 			waitForElementResponse();
 			getDriver().findElement(cbb_contact).sendKeys(inputChildContactEmail);	
 			waitForElementResponse();
@@ -364,7 +363,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 	}
 	public void selectCRMDeveloperTab() throws Throwable		
 	{		
-		getDriver().findElement(tab_crm_developer).click();
+		specialClick(tab_crm_developer);		
 		waitForElementResponse();
 		
 	}
@@ -398,14 +397,12 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 	}
 	public void pressSaveButton() throws Throwable
 	{
-		
-		getDriver().findElement(btn_save).click();
+		specialClick(btn_save);		
 		waitForPageDisplay();
 	}
 	public void clickCRMDeveloper() throws Throwable
 	{
-		
-		getDriver().findElement(tab_crm_developer).click();
+		specialClick(tab_crm_developer);		
 		waitForElementResponse();
 	}
 	//For the kind of Country combobox, that contains the long list of items, we need to enter the name of item -> enter for selecting that item
@@ -416,9 +413,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 			
 			if(!inputText.isEmpty())
 			{
-				
-				
-				getDriver().findElement(cbb_country).click();
+				specialClick(cbb_country);
 				waitForElementResponse();
 				getDriver().findElement(cbb_country).sendKeys(inputText);	
 				waitForElementResponse();
@@ -438,7 +433,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 			{
 				waitForElementResponse();
 
-				getDriver().findElement(cbb_state).click();
+				specialClick(cbb_state);
 				waitForElementResponse();
 				getDriver().findElement(cbb_state).sendKeys(inputText);	
 				waitForElementResponse();
@@ -457,7 +452,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		{
 			waitForElementResponse();
 			
-			getDriver().findElement(cbb_tags).click();	
+			specialClick(cbb_tags);	
 			waitForElementResponse();
 			getDriver().findElement(cbb_tags).sendKeys(inputText);	
 			waitForElementResponse();
@@ -494,7 +489,8 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		
 		//3. If the CreateManual checkbox is UNcheck -> click on it
 		if(!isChecked)
-			getDriver().findElement(div_chb_is_create_manual).click();
+			specialClick(div_chb_is_create_manual);
+			
 	}
 	public void setOffCreateManual(String testFileName, String leadType) throws Throwable
 	{				
@@ -515,7 +511,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		
 		//3. If the CreateManual checkbox is check -> click on it
 		if(isChecked)
-			getDriver().findElement(div_chb_is_create_manual).click();
+			specialClick(div_chb_is_create_manual);			
 	}
 	public void setStageOrPriority(String testFileName, String leadType) throws Throwable
 	{
@@ -545,31 +541,31 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		case "new":
 			//Only if the attribute "aria-checked" of the target Tab is "false", I can click on that tab, otherwise I could not
 			if (getDriver().findElement(tab_stage_new).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
-			{getDriver().findElement(tab_stage_new).click();	}	
+			{specialClick(tab_stage_new);				}	
 			break;
 		case "in process":
 			if (getDriver().findElement(tab_stage_in_process).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
-			{getDriver().findElement(tab_stage_in_process).click();}			
+			{specialClick(tab_stage_in_process);}			
 			break;
 		case "qualified":
 			if (getDriver().findElement(tab_stage_qualified).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
-			{getDriver().findElement(tab_stage_qualified).click();	}			
+			{specialClick(tab_stage_qualified);}						
 			break;
 		case "active interest":
 			if (getDriver().findElement(tab_stage_active_interest).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
-			{getDriver().findElement(tab_stage_active_interest).click();	}		
+			{specialClick(tab_stage_active_interest);}		
 			break;
 		case "hot deal":
 			if (getDriver().findElement(tab_stage_hot_deal).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
-			{getDriver().findElement(tab_stage_hot_deal).click();	}	
+			{specialClick(tab_stage_hot_deal);}	
 			break;
 		case "purchase approval":
 			if (getDriver().findElement(tab_stage_purchase_approval).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
-			{getDriver().findElement(tab_stage_purchase_approval).click();}				
+			{specialClick(tab_stage_purchase_approval);}				
 			break;
 		case "won":
 			if (getDriver().findElement(tab_stage_won).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
-			{getDriver().findElement(tab_stage_won).click();	}		
+			{specialClick(tab_stage_won);}		
 			break;		
 		}
 			
@@ -604,19 +600,19 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		case "1-star":
 			//Only if the attribute "aria-checked" of the target Star is "false", I can click on that Star, otherwise all Star will disappear if clicking on the active level
 			if (getDriver().findElement(star_1).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
-				getDriver().findElement(star_1).click();		
+				specialClick(star_1);						
 			break;
 		case "2-star":
 			if (getDriver().findElement(star_2).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
-				getDriver().findElement(star_2).click();		
+				specialClick(star_2);	
 			break;
 		case "3-star":
 			if (getDriver().findElement(star_3).getAttribute("aria-checked").equalsIgnoreCase("false") == true)	
-				getDriver().findElement(star_3).click();		
+				specialClick(star_3);		
 			break;
 		case "4-star":
 			if (getDriver().findElement(star_4).getAttribute("aria-checked").equalsIgnoreCase("false") == true)
-				getDriver().findElement(star_4).click();	
+				specialClick(star_4);
 			break;		
 		}
 			
@@ -1119,9 +1115,8 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		if (leadType.equalsIgnoreCase(Constants.TARGET_LEAD))
 			replace_dynamic_controll = Common.replaceDynamicControl(lnk_dynamic_targe_lead,"REPLACE#1",inputText);
 		else if (leadType.equalsIgnoreCase(Constants.SOURCE_LEAD))
-			replace_dynamic_controll = Common.replaceDynamicControl(lnk_dynamic_source_lead,"REPLACE#1",inputText);
-		
-		getDriver().findElement(replace_dynamic_controll).click();
+			replace_dynamic_controll = Common.replaceDynamicControl(lnk_dynamic_source_lead,"REPLACE#1",inputText);				
+		specialClick(replace_dynamic_controll);
 		waitForPageDisplay();
 	}
 	/**This method is used to get list of Tags on Target Lead or Source Lead (after creating these 2 leads completely)

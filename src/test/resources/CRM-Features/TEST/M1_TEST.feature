@@ -1,5 +1,4 @@
-Feature: M1_3_Verify the automatic Lead merging happens when the leads from different emails but same company
-
+Feature: M1_4_Verify the automatic Lead merging happens when the leads from different emails but same partner
 
 #Scenario#CRM-1172_1.3.2.1:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has higher Opp.Stage than other
 Scenario Outline: CRM-1172_1.3.2.1:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has higher Opp.Stage than other
@@ -18,4 +17,3 @@ Scenario Outline: CRM-1172_1.3.2.1:Verify that the merging lead happens successf
     Examples: 
    	|Leads file|Contacts file|
    	|MergedLead_DifferentEmailButSameCompany\CRM-1172_1.3.2.1|Contact\Company_with_2_sub-contacts|
-
