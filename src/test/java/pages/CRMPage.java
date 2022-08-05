@@ -598,6 +598,10 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	public void checkEmail(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_email).getText();
+		
+		System.out.println("lbl_email : " + lbl_email + "-------");
+		System.out.println("outputvalue : " + outputvalue + "-------");
+		
 		if(!valueCheck.isEmpty())
 			Logger.verify("Verify the Email is " + valueCheck);
 		else
@@ -644,6 +648,10 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	public void checkContactName(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_contact_name).getText();
+		
+		System.out.println("lbl_contact_name : " + lbl_contact_name + "-------");
+		System.out.println("outputvalue : " + outputvalue + "-------");
+		
 		Logger.verify("Verify the Contact name is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),

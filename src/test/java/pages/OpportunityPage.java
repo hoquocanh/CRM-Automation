@@ -135,7 +135,7 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	
 	
 	
-	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'partner_address_email')]");
+	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'email_from')]");
 	By lbl_address = By.xpath("(//span[contains(@name,'street2')])[2]");
 	By lbl_contact_name = By.xpath("(//span[contains(@name,'contact_name')])[3]");
 	By lbl_company_name = By.xpath("(//span[contains(@name,'partner_name')])[3]");
@@ -186,6 +186,55 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 		WebElement elem = getDriver().findElement(elementName);
 		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
 		executor.executeScript("arguments[0].click();", elem);
+	}
+	
+	/**This method is a way to make the element is able to get text on Jenkins
+	 * <pre>
+	 * This method is a way to make the element is able to get text  on Jenkins
+	 * </pre>
+	 * @param elementName	 
+	 * @throws Throwable
+	 */
+	public String specialGetText(By elementName)
+	{
+		WebElement elem = getDriver().findElement(elementName);
+		
+		System.out.println("elem: "+ elem);
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+		String text = (String ) executor.executeScript("return arguments[0].value", elem);
+		
+		System.out.println("text in Special Get Text: "+ text);
+		return text;
+	}
+	/**This method is a way to make the element is able to get the value of an attribute on Jenkins
+	 * <pre>
+	 * This method is a way to make the element is  able to get the value of an attribute on Jenkins
+	 * </pre>
+	 * @param elementName	 
+	 * @throws Throwable
+	 */
+	public String specialGetAttributetextContent(By elementName)
+	{
+		waitForSecond(2);
+		WebElement elem = getDriver().findElement(elementName);
+		JavascriptExecutor executor = (JavascriptExecutor) getDriver();		
+		
+		executor.executeScript("arguments[0].scrollIntoView(true);", elem);
+		
+		String text =(String) executor.executeScript("return arguments[0].getAttribute('textContent')", elem);
+		System.out.println("text in textContent: "+ text);	
+		
+		String text2 =(String) executor.executeScript("return arguments[0].getAttribute('value')", elem);
+		System.out.println("text in Special value: "+ text2);	
+		
+		String text3 =(String) executor.executeScript("return arguments[0].getAttribute('innerHTML')", elem);
+		System.out.println("text in Special innerHTML: "+ text3);	
+		
+		
+		
+		
+		return text;
+		
 	}
 	public void clickLeadsMenu() throws Throwable 
 	{
@@ -622,6 +671,9 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 	public void checkEmail(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_email).getText();
+		
+		System.out.println("lbl_email : " + lbl_email + "-------");
+		System.out.println("outputvalue : " + outputvalue + "-------");
 		Logger.verify("Verify the Email is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
@@ -656,7 +708,27 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 	}
 	public void checkContactName(String valueCheck)
 	{
+		waitForSecond(3);
 		String outputvalue = (String) getDriver().findElement(lbl_contact_name).getText();
+		String outputvalue1 = (String) specialGetText(lbl_contact_name);
+		String outputvalue2 = (String) specialGetAttributetextContent(lbl_contact_name);
+		System.out.println("lbl_contact_name : " + lbl_contact_name + "-------");
+		System.out.println("outputvalue : " + outputvalue + "-------");
+		System.out.println("outputvalue2 : " + outputvalue2 + "-------");
+		
+		
+		String outputvalue3 = (String) getDriver().findElement(lbl_contact_name).getAttribute("textContent");
+		System.out.println("outputvalue3 : " + outputvalue3 + "-------");
+		
+		String outputvalue4 = (String) getDriver().findElement(lbl_contact_name).getAttribute("innerText");
+		System.out.println("outputvalue4 : " + outputvalue4 + "-------");
+		
+		String outputvalue5 = (String) getDriver().findElement(lbl_contact_name).getAttribute("innerHTML");
+		System.out.println("outputvalue5 : " + outputvalue5 + "-------");
+		
+		String outputvalue6 = (String) getDriver().findElement(lbl_contact_name).getAttribute("value");
+		System.out.println("outputvalue6 : " + outputvalue6 + "-------");
+		
 		Logger.verify("Verify the Contact name is " + valueCheck);
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
