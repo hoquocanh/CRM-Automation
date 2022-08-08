@@ -135,7 +135,7 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	
 	
 	
-	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'email_from')]");
+	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'partner_address_email')]");
 	By lbl_address = By.xpath("(//span[contains(@name,'street2')])[2]");
 	By lbl_contact_name = By.xpath("(//span[contains(@name,'contact_name')])[3]");
 	By lbl_company_name = By.xpath("(//span[contains(@name,'partner_name')])[3]");

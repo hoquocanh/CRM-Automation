@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -206,7 +207,7 @@ public class objContact<T , S extends String> {
 		int returnValue=0;
 		String inputjsonPath = "\\src\\test\\java\\utils\\data\\"+testFileName+".json";
 		String jsonPath = System.getProperty("user.dir") + inputjsonPath;
-		
+		JSONArray contactChildListArray = null;
 		Object obj;
         try {
         	
@@ -216,12 +217,12 @@ public class objContact<T , S extends String> {
             //List of Contacts
 			//1. Position of first Contact is 0
             JSONArray contactListArray = (JSONArray) jsonObject.get(dataJsonContact.CONTACTLIST.getValue());
-            contactXObject = (JSONObject) contactListArray.get(0);
-            
-            //3. "contactChild" is another JSONObject
-            JSONArray contactChildListArray = (JSONArray) contactXObject.get(dataJsonContact.CONTACTCHILD.getValue());
-        	//Go through list of contactChildListArray to find out the desired value of "inputKey" using the navigator as "inputChildName"
-            returnValue = contactChildListArray.size();
+            contactXObject = (JSONObject) contactListArray.get(0);            
+            //3. "contactChild" is another JSONObject           
+            	contactChildListArray = (JSONArray) contactXObject.get(dataJsonContact.CONTACTCHILD.getValue());            	
+            	//Go through list of contactChildListArray to find out the desired value of "inputKey" using the navigator as "inputChildName"
+                if (contactChildListArray != null)
+                	returnValue = (int) contactChildListArray.size();
          } 
 	    catch (Exception e) 
 	    {

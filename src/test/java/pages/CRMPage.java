@@ -598,10 +598,6 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	public void checkEmail(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_email).getText();
-		
-		System.out.println("lbl_email : " + lbl_email + "-------");
-		System.out.println("outputvalue : " + outputvalue + "-------");
-		
 		if(!valueCheck.isEmpty())
 			Logger.verify("Verify the Email is " + valueCheck);
 		else
@@ -648,12 +644,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 	public void checkContactName(String valueCheck)
 	{
 		String outputvalue = (String) getDriver().findElement(lbl_contact_name).getText();
-		
-		System.out.println("lbl_contact_name : " + lbl_contact_name + "-------");
-		System.out.println("outputvalue : " + outputvalue + "-------");
-		
 		Logger.verify("Verify the Contact name is " + valueCheck);
-		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"Contact name output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");		
 		
@@ -912,13 +903,14 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			
 		//5. Check Contact name. In this scenario, we will compare with Contact Name that moved from Contact object		
 			//NOTICE: We assume the 1st Company in input Contactsfile is the Company for the Target Lead
+			String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),1);
 			String contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTNAME.getValue(),1);			
-			//String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),1);
+			
 			//5.2. Check the value on UI
-			//if (contactType.equalsIgnoreCase("individual"))
+			if (contactType.equalsIgnoreCase("individual"))
 				this.checkContactName(contactNameFromConctactObj);
-			//else if (contactType.equalsIgnoreCase("company"))
-				//this.checkContactName(contactNameFromConctactObj);
+			else if (contactType.equalsIgnoreCase("company"))
+				this.checkCompanyName(contactNameFromConctactObj);
 			
 		//6. Check Tag			
 			inputTags.add(temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.TAGS.getValue()));			
@@ -954,7 +946,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		String inputContactName = null;
 		ArrayList<String> inputTags = new ArrayList<String>();
 		String inputPriority = null;
-		
+		String contactNameFromConctactObj; 
 		objContact<String, String> temp2 = new objContact<String, String>();
 		
 		//1. Check Email
@@ -993,15 +985,20 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			this.checkState(inputState);	
 			
 		//5. Check Contact name
-			//5.1. If the value of Contact name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
-			String contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),1);			
-			//String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),1);
+			//If the Lead/ Opp is using the Contact from separate Contact file
+			if (!Contactsfile.isEmpty() )
+				//If having no any Contact child, meaning the Json Contact file need to treat as Reseller or only Company or Individual
+				System.out.println("Number of Contact childs in json Contact: " + temp2.getTotalChildContacs(Contactsfile));
+				if (temp2.getTotalChildContacs(Contactsfile) == 0)
+					contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile, dataJsonContact.CONTACTNAME.getValue(),1);								 
+				else
+					contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),1);		
+			
 			//5.2. Check the value on UI
 			//if (contactType.equalsIgnoreCase("individual"))
 				this.checkContactName(contactNameFromConctactObj);
 			//else if (contactType.equalsIgnoreCase("company"))
 				//this.checkContactName(contactNameFromConctactObj);
-
 			
 		//6. Check Tag
 			//6.1. If the value of Tag name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
@@ -1140,13 +1137,13 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 			
 		//5. Check Contact name
 			//NOTICE: We assume the 2nd Company in input Contactsfile is the Company for the Target Lead
-			String contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTNAME.getValue(),2);			
-			//String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),2);
+			String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),2);
+			String contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTNAME.getValue(),2);						
 			//5.2. Check the value on UI
-			//if (contactType.equalsIgnoreCase("individual"))
+			if (contactType.equalsIgnoreCase("individual"))
 				this.checkContactName(contactNameFromConctactObj);
-			//else if (contactType.equalsIgnoreCase("company"))
-				//this.checkContactName(contactNameFromConctactObj);
+			else if (contactType.equalsIgnoreCase("company"))
+				this.checkCompanyName(contactNameFromConctactObj);
 
 			
 		//6. Check Tag
@@ -1318,7 +1315,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		String inputContactName = null;
 		ArrayList<String> inputTags = new ArrayList<String>();
 		String inputPriority = null;
-		
+		String contactNameFromConctactObj= null;
 		objContact<String, String> temp2 = new objContact<String, String>();
 		
 		//1. Check Email
@@ -1345,16 +1342,23 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 				inputState = temp.getJsonValue(testFileName, Constants.SOURCE_LEAD,dataJsonLead.STATE.getValue());
 			//4.2. Check the value on UI
 			this.checkState(inputState);	
-			
-		//5. Check Contact name			
-			String contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),2);			
-			//String contactType = temp2.getJsonValueOfFatherContactByIndex(Contactsfile,dataJsonContact.CONTACTTYPE.getValue(),1);
+		
+		//5. Check Contact name
+			//If the Lead/ Opp is using the Contact from separate Contact file
+			if (!Contactsfile.isEmpty() )
+				//If having no any Contact child, meaning the Json Contact file need to treat as Reseller or only Company or Individual
+				System.out.println("Number of Contact childs in json Contact: " + temp2.getTotalChildContacs(Contactsfile));
+				if (temp2.getTotalChildContacs(Contactsfile) == 0)					
+					contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile, dataJsonContact.CONTACTNAME.getValue(),1);								 
+				else
+					contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),2);		
 			
 			//5.2. Check the value on UI
 			//if (contactType.equalsIgnoreCase("individual"))
 				this.checkContactName(contactNameFromConctactObj);
 			//else if (contactType.equalsIgnoreCase("company"))
-				//this.checkContactName(contactNameFromConctactObj);
+				//this.checkContactName(contactNameFromConctactObj);	
+		
 						
 		//6. Check Tag
 			//6.1 Get value from input JSON file 
