@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" thread-count="5" parallel="classes">
+	<listeners>
+		<listener class-name="utils.config.TestListener" />
+	</listeners>
+<test name="RUN_All">
+  		<parameter name="browser" value="chrome.local" />
+		<parameter name="autoLogBug" value="false" />
+		<classes>
+			<class name="LinkingCucumber.RunAll_Merged_leads_feature"></class> 					
+		</classes>
+	</test>
+
+</suite>

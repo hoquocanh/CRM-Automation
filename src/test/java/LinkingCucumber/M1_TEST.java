@@ -8,8 +8,7 @@ import cucumber.api.CucumberOptions;
         glue = {"definitions"},
         plugin = {"utils.config.TestListener","json:target/cucumber-reports/cucumber.json",
                         "pretty", "html:target/html-report/cucumber-html-reports.html",
-                        "junit:target/cucumber-reports/cucumber.xml"},
-		tags= {"@RegressionTest"}
+                        "junit:target/cucumber-reports/cucumber.xml"}		
 	)	
 public class M1_TEST extends test_base
 {
