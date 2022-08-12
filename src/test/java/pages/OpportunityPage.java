@@ -135,7 +135,7 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	
 	
 	
-	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'partner_address_email')]");
+	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'email_from')]");
 	By lbl_address = By.xpath("(//span[contains(@name,'street2')])[2]");
 	By lbl_contact_name = By.xpath("(//span[contains(@name,'contact_name')])[3]");
 	By lbl_company_name = By.xpath("(//span[contains(@name,'partner_name')])[3]");
@@ -513,7 +513,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 	{
 		objLead<Boolean, String> temp = new objLead<Boolean, String>();
 		Boolean inputBoolean =  temp.getJsonValue(testFileName,leadType,dataJsonLead.CREATEMANUAL.getValue());	
-		
+		System.out.println("inputBoolean for " + leadType +" : " + inputBoolean);
 		if(inputBoolean == true)
 			setOnCreateManual(testFileName,leadType);
 		else
@@ -538,8 +538,22 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		
 		//3. If the CreateManual checkbox is UNcheck -> click on it
 		if(!isChecked)
-			specialClick(div_chb_is_create_manual);
+			specialClick(chb_is_create_manual);
 			
+	}
+	public Boolean isChecked(By elementName)
+	{
+		WebDriver dr = super.getDriver();
+		JavascriptExecutor Js1 = (JavascriptExecutor) dr;
+		
+		//1. Get value of //input[@id]
+				String attributeValue = getDriver().findElement(elementName).getAttribute("id");
+		//1. Compose the Javascript command to check whether the Checkbox is check. Notice: There are the "return" word at the begining of command to return the value of checking
+				String checkTheCheckBox = 
+						  "return document.querySelector(\'#" + attributeValue + "\')" +
+						  ".checked";
+				
+				return (Boolean) Js1.executeScript(checkTheCheckBox);
 	}
 	public void setOffCreateManual(String testFileName, String leadType) throws Throwable
 	{				
@@ -557,10 +571,17 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		
 		//Logger.info("Checkbox element is "+ checkTheCheckBox);	
 		Boolean isChecked = (Boolean) Js1.executeScript(checkTheCheckBox);
-		
+		System.out.println("attributeValue: " + attributeValue);
+		System.out.println("checkTheCheckBox: " +checkTheCheckBox );
+		System.out.println("isChecked: " + isChecked);
 		//3. If the CreateManual checkbox is check -> click on it
 		if(isChecked)
-			specialClick(div_chb_is_create_manual);			
+			specialClick(chb_is_create_manual);		
+		System.out.println("isChecked: " + isChecked);
+		
+		
+		isChecked = isChecked(chb_is_create_manual);
+		System.out.println("isChecked again: " + isChecked);
 	}
 	public void setStageOrPriority(String testFileName, String leadType) throws Throwable
 	{
