@@ -2,21 +2,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>CRM</groupId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-
 	<name>CRM-Automation</name>
 	<url>http://maven.apache.org</url>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<testNames>all</testNames>
-	</properties>
-
 	<build>
 		<directory>target</directory>
 		<outputDirectory>target/classes</outputDirectory>
@@ -29,9 +19,18 @@
 		</testResources>
 		<plugins>
 			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>                
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M7</version>
+				<version>3.0.0-M7</version>				
 				<configuration>
 					<excludes>
 						<exclude>**/*.java</exclude>
@@ -45,9 +44,9 @@
 							<value>2</value>
 						</property>
 					</properties>
-					<testFailureIgnore>true</testFailureIgnore>					
+						<skipTests>true</skipTests>							
 				</configuration>
-			</plugin>
+			</plugin>		
 			<plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
@@ -61,13 +60,26 @@
                         </goals>
                         <configuration>
                             <projectName>CRM-Automation</projectName>
-                            <outputDirectory>${project.build.directory}/target/html-report/cucumber-html-reports.html</outputDirectory>
-                            <cucumberOutput>${project.build.directory}/target/cucumber-reports/cucumber.json</cucumberOutput>
-                            <inputDirectory>${project.build.directory}/target/cucumber-reports</inputDirectory>
-                            <jsonFiles>
-                                <param>>**/*.json</param>
-                            </jsonFiles>
+        		      <!-- this is similar report as jenkins report -->
+        		      <!-- QA notice: the ${project.build.directory} meaning Your Project directory/target -->
+                            <outputDirectory>${project.build.directory}/cucumber-JVM-reports</outputDirectory>
+               <!-- to generate better report-similar to Jenkin report,maven-cucumber-reporting plug-in is used,which reads the generated cucumber.json file in local directory and generates cucumber-JVM-reports -->
+                           <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>                                       
+              <skippedFails>true</skippedFails>
+              <enableFlashCharts>true</enableFlashCharts>
                             <buildNumber>42</buildNumber>                           
+                        <jsonFiles>
+                                <!-- supports wildcard or name pattern -->
+                                <param>**/*.json</param>
+                            </jsonFiles>
+                            <!-- optional, defaults to outputDirectory if not specified -->
+                            <classificationDirectory>${project.build.directory}/classifications</classificationDirectory>
+                            <classificationFiles>
+                                    <!-- supports wildcard or name pattern -->
+                                    <param>sample.properties</param>
+                                    <param>other.properties</param>
+                            </classificationFiles>
+                            <parallelTesting>false</parallelTesting>
                         </configuration>
                     </execution>
                 </executions>
@@ -94,53 +106,43 @@
 		</repository>
 	</repositories>
 	<dependencies>
-
-
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>23.0</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.14.2</version>
 		</dependency>
-
-
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>4.2.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/net.masterthought/maven-cucumber-reporting -->
-<dependency>
-    <groupId>net.masterthought</groupId>
-    <artifactId>maven-cucumber-reporting</artifactId>
-    <version>5.6.2</version>
-</dependency>
-		
+		<dependency>
+		    <groupId>net.masterthought</groupId>
+		    <artifactId>maven-cucumber-reporting</artifactId>
+		    <version>5.6.2</version>
+		</dependency>		
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-testng</artifactId>
 			<version>4.2.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-core</artifactId>
 			<version>4.2.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java8</artifactId>
@@ -157,8 +159,6 @@
 			<artifactId>gherkin</artifactId>
 			<version>5.1.0</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
@@ -196,8 +196,6 @@
 			<artifactId>guice</artifactId>
 			<version>4.0</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-io</artifactId>
@@ -212,14 +210,12 @@
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
 			<version>3.1.0</version>
-
 		</dependency>
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>json-path</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot -->
 		<dependency>
 			<groupId>ru.yandex.qatools.ashot</groupId>
@@ -254,12 +250,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>25.1-jre</version>
-		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->		
 		<dependency>
 			<groupId>com.google.apis</groupId>
 			<artifactId>google-api-services-gmail</artifactId>
@@ -270,13 +261,7 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20180130</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
-		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-			<version>1.1.1</version>
-		</dependency>
+		</dependency>		
 		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
 		<dependency>
 			<groupId>com.google.api-client</groupId>
@@ -290,9 +275,7 @@
 			<artifactId>google-oauth-client-jetty</artifactId>
 			<version>1.23.0</version>
 		</dependency>
-
 <!-- The below part is for testing WEB UI -->
-
  <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
@@ -319,16 +302,13 @@
 	    <groupId>org.seleniumhq.selenium</groupId>
 	    <artifactId>selenium-java</artifactId>
 	    <version>4.3.0</version>
-	</dependency>
-	
-<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support -->
-<dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>selenium-support</artifactId>
-    <version>2.0a7</version>
-</dependency>
-
-		
+	</dependency>	
+	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support -->
+	<dependency>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-support</artifactId>
+	    <version>2.0a7</version>
+	</dependency>		
 	</dependencies>
 	<artifactId>CRM-Automation </artifactId>
 </project>

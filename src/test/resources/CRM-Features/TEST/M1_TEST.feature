@@ -1,40 +1,20 @@
-Feature: NM2_5_Verify that the merging leads do NOT happens when One lead is assigned to Install Base team and another lead is assigned to another team except Marketing
+Feature: M1_1_Verify the automatic Lead merging happens when the leads from the same company email
 
-
-
-#Scenario_CRM-1172_2.5.2:Verify that the merging lead NOT happens when One lead is assigned to Install Base team and another lead is assigned to CMD
-Scenario Outline: CRM-1172_2.5.2:Verify that the merging lead NOT happens when One lead is assigned to Install Base team and another lead is assigned to CMD
-Given Launch Odoo Page
-Given Login successfully
-Given Active developer mode 
-#Pre-condition:  
-When Create a new Target Lead from <Leads file>
-When Create a new Source Lead from <Leads file>
-#Step#1: Observe the Target Lead
-Then Check Target Lead NOT merged with Source Lead using same email from <Leads file>    
-#Step#2: Observe the Source Lead
-Then Check Source Lead NOT merged with Target Lead using same email from <Leads file>  
-
-
-Examples: 
-|Leads file|
-|NOTMergedLead_OneLeadAssignedToInstallBaseteam\CRM-1172_2.5.2|
-
-#Scenario_CRM-1172_2.5.3:Verify that the merging lead NOT happens when One lead is assigned to Install Base team and another lead is assigned to Field Sales
-Scenario Outline: CRM-1172_2.5.3:Verify that the merging lead NOT happens when One lead is assigned to Install Base team and another lead is assigned to Field Sales
-Given Launch Odoo Page
-Given Login successfully
-Given Active developer mode 
-#Pre-condition:  
-When Create a new Target Lead from <Leads file>
-When Create a new Source Lead from <Leads file>
-#Step#1: Observe the Target Lead
-Then Check Target Lead NOT merged with Source Lead using same email from <Leads file>    
-#Step#2: Observe the Source Lead
-Then Check Source Lead NOT merged with Target Lead using same email from <Leads file>  
-
-
-Examples: 
-|Leads file|
-|NOTMergedLead_OneLeadAssignedToInstallBaseteam\CRM-1172_2.5.3|
-
+#Scenario#CRM-1172_1.1.1.1:Verify that the merging lead happens successfully when the leads from the same company email but One of lead has Lead Form as IB NC Leads
+  Scenario Outline: CRM-1172_1.1.1.1: Verify that the merging lead happens successfully when the leads from the same company email but One of lead has Lead Form as IB NC Leads
+  Given Launch Odoo Page
+  Given Login successfully
+  Given Active developer mode 
+  #Pre-condition:
+  When Create a new Target Lead from <Leads file>
+  When Create a new Source Lead from <Leads file>
+  #Step#1: Observe the Target Lead
+  Then Check Target Lead after merged with Source Lead from <Leads file>    
+  #Step#2: Observe the Source Lead
+  Then Check Source Lead after merged with Target Lead from <Leads file>  
+  
+    
+    Examples: 
+   	|Leads file|
+   	|MergedLead_SameCompanyEmail\CRM-1172_1.1.1.1|
+  
