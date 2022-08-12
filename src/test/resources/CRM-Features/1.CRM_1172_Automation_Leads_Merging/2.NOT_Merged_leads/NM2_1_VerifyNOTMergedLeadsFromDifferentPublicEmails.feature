@@ -1,6 +1,7 @@
 Feature: NM2_1_Verify that the merging leads do NOT happens when the leads from the different public domain email
 
 #Scenario_CRM-1172_2.1.1: Verify that the merging leads do NOT happens when the leads from the different public domain email
+@RegressionTest @SmokeTest
 Scenario Outline: CRM-1172_2.1.1: Verify that the merging leads do NOT happens when the leads from the different public domain email
 Given Launch Odoo Page
 Given Login successfully

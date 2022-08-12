@@ -1,6 +1,7 @@
 Feature: NM2_4_Verify that the merging leads do NOT happens when the leads from IB leads, Partner sign up and NULL
 
 #Scenario_CRM-1172_2.4.1:Verify that the merging lead NOT happens  when the leads from IB leads, Partner sign up and NULL 
+@RegressionTest @SmokeTest @Bug @Bug-CRM-1196
 Scenario Outline: CRM-1172_2.4.1:Verify that the merging lead NOT happens  when the leads from IB leads, Partner sign up and NULL 
 Given Launch Odoo Page
 Given Login successfully

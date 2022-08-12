@@ -39,7 +39,7 @@ Feature: M1_1_Verify the automatic Lead merging happens when the leads from the 
    	|MergedLead_SameCompanyEmail\CRM-1172_1.1.1.2|
 
 #Scenario#CRM-1172_1.1.1.3:Verify that the merging lead happens successfully when the leads from the same company email but One of lead has Lead Form as NULL
-  @RegressionTest @SmokeTest @Bug @Bug-CRM-1420
+  @RegressionTest @SmokeTest
   Scenario Outline: CRM-1172_1.1.1.3:Verify that the merging lead happens successfully when the leads from the same company email but One of lead has Lead Form as NULL
   Given Launch Odoo Page
   Given Login successfully
@@ -58,7 +58,7 @@ Feature: M1_1_Verify the automatic Lead merging happens when the leads from the 
    	|MergedLead_SameCompanyEmail\CRM-1172_1.1.1.3|
 
 #Scenario#CRM-1172_1.1.2.1:Verify that the merging lead happens successfully when the leads from the same company email but One of lead has higher Opp.Stage than other
-  @RegressionTest @SmokeTest @Bug @Bug-CRM-1419
+  @RegressionTest @SmokeTest @Bug @Bug-CRM-1419 @Bug-CRM-1207
   Scenario Outline: CRM-1172_1.1.2.1: Verify that the merging lead happens successfully when the leads from the same company email but One of lead has higher Opp.Stage than other
   Given Launch Odoo Page
   Given Login successfully

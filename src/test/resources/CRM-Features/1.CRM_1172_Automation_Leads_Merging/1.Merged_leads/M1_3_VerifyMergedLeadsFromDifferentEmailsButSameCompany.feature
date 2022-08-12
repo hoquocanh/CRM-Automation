@@ -1,6 +1,7 @@
 Feature: M1_3_Verify the automatic Lead merging happens when the leads from different emails but same company
 
 #Scenario#CRM-1172_1.3.1.1:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has Lead Form as IB NC Leads
+  @RegressionTest @SmokeTest
   Scenario Outline: CRM-1172_1.3.1.1:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has Lead Form as IB NC Leads
   Given Launch Odoo Page
   Given Login successfully
@@ -19,6 +20,7 @@ Feature: M1_3_Verify the automatic Lead merging happens when the leads from diff
    	|MergedLead_DifferentEmailButSameCompany\CRM-1172_1.3.1.1|Contact\Company_with_2_sub-contacts|
 
 #Scenario#CRM-1172_1.3.1.2:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has Lead Form as Partner sign up
+  @RegressionTest
   Scenario Outline: CRM-1172_1.3.1.2:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has Lead Form as Partner sign up
   Given Launch Odoo Page
   Given Login successfully
@@ -37,6 +39,7 @@ Feature: M1_3_Verify the automatic Lead merging happens when the leads from diff
    	|MergedLead_DifferentEmailButSameCompany\CRM-1172_1.3.1.2|Contact\Company_with_2_sub-contacts|
 
 #Scenario#CRM-1172_1.3.1.3:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has Lead Form as NULL
+  @RegressionTest
   Scenario Outline: CRM-1172_1.3.1.3:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has Lead Form as NULL
   Given Launch Odoo Page
   Given Login successfully
@@ -56,6 +59,7 @@ Feature: M1_3_Verify the automatic Lead merging happens when the leads from diff
 
 
 #Scenario#CRM-1172_1.3.2.1:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has higher Opp.Stage than other
+@RegressionTest @Bug @Bug-CRM-1419 @Bug-CRM-1207
 Scenario Outline: CRM-1172_1.3.2.1:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has higher Opp.Stage than other
   Given Launch Odoo Page
   Given Login successfully
@@ -74,6 +78,7 @@ Scenario Outline: CRM-1172_1.3.2.1:Verify that the merging lead happens successf
    	|MergedLead_DifferentEmailButSameCompany\CRM-1172_1.3.2.1|Contact\Company_with_2_sub-contacts|
 
 #Scenario#CRM-1172_1.3.3.1:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has higher Lead.Priority  than other
+@RegressionTest
 Scenario Outline: CRM-1172_1.3.3.1:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead has higher Lead.Priority  than other
   Given Launch Odoo Page
   Given Login successfully
@@ -93,6 +98,7 @@ Scenario Outline: CRM-1172_1.3.3.1:Verify that the merging lead happens successf
    	|MergedLead_DifferentEmailButSameCompany\CRM-1172_1.3.3.1|Contact\Company_with_2_sub-contacts|
 
 #Scenario#CRM-1172_1.3.4.1:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead is created earlier than the other
+@RegressionTest
 Scenario Outline: CRM-1172_1.3.4.1:Verify that the merging lead happens successfully when the leads from different emails but same company in Odoo but One of lead is created earlier than the other
   Given Launch Odoo Page
   Given Login successfully
@@ -111,6 +117,7 @@ Scenario Outline: CRM-1172_1.3.4.1:Verify that the merging lead happens successf
    	|MergedLead_DifferentEmailButSameCompany\CRM-1172_1.3.4.1|Contact\Company_with_2_sub-contacts|
 
 #Scenario#CRM-1172_1.3.5.1:Verify that the merging lead happens successfully when One lead is assigned to Install Base team and another lead is assigned to Marketing
+@RegressionTest
 Scenario Outline: CRM-1172_1.3.5.1:Verify that the merging lead happens successfully when One lead is assigned to Install Base team and another lead is assigned to Marketing
   Given Launch Odoo Page
   Given Login successfully

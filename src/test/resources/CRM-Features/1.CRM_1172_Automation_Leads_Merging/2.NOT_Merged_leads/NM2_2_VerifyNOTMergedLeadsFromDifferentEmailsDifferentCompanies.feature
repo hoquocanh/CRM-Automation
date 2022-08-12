@@ -1,6 +1,7 @@
 Feature: NM2_2_Verify that the merging leads do NOT happens  when the leads from the different emails and 2 leads have 2 different companies
 
 #Scenario_CRM-1172_2.2.1:Verify that the merging leads do NOT happens  when the leads from different emails and 2 leads have 2 different companies
+@RegressionTest @SmokeTest
 Scenario Outline: CRM-1172_2.2.1:Verify that the merging leads do NOT happens  when the leads from different emails and 2 leads have 2 different companies
 Given Launch Odoo Page
 Given Login successfully
@@ -20,6 +21,7 @@ Examples:
 |NOTMergedLead_DifferentEmailsDifferentCompanies\CRM-1172_2.2.1|Contact\2_companies|   
 
 #Scenario_CRM-1172_2.2.2:Verify that the merging leads do NOT happens  when the leads from different emails and a lead has company, the other is has not
+@RegressionTest @SmokeTest
 Scenario Outline: CRM-1172_2.2.2:Verify that the merging leads do NOT happens  when the leads from different emails and a lead has company, the other is has not
 Given Launch Odoo Page
 Given Login successfully
