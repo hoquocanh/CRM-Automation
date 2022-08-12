@@ -4,14 +4,11 @@
 	<listeners>
 		<listener class-name="utils.config.TestListener" />
 	</listeners>
-
- 
 <test name="REGRESSION">
   		<parameter name="browser" value="chrome.local" />
 		<parameter name="autoLogBug" value="false" />
 		<classes>
-			<class name="LinkingCucumber.Merged_leads_feature"></class> 
-					
+			<class name="LinkingCucumber.RegressionTest_Merged_leads_feature"></class> 					
 		</classes>
 	</test>
 

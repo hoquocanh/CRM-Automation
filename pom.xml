@@ -65,8 +65,8 @@
                             <outputDirectory>${project.build.directory}/cucumber-JVM-reports</outputDirectory>
                <!-- QA notice: to generate better report-similar to Jenkin report,maven-cucumber-reporting plug-in is used,which reads the generated cucumber.json file in local directory and generates cucumber-JVM-reports -->
                            <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>                                       
-              <skippedFails>true</skippedFails>
-              <enableFlashCharts>true</enableFlashCharts>
+              					<skippedFails>true</skippedFails>
+             					 <enableFlashCharts>true</enableFlashCharts>
                             <buildNumber>42</buildNumber>                           
                     	    <jsonFiles>
                                 <!-- supports wildcard or name pattern -->

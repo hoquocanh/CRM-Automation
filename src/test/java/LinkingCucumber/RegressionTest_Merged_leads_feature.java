@@ -8,9 +8,10 @@ import cucumber.api.CucumberOptions;
         glue = {"definitions"},
         plugin = {"utils.config.TestListener","json:target/cucumber-regression-reports/cucumber.json",
                         "pretty", "html:target/html-report/cucumber-html-reports.html",
-                        "junit:target/cucumber-regression-reports/cucumber.xml"}
+                        "junit:target/cucumber-regression-reports/cucumber.xml"},
+		tags= {"@RegressionTest"}
 	)	
-public class Merged_leads_feature extends test_base
+public class RegressionTest_Merged_leads_feature extends test_base
 {
 
 }
