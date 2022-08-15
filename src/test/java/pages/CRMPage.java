@@ -525,7 +525,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		
 		//3. If the CreateManual checkbox is UNcheck -> click on it
 		if(!isChecked)
-			getDriver().findElement(chb_is_create_manual).click();
+			getDriver().findElement(div_chb_is_create_manual).click();
 	}
 	public void setOffCreateManual(String testFileName, String leadType) throws Throwable
 	{				
@@ -547,7 +547,7 @@ public class CRMPage<T, S extends String> extends GeneralHomePage {
 		
 		//3. If the CreateManual checkbox is check -> click on it
 		if(isChecked)
-			getDriver().findElement(chb_is_create_manual).click();
+			getDriver().findElement(div_chb_is_create_manual).click();
 	}
 	
 	/**This method is used to select the Priority of Lead if having that Key in JSON file
