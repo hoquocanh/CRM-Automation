@@ -135,9 +135,12 @@ public class OpportunityPage<T, S extends String> extends GeneralHomePage {
 	
 	
 	
-	By lbl_email = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'email_from')]");
+	By lbl_email_form = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'email_from')]");
+	By lbl_email_partner = By.xpath("//table[contains(@class,'o_group_col_6') and not(contains(@class,'o_invisible_modifier'))]/descendant::a[contains(@name,'partner_address_email')]");
+		
 	By lbl_address = By.xpath("(//span[contains(@name,'street2')])[2]");
 	By lbl_contact_name = By.xpath("(//span[contains(@name,'contact_name')])[3]");
+	By lbl_combobox_contact = By.xpath("(//a[contains(@name,'partner_id')])[2]");
 	By lbl_company_name = By.xpath("(//span[contains(@name,'partner_name')])[3]");
 	By lbl_state = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::span[contains(@name, 'state_id')][2]");
 	By lbl_country = By.xpath("//div[contains(@class,'clearfix o_form_sheet')]/descendant::span[contains(@name, 'country_id')][2]");
@@ -687,15 +690,31 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		}
 			
 	}
-	
+	public Boolean isComboxContactEmpty()
+	{
+		String outputvalue = (String) getDriver().findElement(lbl_combobox_contact).getText();
+		
+		return outputvalue.isEmpty();
+	}
 	//----------------------Validation area--------------------------------------------------
 	public void checkEmail(String valueCheck)
 	{
-		String outputvalue = (String) getDriver().findElement(lbl_email).getText();
+		String outputvalue = null;
+		if(isComboxContactEmpty() ==true)
+		{
+			System.out.println("lbl_email_form : " + lbl_email_form + "-------");
+			outputvalue = (String) getDriver().findElement(lbl_email_form).getText();
+		}
+		else
+		{
+			System.out.println("lbl_email_partner : " + lbl_email_partner + "-------");
+			outputvalue = (String) getDriver().findElement(lbl_email_partner).getText();			
+		}
 		
-		System.out.println("lbl_email : " + lbl_email + "-------");
+		
 		System.out.println("outputvalue : " + outputvalue + "-------");
 		Logger.verify("Verify the Email is " + valueCheck);
+		
 		
 			Assert.assertTrue(outputvalue.equals(valueCheck),
 					"Email output value : " + outputvalue + " ; expected value : "+ valueCheck + "|");	
