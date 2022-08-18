@@ -7,7 +7,7 @@
 	<test name="Run Smoke test">
 		<parameter name="browser" value="chrome.local" />
 		<parameter name="autoLogBug" value="false" />
-		<parameter name="tags" value="@SmokeTest" />
+		<!--   <parameter name="tags" value="@SmokeTest" /> -->
 		<classes>			
 			<class name="LinkingCucumber.SmokeTest_Merged_leads_feature"></class> 		
 		</classes>
