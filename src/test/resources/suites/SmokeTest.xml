@@ -9,7 +9,8 @@
 		<parameter name="autoLogBug" value="false" />
 		<!--   <parameter name="tags" value="@SmokeTest" /> -->
 		<classes>			
-			<class name="LinkingCucumber.SmokeTest_Merged_leads_feature"></class> 		
+			<!-- <class name="LinkingCucumber.SmokeTest_Merged_leads_feature"></class> 	-->
+			<class name="LinkingCucumber.M1_TEST"></class>	
 		</classes>
 	</test>
 </suite>

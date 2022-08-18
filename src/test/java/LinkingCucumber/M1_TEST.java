@@ -7,8 +7,8 @@ import cucumber.api.CucumberOptions;
 		features = {"src/test/resources/CRM-Features/TEST"}, 				
         glue = {"definitions"},
         plugin = {"utils.config.TestListener","json:target/cucumber-reports/cucumber.json",
-                        "pretty", "html:target/html-report/cucumber-html-reports.html",
-                        "junit:target/cucumber-reports/cucumber.xml"}		
+        		"pretty", "html:target/html-report/cucumber-html-reports.html",
+        "junit:target/cucumber-smoketest-reports/cucumber.xml"}
 	)	
 public class M1_TEST extends test_base
 {
