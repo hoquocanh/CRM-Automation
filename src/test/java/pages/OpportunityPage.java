@@ -892,6 +892,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		String inputCountry = null;
 		String inputState = null;
 		String inputContactName = null;
+		String contactNameFromConctactObj = null;
 		ArrayList<String> inputTags = new ArrayList<String>();
 		objContact<String, String> temp2 = new objContact<String, String>();
 		
@@ -930,13 +931,17 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 			this.checkState(inputState);	
 			
 		//5. Check Contact name						
-			//NOTICE: From the input Contactsfile, the setup for the 1st child contact is used for Target Opp							
-			String contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),1);
+			///If the Lead/ Opp is using the Contact from separate Contact file
+			if (!Contactsfile.isEmpty() )
+				//If having no any Contact child, meaning the Json Contact file need to treat as Reseller or only Company or Individual
+				System.out.println("Number of Contact childs in json Contact: " + temp2.getTotalChildContacs(Contactsfile));
+				if (temp2.getTotalChildContacs(Contactsfile) == 0)
+					contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile, dataJsonContact.CONTACTNAME.getValue(),1);								 
+				else
+					contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),1);	
 			//5.2. Check the value on UI
 				this.checkContactName(contactNameFromConctactObj);
-			
-			
-			
+		
 		//6. Check Tag
 			//6.1. If the value of Tag name field on Target Lead from JSON file is not empty, set the input value to be checked as the value from Target Lead 
 			if(!temp.getJsonValue(testFileName, Constants.TARGET_LEAD,dataJsonLead.TAGS.getValue()).isEmpty())
@@ -1030,6 +1035,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 		String inputCountry = null;
 		String inputState = null;
 		String inputContactName = null;
+		String contactNameFromConctactObj = null;
 		ArrayList<String> inputTags = new ArrayList<String>();
 		objContact<String, String> temp2 = new objContact<String, String>();
 		//String contactNameFromConctactObj = temp2.getJsonValue(Contactsfile,dataJsonContact.CONTACTNAME.getValue());
@@ -1058,10 +1064,16 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 			//4.2. Check the value on UI
 			this.checkState(inputState);	
 			
-		//5. Check Contact name			
-			//NOTICE: We assume the 2nd Company in input Contactsfile is the Company for the Target Lead
-			String contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),2);						
-			//5.2. Check the value on UI			
+		//5. Check Contact name						
+			///If the Lead/ Opp is using the Contact from separate Contact file
+			if (!Contactsfile.isEmpty() )
+				//If having no any Contact child, meaning the Json Contact file need to treat as Reseller or only Company or Individual
+				System.out.println("Number of Contact childs in json Contact: " + temp2.getTotalChildContacs(Contactsfile));
+				if (temp2.getTotalChildContacs(Contactsfile) == 0)
+					contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile, dataJsonContact.CONTACTNAME.getValue(),1);								 
+				else
+					contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),1);	
+			//5.2. Check the value on UI
 				this.checkContactName(contactNameFromConctactObj);
 			
 		//6. Check Tag

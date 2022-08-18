@@ -1,6 +1,7 @@
 {
    "contactList":[{
          "contactType":"individual",
+         "isReseller":true,
          "contactName":"Reseller Contact",
          "emailAddress":"",
          "address":{
