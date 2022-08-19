@@ -16,7 +16,7 @@
          "leadForm":"IB NC Leads",
          "createManual":false,
          "tags":"Renewal",
-         "testcaseType":"public domain",
+         "testcaseType":"test domain",
          "salesTeam":"CMR"
       },
       {
@@ -37,7 +37,7 @@
          "leadForm":"Partner Sign Up",
          "createManual":false,
          "tags":"Trial download",
-         "testcaseType":"public domain",
+         "testcaseType":"test domain",
          "salesTeam":"CMR"
       },
       {
