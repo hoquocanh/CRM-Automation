@@ -1072,7 +1072,7 @@ public String enterEmail(String testFileName, String leadType) throws Throwable
 				if (temp2.getTotalChildContacs(Contactsfile) == 0)
 					contactNameFromConctactObj = temp2.getJsonValueOfFatherContactByIndex(Contactsfile, dataJsonContact.CONTACTNAME.getValue(),1);								 
 				else
-					contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),1);	
+					contactNameFromConctactObj = temp2.getJsonValueOfChildContactByIndex(Contactsfile, dataJsonContact.CHILDCONTACTNAME.getValue(),2);	
 			//5.2. Check the value on UI
 				this.checkContactName(contactNameFromConctactObj);
 			
