@@ -17,7 +17,7 @@
          "leadForm":"Download Free Trial",
          "createManual":false,
          "tags":"Trial download",
-         "testcaseType":"test domain",
+         "testcaseType":"company domain",
          "salesTeam":"BDEU"
       },
       {
@@ -39,7 +39,7 @@
          "emailAddress":"",
          "leadType":"source lead",
          "leadForm":"Download Free Trial",
-         "testcaseType":"test domain",
+         "testcaseType":"company domain",
          "createManual":false
       }
    ]

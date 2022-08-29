@@ -782,9 +782,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnTargetLead(Leadsfile,returnRandomEmail);	
-			//crmpage.checkMergeMessageOnTargetLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
 		crmpage.checkMergeMessageOnTargetLead(Leadsfile,returnRandomEmail);
+		crmpage.checkValueOfFieldOnTargetLead(Leadsfile,returnRandomEmail);	
 		
 		crmpage.clickCRMDeveloper();
 		crmpage.checkIsWon("Pending");
@@ -816,9 +815,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild1);	
-			//crmpage.checkMergeMessageOnTargetLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
 		crmpage.checkMergeMessageOnTargetLead(Leadsfile,returnRandomEmail_ContactChild1);
+		crmpage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild1);	
 		
 		crmpage.clickCRMDeveloper();
 		crmpage.checkIsWon("Pending");
@@ -850,9 +848,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
-			//crmpage.checkMergeMessageOnTargetLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
 		crmpage.checkMergeMessageOnTargetLead(Leadsfile,returnRandomContactEmail);
+		crmpage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
 		
 		crmpage.clickCRMDeveloper();
 		crmpage.checkIsWon("Pending");
@@ -883,8 +880,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		opppage.checkValueOfFieldOnTargetLead(Leadsfile,returnRandomEmail);	
 		opppage.checkMergeMessageOnTargetLead(Leadsfile,returnRandomEmail);
+		opppage.checkValueOfFieldOnTargetLead(Leadsfile,returnRandomEmail);	
 		
 		opppage.clickCRMDeveloper();
 		opppage.checkIsWon("Pending");
@@ -915,8 +912,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		opppage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild1);	
 		opppage.checkMergeMessageOnTargetLead(Leadsfile,returnRandomEmail_ContactChild1);
+		opppage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild1);	
 		
 		opppage.clickCRMDeveloper();
 		opppage.checkIsWon("Pending");
@@ -947,8 +944,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		opppage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
 		opppage.checkMergeMessageOnTargetLead(Leadsfile,returnRandomContactEmail);
+		opppage.checkValueOfFieldOnTargetLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
 		
 		opppage.clickCRMDeveloper();
 		opppage.checkIsWon("Pending");
@@ -1072,10 +1069,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,returnRandomEmail);	
-			//crmpage.checkMergeMessageOnSourceLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
 		crmpage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomEmail);
-		
+		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,returnRandomEmail);	
 		
 		crmpage.clickCRMDeveloper();
 		crmpage.checkIsWon("Lost");
@@ -1107,10 +1102,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild2);	
-			//crmpage.checkMergeMessageOnSourceLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
 		crmpage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomEmail_ContactChild2);
-		
+		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild2);	
 		
 		crmpage.clickCRMDeveloper();
 		crmpage.checkIsWon("Lost");
@@ -1142,10 +1135,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
-			//crmpage.checkMergeMessageOnSourceLead(Leadsfile,"TEST_AUTOMATION_2022_04_29T15_35_15@test.com");
 		crmpage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomContactEmail);
-		
+		crmpage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
 		
 		crmpage.clickCRMDeveloper();
 		crmpage.checkIsWon("Lost");
@@ -1174,8 +1165,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		opppage.checkValueOfFieldOnSourceLead(Leadsfile,returnRandomEmail);	
 		opppage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomEmail);
+		opppage.checkValueOfFieldOnSourceLead(Leadsfile,returnRandomEmail);	
 		
 		opppage.clickCRMDeveloper();
 		opppage.checkIsWon("Lost");
@@ -1205,8 +1196,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		opppage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild2);	
 		opppage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomEmail_ContactChild2);
+		opppage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomEmail_ContactChild2);	
 		
 		opppage.clickCRMDeveloper();
 		opppage.checkIsWon("Lost");
@@ -1235,8 +1226,8 @@ public class LoginDefinition  {
 		
 		//*1.2. Check the fields after doing merging action
 		
-		opppage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
 		opppage.checkMergeMessageOnSourceLead(Leadsfile,returnRandomContactEmail);
+		opppage.checkValueOfFieldOnSourceLead(Leadsfile,varContactsfile,returnRandomContactEmail);	
 		
 		opppage.clickCRMDeveloper();
 		opppage.checkIsWon("Lost");
