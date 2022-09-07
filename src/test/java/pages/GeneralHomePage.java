@@ -100,6 +100,7 @@ public class GeneralHomePage implements WebDriverEventListener{
 	
 	public void gotoModuleCRM() {
 		
+		waitForElementResponse();
 		driver.findElement(module_crm).click();
 		waitForPageDisplay();
 	}
