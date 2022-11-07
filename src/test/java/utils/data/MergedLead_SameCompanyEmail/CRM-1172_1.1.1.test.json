@@ -13,9 +13,9 @@
          },         
          "leadName":"target lead-IB NC Leads",
          "companyName":"test123",
-         "leadForm":"IB NC Leads",
+         "leadForm":"Download Free Edition",
          "createManual":false,
-         "tags":"Renewal",
+         "tags":"Free Download",
          "testcaseType":"company domain",
          "salesTeam":"IBSA"
       },
@@ -34,9 +34,9 @@
          "companyName":"test12345",
          "userLogNotes":"target lead log notes",
          "publicMessage":"target lead message",
-         "leadForm":"White paper",
+         "leadForm":"License",
          "createManual":false,
-         "tags":"White paper",
+         "tags":"Product Registration",
          "testcaseType":"company domain",
          "salesTeam":"Marketing - BDR"
       }
