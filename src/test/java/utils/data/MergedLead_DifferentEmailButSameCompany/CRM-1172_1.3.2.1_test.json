@@ -1,7 +1,7 @@
 {
    "leadsList":[
       {
-         "leadType":"target lead",
+      	 "leadName":"target Opportunity-Higher stage",
          "contactname":"",
          "emailAddress":"",
          "address":{
@@ -10,19 +10,18 @@
             "city":"",
             "postalCode":"",
             "state":"Texas (US)"
-         },         
-         "leadName":"target lead-IB NC Leads",
+         },
+         "leadType":"target lead",         
          "companyName":"test123",
-         "leadForm":"IB NC Leads",
+         "stageOpp":"in process",
+         "leadForm":"Download Free Trial",
          "createManual":false,
-         "tags":"Renewal",
-         "testcaseType":"company domain",
-         "salesTeam":"IBSA"
+         "tags":"Trial download",
+         "testcaseType":"test domain",
+         "salesTeam":"Marketing - BDR"
       },
       {
-         "leadType":"source lead",
-         "contactname":"test contact",
-         "emailAddress":"",
+         "leadName":"source Opportunity-Lower stage",
          "address":{
             "country":"United States",
             "streetAddress":"123street",
@@ -30,15 +29,18 @@
             "postalCode":"",
             "state":"Texas (US)"
          },         
-         "leadName":"source lead-White paper",
          "companyName":"test12345",
          "userLogNotes":"target lead log notes",
          "publicMessage":"target lead message",
-         "leadForm":"White paper",
-         "createManual":false,
-         "tags":"White paper",
-         "testcaseType":"company domain",
-         "salesTeam":"Marketing - BDEU"
+         "stageOpp":"new",
+         "tags":"Trial download",
+         "salesTeam":"Marketing - BDR",
+         "contactname":"test contact",
+         "emailAddress":"",
+         "leadType":"source lead",
+         "leadForm":"Download Free Trial",
+         "testcaseType":"test domain",
+         "createManual":false
       }
    ]
 }
